@@ -1,15 +1,18 @@
-# Music Cards
+# RFID Cards Trigger
 
-Click the image below to see a video of it being used
+This project is a fork of Music Card from [https://github.com/hoveeman/music-cards](hoveeman/music-cards) forked from [https://github.com/fsahli/music-cards](fsahli/music-cards).
 
-[![RFID Jukebox with Google Home](https://img.youtube.com/vi/AvCseOQidSw/0.jpg)](https://www.youtube.com/watch?v=AvCseOQidSw)
+It has been updated to be able to trig actions on others servers on rfid swipe. 
+List of actions:
+- sonos Api [https://github.com/jishi/node-sonos-http-api](node-sonos-http-api)
+- homme assistant (todo, change from hoveeman/music-cards)
+
 
 ## Requires
 ### software:
 - python evdev. To install:
 ```bash
 wget http://dl.piwall.co.uk/python-evdev_0.4.1-1_armhf.deb
-
 dpkg -i python-evdev_0.4.1-1_armhf.deb
 ```
 
@@ -18,12 +21,17 @@ dpkg -i python-evdev_0.4.1-1_armhf.deb
 - [USB OTG Hub](https://www.amazon.com/gp/product/B01HYJLZH6/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1)
 - [RFID 125Khz Reader](https://www.amazon.com/gp/product/B018C8C162/ref=oh_aui_detailpage_o03_s01?ie=UTF8&psc=1)
 - [125Khz Cards](https://www.amazon.com/gp/product/B01MQY5Y7U/ref=ox_sc_act_title_1?smid=A1GYMVIZIMSYWM&psc=1)
-- [RFID Card Inkjet Tray to print in your printer (Note this is the model needed for my Canon MX922 Printer)](https://www.amazon.com/gp/product/B00P25H0BA/ref=oh_aui_detailpage_o03_s01?ie=UTF8&psc=1)
 
-Please note that Raspberry Pi Zero is insufficient to run both the Home Assistant and Music Cards concurrently. I recommend you use a Raspberry Pi 3 if you intend to run both at the same time.
+Remark : see on original project [https://github.com/hoveeman/music-cards](hoveeman/music-cards) for printable rfid cards
 
-## Steps to Configure and/or Run once if you dont want Music Cards to AutoStart
+####Raspberry Limitaion
+Please note that Raspberry Pi Zero is insufficient to run both the Home Assistant and and the rfid scanner. 
+It is recommend you use a Raspberry Pi 3 if you intend to run both at the same time.
 
+Test has to be done with [https://github.com/jishi/node-sonos-http-api](node-sonos-http-api) and rfid scanner, they should run together on all raspberry.
+
+## Steps to Configure and/or Run once without AutoStart
+0. Copy/Downloar/Clone the project in home/pi
 1. Run `python config.py` to select the reader from the inputs
 2. Run `python add_card.py` to scan cards and enter your Google Play Music Playlist Name
 3. Make .sh scrypts executables : chmod +x sonosplay.sh
@@ -53,7 +61,7 @@ sudo systemctl status musiccards.service
 ```
 
 ## HomeAssistant Setup for Google Music
-
-1. Place the files under homeassistant_files in the config directory of your [Homeassistant](https://www.home-assistant.io/) machine.
+TO BE CHECKED
+1. Add the configs from homeassistant_files in the config of your [Homeassistant](https://www.home-assistant.io/).
 2. You will need to create custom_components/switch directory in your config directory and place [`gmusic.py`](https://github.com/mf-social/Home-Assistant/blob/master/custom_components/switch/gmusic.py) in there.
 3. Follow [this forum post](https://community.home-assistant.io/t/google-music-in-ha/10976) to install gmusicapi, find your device id, and set up the component.
