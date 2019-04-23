@@ -45,7 +45,7 @@ cd music-cards/
 ```
 - Copy the musiccards.service file to systemd
 ```bash
-sudo cp musiccards.service /etc/systemd/system/musiccards.service
+sudo cp /home/pi/music-cards/musiccards.service /etc/systemd/system/musiccards.service
 ```
 - Reload the Daemon
 ```bash
@@ -53,6 +53,7 @@ sudo systemctl daemon-reload
 ```
 - Start the musiccards.service
 ```bash
+sudo systemctl enable  musiccards.service
 sudo systemctl start musiccards.service
 ```
 - Check if musiccards.service is running 
