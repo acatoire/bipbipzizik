@@ -1,10 +1,10 @@
 # RFID Cards Trigger
 
-This project is a fork of Music Card from [https://github.com/hoveeman/music-cards](hoveeman/music-cards) forked from [https://github.com/fsahli/music-cards](fsahli/music-cards).
+This project is a fork of Music Card from [hoveeman/music-cards](https://github.com/hoveeman/music-cards) forked from [fsahli/music-cards](https://github.com/fsahli/music-cards).
 
 It has been updated to be able to trig actions on others servers on rfid swipe. 
 List of actions:
-- sonos Api [https://github.com/jishi/node-sonos-http-api](node-sonos-http-api)
+- sonos Api [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
 - homme assistant (todo, change from hoveeman/music-cards)
 
 
@@ -28,7 +28,7 @@ Remark : see on original project [https://github.com/hoveeman/music-cards](hovee
 Please note that Raspberry Pi Zero is insufficient to run both the Home Assistant and and the rfid scanner. 
 It is recommend you use a Raspberry Pi 3 if you intend to run both at the same time.
 
-Test has to be done with [https://github.com/jishi/node-sonos-http-api](node-sonos-http-api) and rfid scanner, they should run together on all raspberry.
+Test has to be done with [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api) and rfid scanner, they should run together on all raspberry.
 
 ## Steps to Configure and/or Run once without AutoStart
 0. Copy/Downloar/Clone the project in home/pi
