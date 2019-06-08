@@ -30,6 +30,9 @@ It is recommend you use a Raspberry Pi 3 if you intend to run both at the same t
 
 Test has to be done with [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api) and rfid scanner, they should run together on all raspberry.
 
+#####Raspberry Config
+[Config the wifi on boot partition](https://www.raspberrypi-spy.co.uk/2017/04/manually-setting-up-pi-wifi-using-wpa_supplicant-conf/)
+
 ## Steps to Configure and/or Run once without AutoStart
 0. Copy/Downloar/Clone the project in home/pi
 1. Run `python config.py` to select the reader from the inputs
