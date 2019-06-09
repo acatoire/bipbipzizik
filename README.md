@@ -32,7 +32,7 @@ Test has to be done with [https://github.com/jishi/node-sonos-http-api](node-son
 
 ## Steps to Configure and/or Run once without AutoStart
 0. Copy/Downloar/Clone the project in home/pi
-1. Run `python config.py` to select the reader from the inputs
+1. Run `python setup_reader.py` to select the reader from the inputs
 2. Run `python add_card.py` to scan cards and enter your Google Play Music Playlist Name
 3. Make .sh scrypts executables : chmod +x sonosplay.sh
 4. Run `python box.py` to start the application and verify that it is reading your cards and csv list properly
