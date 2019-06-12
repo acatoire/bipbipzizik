@@ -30,20 +30,32 @@ else:
     # Command for local playing
     commandLine = address + ' ' + cfg.location + '/'
 
+# Previous card id memory
+previousCard = ""
 
 print 'Ready: place a card on top of the reader'
 
 while True:
     card = reader.readCard()
+    # Todo clear previousCard after some time (cfg.previousCardTimeout)
+
     try:
         print 'Read card : ', card
-        plist = cardList.getPlaylist(card)
-        print 'Command : ', plist
-        if plist != '':
-            subprocess.check_call(["./sonosplay.sh %s" % commandLine + plist], shell=True)
-            # subprocess.check_call( ["./haplaylist.sh %s" % plist], shell=True)
-            range(10000)       # some payload code
-            time.sleep(0.2)    # sane sleep time of 0.1 seconds
+
+        if (previousCard == card) and ("cancel" == cfg.multiReadMode):
+            print 'Multi read : card canceled'
+        else:
+            previousCard = card
+
+            # Card execution
+            plist = cardList.getPlaylist(card)
+            print 'Command : ', plist
+            if plist != '':
+                subprocess.check_call(["./sonosplay.sh %s" % commandLine + plist], shell=True)
+
+                range(10000)       # some payload code
+                time.sleep(0.2)    # sane sleep time
+
     except OSError as e:
         print "Execution failed:"
         range(10000)       # some payload code
