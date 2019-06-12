@@ -1,6 +1,13 @@
+
+#
+# MUSIC CARD
+# Card management
+#
+
 import csv
 import os.path
 import sys
+
 
 class CardList:
 	def __init__(self):

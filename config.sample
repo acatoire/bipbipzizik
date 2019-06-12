@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+#
+# MUSIC CARD CONFIG
+#
+# Rename this file to config.py
+#
+
+
+ip = "192.168.1.80"
+port = "5005"
+
+# Room name designation
+# If you want to play on all your speakers, set roomName = ""
+roomName = "Hugo"
+# roomName = "Salon"
