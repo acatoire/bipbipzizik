@@ -3,10 +3,30 @@ Card Id,Command,Comment
 0013403195,next
 0013354327,volume/+5
 0005690629,volume/-5
-0013365376,spotify/now/spotify:album:4yYVqX2KierVI3nDV0M2UL,M - Lettre Infinie
-0013193487,spotify/now/spotify:playlist:37i9dQZF1DWXTHBOfJ8aI7,Légendes du Rock
-0003586576,spotify/now/spotify:album:45Hm9e77uZVaRnEIYzzpzM,Adebert 2
-0013381409,spotify/now/spotify:album:3qU4wXm0Qngbtnr5PiLbFX,Caravan Palace
-0013356493,spotify/now/spotify:album:5lFcL4pj96ZRsoIiHpFl79,Shaka Ponk
-0005585628,spotify/now/spotify:album:0bUTHlWbkSQysoM3VsWldT,Gorillaz
-0013343924,spotify/now/spotify:album:3bRM4GQgoFjBRRzhp87Ugb,Kavinsky
+0013365376,spotify/now/spotify:album:4yYVqX2KierVI3nDV0M2UL, M - Lettre Infinie
+0013193487,spotify/now/spotify:playlist:37i9dQZF1DWXTHBOfJ8aI7, Légendes du Rock
+0003586576,spotify/now/spotify:album:45Hm9e77uZVaRnEIYzzpzM, Adebert 2
+0013381409,spotify/now/spotify:album:3qU4wXm0Qngbtnr5PiLbFX, Caravan Palace
+0013356493,spotify/now/spotify:album:5lFcL4pj96ZRsoIiHpFl79, Shaka Ponk
+0005585628,spotify/now/spotify:album:0bUTHlWbkSQysoM3VsWldT, Gorillaz
+0013343924,spotify/now/spotify:album:3bRM4GQgoFjBRRzhp87Ugb, Kavinsky
+0005690638,tunein/play/24875,Radio France Inter
+0013385899,tunein/play/17696,Radio Nova
+0005589167,tunein/play/50486,Radio RTL2
+0013336496,tunein/play/2960,Radio Nostalgie
+HUGO
+0013200813,spotify/now/spotify:album:1xhy7WWxO28XoPKuFlnxSZ, Aldebert Enfantillage 1
+0013352322,spotify/now/spotify:album:45Hm9e77uZVaRnEIYzzpzM, Aldebert Enfantillage 2
+0013362342,spotify/now/spotify:album:77kv2o5PJeW3mim1yWPiMA, Aldebert Enfantillage 3
+0013177875,spotify/now/spotify:album:3qU4wXm0Qngbtnr5PiLbFX, Caravan Palace
+0013397291,spotify/now/spotify:track:35VKLRwEjuR5IuFyGqjMaf, Les petits poissons
+0013199764,spotify/now/spotify:track:7zwcj8LYBpHfcPTgR5LkFg, Bateau sur l'eau
+0013400272,spotify/now/spotify:track:3yCoWlqfp2wnOS4PeNsADE, Pirouette Cacahuete
+0013337950,spotify/now/spotify:track:16nCFJAHubC7sj9LsTt3KF, Un grand Cerf
+0013385163,spotify/now/spotify:track:7IDzwsobKLjgaqg6keknrE, Planter les choux
+0013353316,spotify/now/spotify:track:2eu7C32YZKEyILfPHPwVa3, Coucou Hibou
+
+
+
+
+dead,spotify/now/spotify:playlist:5p0Mw9D1i1EjkJyIafFsvH, Hugo Dance
