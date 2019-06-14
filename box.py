@@ -23,12 +23,12 @@ cardList = CardList()
 address = cfg.ip + ':' + cfg.port
 
 # Create command line
-if cfg.location == '':
+if cfg.roomName == '':
     # Command for global playing
     commandLine = address + ' '
 else:
     # Command for local playing
-    commandLine = address + ' ' + cfg.location + '/'
+    commandLine = address + ' ' + cfg.roomName + '/'
 
 # Previous card id memory
 previousCard = ""
@@ -51,6 +51,7 @@ while True:
             plist = cardList.getPlaylist(card)
             print 'Command : ', plist
             if plist != '':
+                # Check if sonosplay.sh is executable, if not write an error message
                 subprocess.check_call(["./sonosplay.sh %s" % commandLine + plist], shell=True)
 
                 range(10000)       # some payload code

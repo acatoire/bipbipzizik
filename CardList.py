@@ -18,6 +18,9 @@ class CardList:
 		with open(self.path + '/cardList.csv', mode='r') as infile:
 			reader = csv.reader(infile)
 			cardList = {rows[0]:rows[1] for rows in reader}
+			# TODO exclude errors lines
+			# IndexError: list index out of range
+			
 			infile.close()
 		return cardList
 	

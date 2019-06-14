@@ -14,7 +14,7 @@ Card Id,Command,Comment
 0013385899,tunein/play/17696,Radio Nova
 0005589167,tunein/play/50486,Radio RTL2
 0013336496,tunein/play/2960,Radio Nostalgie
-HUGO
+HUGO,Command,Comment
 0013200813,spotify/now/spotify:album:1xhy7WWxO28XoPKuFlnxSZ, Aldebert Enfantillage 1
 0013352322,spotify/now/spotify:album:45Hm9e77uZVaRnEIYzzpzM, Aldebert Enfantillage 2
 0013362342,spotify/now/spotify:album:77kv2o5PJeW3mim1yWPiMA, Aldebert Enfantillage 3
@@ -25,8 +25,5 @@ HUGO
 0013337950,spotify/now/spotify:track:16nCFJAHubC7sj9LsTt3KF, Un grand Cerf
 0013385163,spotify/now/spotify:track:7IDzwsobKLjgaqg6keknrE, Planter les choux
 0013353316,spotify/now/spotify:track:2eu7C32YZKEyILfPHPwVa3, Coucou Hibou
-
-
-
-
+Later,Command,Comment
 dead,spotify/now/spotify:playlist:5p0Mw9D1i1EjkJyIafFsvH, Hugo Dance

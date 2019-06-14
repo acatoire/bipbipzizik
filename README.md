@@ -69,3 +69,5 @@ TO BE CHECKED
 1. Add the configs from homeassistant_files in the config of your [Homeassistant](https://www.home-assistant.io/).
 2. You will need to create custom_components/switch directory in your config directory and place [`gmusic.py`](https://github.com/mf-social/Home-Assistant/blob/master/custom_components/switch/gmusic.py) in there.
 3. Follow [this forum post](https://community.home-assistant.io/t/google-music-in-ha/10976) to install gmusicapi, find your device id, and set up the component.
+
+
