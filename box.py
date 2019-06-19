@@ -33,32 +33,32 @@ else:
 # Previous card id memory
 previousCard = ""
 
-print 'Ready: place a card on top of the reader'
+print('Ready: place a card on top of the reader')
 
 while True:
     card = reader.readCard()
     # Todo clear previousCard after some time (cfg.previousCardTimeout)
 
     try:
-        print 'Read card : ', card
+        print('Read card : ', card)
 
         if (previousCard == card) and ("cancel" == cfg.multiReadMode):
-            print 'Multi read : card canceled'
+            print('Multi read : card canceled')
         else:
             previousCard = card
 
             # Card execution
             plist = cardList.getPlaylist(card)
-            print 'Command : ', plist
+            print('Command : ', plist)
             if plist != '':
                 # Check if sonosplay.sh is executable, if not write an error message
                 subprocess.check_call(["./sonosplay.sh %s" % commandLine + plist], shell=True)
 
-                range(10000)       # some payload code
+                list(range(10000))       # some payload code
                 time.sleep(0.2)    # sane sleep time
 
     except OSError as e:
-        print "Execution failed:"
-        range(10000)       # some payload code
+        print("Execution failed:")
+        list(range(10000))       # some payload code
         time.sleep(0.2)    # sane sleep time of 0.1 seconds
 

@@ -5,16 +5,25 @@ This project is a fork of Music Card from [hoveeman/music-cards](https://github.
 It has been updated to be able to trig actions on others servers on rfid swipe. 
 List of actions:
 - sonos Api [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
-- homme assistant (todo, change from hoveeman/music-cards)
+- home assistant (todo, change from hoveeman/music-cards)
 
 
 ## Requires
 ### software:
+- python pip. To install:
+```bash
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install python3-pip
+
+```
+
 - python evdev. To install:
 ```bash
-wget http://dl.piwall.co.uk/python-evdev_0.4.1-1_armhf.deb
-dpkg -i python-evdev_0.4.1-1_armhf.deb
+sudo pip3 --default-timeout=1000 install evdev
 ```
+
+```--default-timeout=1000``` helps if the raspberry is too slow
 
 ### hardware:
 - [Raspberry Pi Zero (Don't forget micro sd card and power supply)](http://www.microcenter.com/product/486575/Zero_W)
@@ -35,10 +44,10 @@ Test has to be done with [node-sonos-http-api](https://github.com/jishi/node-son
 
 ## Steps to Configure and/or Run once without AutoStart
 0. Copy/Downloar/Clone the project in home/pi
-1. Run `python setup_reader.py` to select the reader from the inputs
-2. Run `python add_card.py` to scan cards and enter your Google Play Music Playlist Name
-3. Make .sh scrypts executables : chmod +x sonosplay.sh
-4. Run `python box.py` to start the application and verify that it is reading your cards and csv list properly
+1. Run `python3 setup_reader.py` to select the reader from the inputs
+2. Run `python3 add_card.py` to scan cards and enter your Google Play Music Playlist Name
+3. Make .sh scrypts executables : `chmod +x sonosplay.sh`
+4. Run `python3 box.py` to start the application and verify that it is reading your cards and csv list properly
 
 ## Install Service to AutoStart
 
