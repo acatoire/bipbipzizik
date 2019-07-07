@@ -19,26 +19,26 @@ class Reader:
             sys.exit('Please run config.py first')
         else:
             with open(path + '/deviceName.txt','r') as f:
-                deviceName = f.read()
+                device_name = f.read()
             devices = [InputDevice(fn) for fn in list_devices()]
             for device in devices:
-                if device.name == deviceName:
+                if device.name == device_name:
                     self.dev = device
                     break
             try:
                 self.dev
             except:
-                sys.exit('Could not find the device %s\n. Make sure is connected' % deviceName)
+                sys.exit('Could not find the device %s\n. Make sure is connected' % device_name)
 
     def read_card(self):
-        stri = ''
+        keys_input = ''
         key = ''
         while key != 'KEY_ENTER':
             r,w,x = select([self.dev], [], [])
             for event in self.dev.read():
                 if event.type == 1 and event.value == 1:
-                    stri += self.keys[event.code]
+                    keys_input += self.keys[event.code]
                     # print( keys[ event.code ] )
                     key = ecodes.KEY[event.code]
-        return stri[:-1]
+        return keys_input[:-1]
 

@@ -56,12 +56,15 @@ while True:
             else:
                 previousCard = read_id
 
+                if card.has_mode("ClearQueue"):
+                    subprocess.check_call(["./sonosplay.sh " + commandLine + "clearqueue"], shell=True)
+
                 if card.cmd != 'error':
                     # TODO, direct python implementation without using sh script
-                    subprocess.check_call(["./sonosplay.sh %s" % commandLine + card.cmd], shell=True)
+                    subprocess.check_call(["./sonosplay.sh " + commandLine + card.cmd], shell=True)
 
-                    list(range(10000))       # some payload code
-                    time.sleep(0.2)    # sane sleep time
+                list(range(10000)) # some payload code
+                time.sleep(0.2)    # sane sleep time
 
     except OSError as e:
         print("Execution failed:")
