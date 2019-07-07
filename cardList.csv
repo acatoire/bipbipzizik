@@ -1,11 +1,13 @@
 
 # Card Id, Command, Mode, Comment
 
+# Command cards
+0013397903,playpause, Command,
+0013403195,next, Command,
+0013354327,volume/+5, Command,
+0005690629,volume/-5, Command,
+
 # For Parents
-0013397903,playpause, ,
-0013403195,next, ,
-0013354327,volume/+5, ,
-0005690629,volume/-5, ,
 0013365376,spotify/now/spotify:album:4yYVqX2KierVI3nDV0M2UL, , M - Lettre Infinie
 0013193487,spotify/now/spotify:playlist:37i9dQZF1DWXTHBOfJ8aI7, , Légendes du Rock
 0003586576,spotify/now/spotify:album:45Hm9e77uZVaRnEIYzzpzM, , Adebert 2

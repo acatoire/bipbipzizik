@@ -5,7 +5,7 @@ addr=$1   # Mendatory - exemple : http://192.168.0.140:5005
 cmd=$2    # Mendatory - exemple : volume/50
 
 
-echo "Execute the command '$cmd' on the server at '$addr'"
+echo "Execute the command $addr/$cmd"
 
 
 # Execute the sonos api request using curl

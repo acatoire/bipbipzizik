@@ -43,17 +43,18 @@ while True:
         cardList.update_list()
 
         # Find the card in bdd
-        card = cardList.get_card(read_id).cmd
+        card = cardList.get_card(read_id)
 
         if card is not None:
             # Card execution
             print('Command : ', card.cmd)
-            print('Modes : ', card.mode)
+            print('Modes : ', card.str_modes())
 
-            # Update the previous card memory
-            if (previousCard == read_id) and ("cancel" == cfg.multiReadMode):
+            if (previousCard == read_id) and ("cancel" == cfg.multiReadMode) and (not card.has_mode("Command")):
+                # Cancel the read
                 print('Multi read : card canceled')
             else:
+                # Update the previous card memory
                 previousCard = read_id
 
                 if card.has_mode("ClearQueue"):

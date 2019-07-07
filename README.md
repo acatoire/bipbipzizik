@@ -72,6 +72,10 @@ sudo systemctl start musiccards.service
 ```bash
 sudo systemctl status musiccards.service
 ```
+- Restart service after file update 
+```bash
+sudo systemctl restart musiccards.service
+```
 
 ## HomeAssistant Setup for Google Music
 TO BE CHECKED
