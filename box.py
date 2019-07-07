@@ -5,10 +5,7 @@
 # Application
 #
 
-import re
-import sys
 import subprocess
-import os
 import time
 from CardList import CardList
 from Reader import Reader
@@ -36,26 +33,35 @@ previousCard = ""
 print('Ready: place a card on top of the reader')
 
 while True:
-    card = reader.readCard()
+    read_id = reader.read_card()
     # Todo clear previousCard after some time (cfg.previousCardTimeout)
 
     try:
-        print('Read card : ', card)
+        print('Read card : ', read_id)
 
-        if (previousCard == card) and ("cancel" == cfg.multiReadMode):
-            print('Multi read : card canceled')
-        else:
-            previousCard = card
+        # Update Card bdd TODO do it every X minutes
+        cardList.update_list()
 
+        # Find the card in bdd
+        card = cardList.get_card(read_id).cmd
+
+        if card is not None:
             # Card execution
-            plist = cardList.getPlaylist(card)
-            print('Command : ', plist)
-            if plist != '':
-                # Check if sonosplay.sh is executable, if not write an error message
-                subprocess.check_call(["./sonosplay.sh %s" % commandLine + plist], shell=True)
+            print('Command : ', card.cmd)
+            print('Modes : ', card.mode)
 
-                list(range(10000))       # some payload code
-                time.sleep(0.2)    # sane sleep time
+            # Update the previous card memory
+            if (previousCard == read_id) and ("cancel" == cfg.multiReadMode):
+                print('Multi read : card canceled')
+            else:
+                previousCard = read_id
+
+                if card.cmd != 'error':
+                    # TODO, direct python implementation without using sh script
+                    subprocess.check_call(["./sonosplay.sh %s" % commandLine + card.cmd], shell=True)
+
+                    list(range(10000))       # some payload code
+                    time.sleep(0.2)    # sane sleep time
 
     except OSError as e:
         print("Execution failed:")
