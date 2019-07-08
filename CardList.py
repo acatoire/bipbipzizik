@@ -32,7 +32,7 @@ class Card:
                 raise ValueError("Incorrect Value for mode")
             else:
                 for element in raw_mode.split(";"):
-                    self.modes.append(element)
+                    self.modes.append(element.strip())
         except (IndexError, ValueError):
             self.modes.append("Normal")
 
