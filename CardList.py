@@ -84,12 +84,20 @@ class CardList:
 
         up_to_date_list = []
 
-        for line in open(self.file_path):
+        file = open(self.file_path)
+
+        for line in file:
             # Exclude comments and empty lines
             if (not line.startswith("#")) and (not "" == line.strip()):
                 up_to_date_list.append(Card(line))
 
+        file.close()
+
         return up_to_date_list
+
+    def size(self):
+
+        return self.card_list.__len__()
 
     def get_card(self, searched_id):
 
@@ -106,29 +114,9 @@ class CardList:
 # For test purpose
 def main():
 
-    # Test the card creation
-    card_test = Card("1,2,mode1;mode2;mode3,4")
-    print("Card: " + card_test.__str__())
-    print(card_test.has_mode("mode2"))
-    print(card_test.has_mode("mode4"))
-
-    card_test = Card(",,,")
-    print(card_test)
-    card_test = Card("")
-    print(card_test)
-
     # Test the card list creation
     card_list = CardList()
     print(card_list)
-
-    # Test the search of card in list
-    card = card_list.get_card("0013200813")     # Existing
-    if card is not None:
-        print(card)
-
-    card = card_list.get_card("0-0")              # Not Existing
-    if card is not None:
-        print(card)
 
 
 if __name__ == "__main__":
