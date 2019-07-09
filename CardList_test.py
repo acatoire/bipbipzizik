@@ -11,7 +11,7 @@ from CardList import Card
 from CardList import CardList
 
 
-class TestCard(unittest.TestCase):
+class CardLisTest(unittest.TestCase):
 
     def test_create_normal_card(self):
 
@@ -63,13 +63,6 @@ class TestCard(unittest.TestCase):
 
 
 if __name__ == '__main__':
-
-    #
-    # coverage run CardListTest.py
-    # coverage report --omit CardListTest.py
-    # coverage html --omit CardListTest.py
-    # coverage erase
-    #
 
     unittest.main()
 

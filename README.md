@@ -83,4 +83,30 @@ TO BE CHECKED
 2. You will need to create custom_components/switch directory in your config directory and place [`gmusic.py`](https://github.com/mf-social/Home-Assistant/blob/master/custom_components/switch/gmusic.py) in there.
 3. Follow [this forum post](https://community.home-assistant.io/t/google-music-in-ha/10976) to install gmusicapi, find your device id, and set up the component.
 
+## For Dev
+### Unit test
 
+#### Run all unit test of the project
+```
+python -m unittest discover -p "*_test.py"
+```
+
+#### Run unit test with coverage on it
+
+Specific file:
+```
+coverage run xxx_Test.py
+```
+
+All unit test:
+```
+coverage run -m unittest discover -p "*_test.py"
+```
+
+#### Generate coverage report
+```
+coverage erase
+coverage run -m unittest discover -p "*_test.py"
+coverage report --omit "*_test.py"
+coverage html --omit "*_test.py"
+```
