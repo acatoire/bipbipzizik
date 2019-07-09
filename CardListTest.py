@@ -66,11 +66,9 @@ if __name__ == '__main__':
 
     #
     # coverage run CardListTest.py
-    # coverage report
-    # coverage html
-    # coverage purge
-    #
-    # TODO see the use of  --omit CardListTest.py
+    # coverage report --omit CardListTest.py
+    # coverage html --omit CardListTest.py
+    # coverage erase
     #
 
     unittest.main()
