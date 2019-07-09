@@ -31,5 +31,15 @@ class TestCard(unittest.TestCase):
 
 
 if __name__ == '__main__':
+
+    #
+    # coverage run CardListTest.py
+    # coverage report
+    # coverage html
+    # coverage purge
+    #
+    # TODO see the use of  --omit CardListTest.py
+    #
+
     unittest.main()
 

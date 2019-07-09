@@ -3,3 +3,5 @@ config.py
 deviceName.txt
 *.bak
 __pycache__/
+.coverage
+htmlcov/
