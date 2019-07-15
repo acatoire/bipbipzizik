@@ -51,6 +51,26 @@ class CardMemoryTest(unittest.TestCase):
         sleep(1.0)
         self.assertEqual(self.memo.get(), self.empty)
 
+    def test_memory_double_use(self):
+
+        # Fill first value
+        self.memo.set(self.fill)
+        # Wait 1s the end of the memory
+        sleep(1.0)
+        self.assertEqual(self.memo.get(), self.fill)
+        # Wait 3s the end of the memory
+        sleep(2.0)
+        self.assertEqual(self.memo.get(), self.empty)
+
+        # Try another use
+        self.memo.set(self.fill)
+        # Wait 1s the end of the memory
+        sleep(1.0)
+        self.assertEqual(self.memo.get(), self.fill)
+        # Wait 3s the end of the memory
+        sleep(2.0)
+        self.assertEqual(self.memo.get(), self.empty)
+
 
 if __name__ == '__main__':
 

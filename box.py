@@ -20,7 +20,12 @@ import config as cfg    # Get config from file
 def main():
 
     # Previous card id memory
-    previous_card = CardMemory()
+    try:
+        # Get it from config
+        previous_card = CardMemory(cfg.previousCardTimeout)
+    except AttributeError:
+        # Default value
+        previous_card = CardMemory(30)
 
     reader = Reader()
     card_list = CardList()
@@ -75,8 +80,8 @@ def main():
 
         except OSError as e:
             print("Execution failed:")
-            list(range(10000))       # some payload code
-            time.sleep(0.2)    # sane sleep time of 0.1 seconds
+            list(range(10000))       # some payload code                TODO needed??
+            time.sleep(0.2)          # sane sleep time of 0.1 seconds   TODO needed??
 
 
 if __name__ == "__main__":

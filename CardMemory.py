@@ -14,7 +14,9 @@ class CardMemory:
 
         self.timer_value = timer
         self.clear_value = reset_value
-        self.memory = reset_value
+
+        # equivalent to init_timer
+        self.memory = self.clear_value
         self.memory_timer = Timer(self.timer_value, self.clear)
 
     def get(self):
@@ -33,6 +35,12 @@ class CardMemory:
 
     def clear(self):
 
+        self.memory_timer.cancel()
+        self.init_timer()
+
+    def init_timer(self):
+
+        self.memory_timer = Timer(self.timer_value, self.clear)
         self.memory = self.clear_value
 
 

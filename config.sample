@@ -14,3 +14,14 @@ port = "5005"
 # If you want to play on all your speakers, set roomName = ""
 roomName = "Hugo"
 # roomName = "Salon"
+
+# Multi read mode
+# Choose the action to do on a successive read of the same card
+#
+multiReadMode = "cancel"
+# multiReadMode = "next"          #TODO
+# multiReadMode = "randomAlbum"   #TODO
+# multiReadMode = "nextAlbum"     #TODO
+
+# Previous card memory duration
+previousCardTimeout = 30
