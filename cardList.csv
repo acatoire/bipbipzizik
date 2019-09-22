@@ -13,9 +13,8 @@
 0013354327  , volume/+5                                            , Command    ,
 0005690629  , volume/-5                                            , Command    ,
 
-# For Parents  , Command                                              , Mode       , Comment
+# For Parents  , Command                                           , Mode       , Comment
 0013365376  , spotify/now/spotify:album:4yYVqX2KierVI3nDV0M2UL     ,            , M - Lettre Infinie
-0013193487  , spotify/now/spotify:playlist:37i9dQZF1DWXTHBOfJ8aI7  ,            , Légendes du Rock
 0003586576  , spotify/now/spotify:album:45Hm9e77uZVaRnEIYzzpzM     ,            , Adebert 2
 0013381409  , spotify/now/spotify:album:3qU4wXm0Qngbtnr5PiLbFX     ,            , Caravan Palace
 0013356493  , spotify/now/spotify:album:5lFcL4pj96ZRsoIiHpFl79     ,            , Shaka Ponk
@@ -40,4 +39,27 @@
 
 # To be checked
 #playlist doesn't work
-#xxx        , spotify/now/spotify:playlist:5p0Mw9D1i1EjkJyIafFsvH  ,            , Hugo Dance
+0013193487  , spotify/now/spotify:user:spotify:playlist:37i9dQZF1DWXTHBOfJ8aI7  ,            , Légendes du Rock
+0013186464  , spotify/now/spotify:user:spotify:playlist:5p0Mw9D1i1EjkJyIafFsvH  ,            , Hugo Dance Hugo Go Go
+
+# To assign
+
+#0005686687  ,      ,  , Medusa
+#0013377637  ,      ,  , Pompier
+#0013350280  ,      ,  , Plouf
+#0013375526  ,      ,  , Shaka Ponk
+#0015141595  ,      ,  , Elefunk
+#0013381471  ,      ,  , Mystico
+#0015141710  ,      ,  , Nez-licoptere
+#0013375443  ,      ,  , Lion
+#0013379816  ,      ,  , Mr Oizo
+#0013377441  ,      ,  , Mice Mobile
+#0015141564  ,      ,  , Spirale
+#0013379825  ,      ,  , Clowny
+#0013209651  ,      ,  , Enaf
+#0013338744  ,      ,  , Croc odile
+#0013249903  ,      ,  , Mr Bato
+#0013247975  ,      ,  , Lapin
+
+
+
