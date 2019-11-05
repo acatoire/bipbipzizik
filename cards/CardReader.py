@@ -6,56 +6,133 @@
 
 
 import firebase_admin
+import switch as switch
 from firebase_admin import credentials
 from firebase_admin import db
 
 
-class CardReader:
+class Card:
 
-    def __init__(self, bdd_name):
+    def __init__(self, card_dict):
+        self.parameters = card_dict
+
+    def print(self):
+        """
+        Function that print a card parameters found from its id
+        :return:
+        """
+
+        if self.parameters is not None:
+            print("Card found:")
+            for param, value in self.parameters.items():
+                print("    - " + param + ": " + value)
+        else:
+            print("Card not found in bdd\n")
+
+    def get_command(self):
+        """
+        Function that create the command from card parameters found from its id
+        :return:
+        """
+
+        if self.parameters is not None:
+            # Card found create the command line
+            action = self.parameters.get("action")
+            if action == "spotify:album":
+                command = "spotify/now/spotify:album:" + self.parameters.get("data")
+            elif action == "spotify:playlist":
+                command = "spotify/now/spotify:user:spotify:playlist:" + self.parameters.get("data")
+            elif action == "spotify:track":
+                command = "spotify/now/spotify:track:" + self.parameters.get("data")
+            elif action == "command":
+                command = self.parameters.get("data")
+            else:
+                command = None
+
+        else:
+            command = None
+
+        return command
+
+    def get_mode(self):
+        if self.parameters is not None:
+            # Card found create the command line
+            mode = self.parameters.get("mode")
+
+            if mode == "none" or mode == "":
+                mode = None
+
+        else:
+            mode = None
+
+        return mode
+
+
+class CardBdd:
+
+    def __init__(self, bdd_addr, bdd_name):
+        """
+        Card reader constructor.
+        :param bdd_addr:
+        :param bdd_name:
+        """
 
         # Fetch the service account key JSON file contents
         cred = credentials.Certificate('serviceAccountKey.json')
 
         # Initialize the app with a service account, granting admin privileges
         firebase_admin.initialize_app(cred, {
-            'databaseURL': 'https://bipbipzizik.firebaseio.com/'
+            'databaseURL': bdd_addr
         })
 
         self.cards_db = db.reference(bdd_name)
 
-    def get_card(self, id):
+    def get_card(self, card_id):
+        """
+        Function that get a dict of a searched card
+        :param card_id: searched card id
+        :return: the searched Card or None
+        """
 
         cards_db_python = self.cards_db.get()
 
-        for card in cards_db_python.items():
+        for key, card in cards_db_python.items():
+            if card_id in card.get("ids"):
+                return Card(card)
 
-            if card[1]["ids"] == id:  # todo multi card with split
 
-                print("Card " + id + " found: \n" +
-                      "    - user    : " + card[1]["user"] + "\n" +
-                      "    - name    : " + card[1]["name"] + "\n" +
-                      "    - ids     : " + card[1]["ids"] + "\n" +
-                      "    - mode    : " + card[1]["mode"] + "\n" +
-                      "    - type    :" + card[1]["type"] + "\n" +
-                      "    - command :" + card[1]["command"] + "\n")
-
-    def write_card(self, user, name, ids, mode, type, command):
+    def write_card(self, ids, user, name, action, data, comment, mode):
+        """
+        Function thar write a new card in the bdd
+        :param ids:
+        :param user:
+        :param name:
+        :param action:
+        :param command:
+        :param comment:
+        :param mode:
+        :return:
+        """
 
         # check if card already exist
         # If not creat
         # If yes update
 
         self.cards_db.push({
+            'ids': ids,
             'user': user,
             'name': name,
-            'ids': ids,
+            'action': action,
+            'data': data,
             'mode': mode,
-            'type': type,
-            'command': command
+            'comment': comment,
         })
 
-    def read_cards(self):
+    def print(self):
+        """
+        Function that print the whole card bdd
+        :return:
+        """
 
         print(self.cards_db.get())
 
@@ -63,31 +140,12 @@ class CardReader:
 # For test purpose
 def main():
 
-    card_reader = CardReader('cards')
+    card_reader = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
 
-    #card_reader.write_card( user="axel",
-    #                        name="M - Lettre Infinie",
-    #                        ids="0013365376",
-    #                        mode="none",
-    #                        type="spotify:album",
-    #                        command="spotify/now/spotify:album:4yYVqX2KierVI3nDV0M2UL")
+    card = card_reader.get_card('0013365376')
 
-    #card_reader.write_card( user="axel",
-    #                        name="Aldebert Enfantillage 1",
-    #                        ids="0013200813",
-    #                        mode="ClearQueue",
-    #                        type="spotify:album",
-    #                        command="spotify/now/spotify:album:1xhy7WWxO28XoPKuFlnxSZ")
-
-    #card_reader.write_card( user="bertrand",
-    #                        name="test",
-    #                        ids="00000000000",
-    #                        mode="ClearQueue",
-    #                        type="spotify:album",
-    #                        command="spotify/now/spotify:album:1xhy7WWxO28XoPKuFlnxSZ")
-
-    card_reader.read_cards()
-    card_reader.get_card('0013365376')
+    card.print()
+    print(card.get_command())
 
 
 if __name__ == "__main__":
