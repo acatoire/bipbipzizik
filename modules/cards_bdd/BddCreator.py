@@ -12,7 +12,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0013397903",
                mode="none",
-               action="command",
+               action="Command",
                data="playpause")
 
 bdd.write_card(user="axel",
@@ -20,7 +20,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0013403195",
                mode="none",
-               action="command",
+               action="Command",
                data="next")
 
 bdd.write_card(user="axel",
@@ -28,7 +28,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0005690629",
                mode="none",
-               action="command",
+               action="Command",
                data="volume/+5")
 
 bdd.write_card(user="axel",
@@ -36,7 +36,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0005690629",
                mode="none",
-               action="command",
+               action="Command",
                data="volume/-5")
 
 # For Parents

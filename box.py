@@ -10,14 +10,19 @@ import subprocess
 import time
 
 # Bipbip Music import
-from modules.card_memory.CardMemory import CardMemory
-from modules.cards_csv.CardList import CardList
 from modules.rfid_reader.Reader import Reader
+from modules.card_memory.CardMemory import CardMemory
+from modules.cards_bdd.CardReader import CardBdd
 
 import config as cfg    # Get config from file
 
+# TODO check if bdd is automatically updated
+
 
 def main():
+
+    reader = Reader()
+    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards_test')
 
     # Previous card id memory
     try:
@@ -26,9 +31,6 @@ def main():
     except AttributeError:
         # Default value
         previous_card = CardMemory(30)
-
-    reader = Reader()
-    card_list = CardList()
 
     # Create address path
     address = cfg.ip + ':' + cfg.port
@@ -50,16 +52,15 @@ def main():
         try:
             print('Read card : ', read_id)
 
-            # Update Card bdd TODO do it every X minutes
-            card_list.update_list()
-
             # Find the card in bdd
-            card = card_list.get_card(read_id)
+            card = bdd.get_card(read_id)
+            mode = card.get_mode()
+            command = card.get_command()
 
             if card is not None:
                 # Card execution
-                print('Command : ', card.cmd)
-                print('Modes : ', card.str_modes())
+                print('Command : ', command)
+                print('Modes : ', mode)
 
                 if (previous_card.get() == read_id) and ("cancel" == cfg.multiReadMode) and (not card.has_mode("Command")):
                     # Cancel the read

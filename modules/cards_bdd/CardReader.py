@@ -68,6 +68,15 @@ class Card:
 
         return mode
 
+    def has_mode(self, mode):
+
+        if self.parameters.get("mode") == mode:
+            mode_exist = True
+        else:
+            mode_exist = False
+
+        return mode_exist
+
 
 class CardBdd:
 
