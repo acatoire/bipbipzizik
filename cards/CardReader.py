@@ -35,20 +35,22 @@ class Card:
         :return:
         """
 
+        # This dict can be easily completed with more command
+        action_dict = {"spotify:album": "spotify/now/spotify:album:%DATA%",
+                       "spotify:playlist": "spotify/now/spotify:user:spotify:playlist:%DATA%",
+                       "spotify:track": "spotify/now/spotify:track:%DATA%",
+                       "tunein": "tunein/play/%DATA%",
+                       "command": "%DATA%",}
+
         if self.parameters is not None:
             # Card found create the command line
             action = self.parameters.get("action")
-            if action == "spotify:album":
-                command = "spotify/now/spotify:album:" + self.parameters.get("data")
-            elif action == "spotify:playlist":
-                command = "spotify/now/spotify:user:spotify:playlist:" + self.parameters.get("data")
-            elif action == "spotify:track":
-                command = "spotify/now/spotify:track:" + self.parameters.get("data")
-            elif action == "command":
-                command = self.parameters.get("data")
+            data = self.parameters.get("data")
+
+            if action in action_dict:
+                command = action_dict.get(action).replace("%DATA%", data)
             else:
                 command = None
-
         else:
             command = None
 
@@ -127,6 +129,15 @@ class CardBdd:
             'mode': mode,
             'comment': comment,
         })
+
+    def delete(self):
+        """
+        Function that clear the whole card bdd
+        DANGEROUS
+        :return:
+        """
+
+        print(self.cards_db.delete())
 
     def print(self):
         """
