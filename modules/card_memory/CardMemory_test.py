@@ -8,7 +8,7 @@ import unittest
 
 from time import sleep
 
-from CardMemory import CardMemory
+from modules.card_memory.CardMemory import CardMemory
 
 
 class CardMemoryTest(unittest.TestCase):

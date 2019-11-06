@@ -6,67 +6,67 @@
 #
 
 import unittest
-
-from cards.CardReader import CardBdd
+from modules.cards_bdd.CardReader import Card, CardBdd
 
 
 class CardLisTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+
         cls.bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards_test')
         cls.bdd.delete()
         cls.bdd.write_card(user="user1",
-                       name="name1",
-                       comment="comment1",
-                       ids="id1",
-                       mode="mode1",
-                       action="command",
-                       data="data1")
+                           name="name1",
+                           comment="comment1",
+                           ids="id1",
+                           mode="mode1",
+                           action="command",
+                           data="data1")
 
         cls.bdd.write_card(user="user2",
-                       name="name2",
-                       comment="comment2",
-                       ids="id2",
-                       mode="mode2",
-                       action="spotify:album",
-                       data="data2")
+                           name="name2",
+                           comment="comment2",
+                           ids="id2",
+                           mode="mode2",
+                           action="spotify:album",
+                           data="data2")
 
         cls.bdd.write_card(user="user3",
-                       name="name3",
-                       comment="comment3",
-                       ids="id3",
-                       mode="mode3",
-                       action="spotify:playlist",
-                       data="data3")
+                           name="name3",
+                           comment="comment3",
+                           ids="id3",
+                           mode="mode3",
+                           action="spotify:playlist",
+                           data="data3")
 
         cls.bdd.write_card(user="user4",
-                       name="name4",
-                       comment="comment4",
-                       ids="id4",
-                       mode="mode4",
-                       action="spotify:track",
-                       data="data4")
+                           name="name4",
+                           comment="comment4",
+                           ids="id4",
+                           mode="mode4",
+                           action="spotify:track",
+                           data="data4")
 
         cls.bdd.write_card(user="user5",
-                       name="name5",
-                       comment="comment5",
-                       ids="id5",
-                       mode="mode5",
-                       action="tunein",
-                       data="data5")
+                           name="name5",
+                           comment="comment5",
+                           ids="id5",
+                           mode="mode5",
+                           action="tunein",
+                           data="data5")
 
     # def setUp(self):
         # nothing yet
 
     def test_read_card(self):
-        card_expected = {  "user": "user5",
-                           "name": "name5",
-                           "comment": "comment5",
-                           "ids": "id5",
-                           "mode": "mode5",
-                           "action": "tunein",
-                           "data": "data5"}
+        card_expected = {"user": "user5",
+                         "name": "name5",
+                         "comment": "comment5",
+                         "ids": "id5",
+                         "mode": "mode5",
+                         "action": "tunein",
+                         "data": "data5"}
 
         card = self.bdd.get_card("id5")
 

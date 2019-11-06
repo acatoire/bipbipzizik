@@ -6,7 +6,6 @@
 
 
 import firebase_admin
-import switch as switch
 from firebase_admin import credentials
 from firebase_admin import db
 

@@ -10,9 +10,9 @@ import subprocess
 import time
 
 # Bipbip Music import
-from CardMemory import CardMemory
-from CardList import CardList
-from Reader import Reader
+from modules.card_memory.CardMemory import CardMemory
+from modules.cards_csv.CardList import CardList
+from modules.rfid_reader.Reader import Reader
 
 import config as cfg    # Get config from file
 

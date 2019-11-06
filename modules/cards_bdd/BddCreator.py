@@ -1,7 +1,7 @@
 
 # Sciypte that fill the database with all cards
 
-from cards.CardReader import CardBdd
+from modules.cards_bdd.CardReader import Card, CardBdd
 
 bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
 

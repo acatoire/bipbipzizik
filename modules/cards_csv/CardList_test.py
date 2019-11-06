@@ -7,8 +7,8 @@
 
 import unittest
 
-from CardList import Card
-from CardList import CardList
+from modules.cards_csv.CardList import Card
+from modules.cards_csv.CardList import CardList
 
 
 class CardLisTest(unittest.TestCase):
