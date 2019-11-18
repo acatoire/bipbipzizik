@@ -96,6 +96,7 @@ class CardBdd:
         })
 
         self.cards_db = db.reference(bdd_name)
+        self.cards_db_python = self.cards_db.get()  # Todo refresh the bdd periodically
 
     def get_card(self, card_id):
         """
@@ -104,9 +105,7 @@ class CardBdd:
         :return: the searched Card or None
         """
 
-        cards_db_python = self.cards_db.get()
-
-        for key, card in cards_db_python.items():
+        for key, card in self.cards_db_python.items():
             if card_id in card.get("ids"):
                 return Card(card)
 

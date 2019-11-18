@@ -8,6 +8,7 @@
 # Python import
 import subprocess
 import time
+import requests
 
 # Bipbip Music import
 from modules.rfid_reader.Reader import Reader
@@ -22,7 +23,7 @@ import config as cfg    # Get config from file
 def main():
 
     reader = Reader()
-    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards_test')
+    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
 
     # Previous card id memory
     try:
@@ -38,10 +39,10 @@ def main():
     # Create command line
     if cfg.roomName == '':
         # Command for global playing
-        command_line = address + ' '
+        command_with_room = address + '/'
     else:
         # Command for local playing
-        command_line = address + ' ' + cfg.roomName + '/'
+        command_with_room = address + '/' + cfg.roomName + '/'
 
     print('Ready: place a card on top of the reader')
 
@@ -54,11 +55,12 @@ def main():
 
             # Find the card in bdd
             card = bdd.get_card(read_id)
-            mode = card.get_mode()
-            command = card.get_command()
 
             if card is not None:
                 # Card execution
+                mode = card.get_mode()
+                command = card.get_command()
+
                 print('Command : ', command)
                 print('Modes : ', mode)
 
@@ -70,16 +72,24 @@ def main():
                     previous_card.set(read_id)
 
                     if card.has_mode("ClearQueue"):
-                        subprocess.check_call(["./sonosplay.sh " + command_line + "clearqueue"], shell=True)
+                        command_line = "http://" + command_with_room + "clearqueue"
+                        print(command_line)
+                        response = requests.get(command_line)
+                        print(response.text)
 
-                    if card.cmd != 'error':
-                        # TODO, direct python implementation without using sh script
-                        subprocess.check_call(["./sonosplay.sh " + command_line + card.cmd], shell=True)
+                    if command is not None:
+                        command_line = "http://" + command_with_room + command
+                        print(command_line)
+                        response = requests.get(command_line)
+                        print(response.text)
 
                     list(range(10000)) # some payload code
                     time.sleep(0.2)    # sane sleep time
+            else:
+                print('Failed to read card from bdd')
 
         except OSError as e:
+            raise e
             print("Execution failed:")
             list(range(10000))       # some payload code                TODO needed??
             time.sleep(0.2)          # sane sleep time of 0.1 seconds   TODO needed??

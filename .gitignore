@@ -5,3 +5,4 @@ deviceName.txt
 __pycache__/
 .coverage
 htmlcov/
+venv/

@@ -4,6 +4,7 @@
 from modules.cards_bdd.CardReader import Card, CardBdd
 
 bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
+bdd.delete()
 
 # CARDS
 # Command cards
@@ -159,7 +160,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0013397291",
                mode="ClearQueue",
-               action="spotify:album",
+               action="spotify:track",
                data="35VKLRwEjuR5IuFyGqjMaf")
 
 bdd.write_card(user="axel",
