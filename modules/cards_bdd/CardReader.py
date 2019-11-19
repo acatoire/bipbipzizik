@@ -77,6 +77,13 @@ class Card:
 
         return mode_exist
 
+    def is_command(self):
+
+        if self.parameters.get("action") == "command":
+            return True
+        else:
+            return False
+
 
 class CardBdd:
 

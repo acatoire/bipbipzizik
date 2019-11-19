@@ -22,16 +22,17 @@ import config as cfg    # Get config from file
 
 def main():
 
-    reader = Reader()
-    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
-
-    # Previous card id memory
+    # Get config
     try:
         # Get it from config
-        previous_card = CardMemory(cfg.previousCardTimeout)
+        memory_duration = cfg.previousCardTimeout
     except AttributeError:
         # Default value
-        previous_card = CardMemory(30)
+        memory_duration = 30
+
+    reader = Reader()
+    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
+    previous_card = CardMemory(memory_duration)
 
     # Create address path
     address = cfg.ip + ':' + cfg.port
@@ -39,16 +40,17 @@ def main():
     # Create command line
     if cfg.roomName == '':
         # Command for global playing
-        command_with_room = address + '/'
+        addr_with_room = address + '/'
     else:
         # Command for local playing
-        command_with_room = address + '/' + cfg.roomName + '/'
+        addr_with_room = address + '/' + cfg.roomName + '/'
 
-    print('Ready: place a card on top of the reader')
 
     while True:
+        print('Ready: place a card on top of the reader')
+
+        # Wait for a card to be read
         read_id = reader.read_card()
-        # Todo clear previous_card after some time (cfg.previousCardTimeout)
 
         try:
             print('Read card : ', read_id)
@@ -56,7 +58,10 @@ def main():
             # Find the card in bdd
             card = bdd.get_card(read_id)
 
-            if card is not None:
+            if card is None:
+                print('Failed to read card from bdd')
+
+            else:
                 # Card execution
                 mode = card.get_mode()
                 command = card.get_command()
@@ -64,7 +69,7 @@ def main():
                 print('Command : ', command)
                 print('Modes : ', mode)
 
-                if (previous_card.get() == read_id) and ("cancel" == cfg.multiReadMode) and (not card.has_mode("Command")):
+                if (previous_card.get() == read_id) and ("cancel" == cfg.multiReadMode) and (not card.is_command()):
                     # Cancel the read
                     print('Multi read : card canceled')
                 else:
@@ -72,27 +77,24 @@ def main():
                     previous_card.set(read_id)
 
                     if card.has_mode("ClearQueue"):
-                        command_line = "http://" + command_with_room + "clearqueue"
+                        command_line = "http://" + addr_with_room + "clearqueue"
                         print(command_line)
                         response = requests.get(command_line)
                         print(response.text)
 
                     if command is not None:
-                        command_line = "http://" + command_with_room + command
+                        command_line = "http://" + addr_with_room + command
                         print(command_line)
                         response = requests.get(command_line)
                         print(response.text)
 
                     list(range(10000)) # some payload code
                     time.sleep(0.2)    # sane sleep time
-            else:
-                print('Failed to read card from bdd')
 
         except OSError as e:
-            raise e
-            print("Execution failed:")
-            list(range(10000))       # some payload code                TODO needed??
-            time.sleep(0.2)          # sane sleep time of 0.1 seconds   TODO needed??
+            print("Execution failed:" + e)
+            # wait before restart
+            time.sleep(0.5)
 
 
 if __name__ == "__main__":

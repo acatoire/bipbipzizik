@@ -1,7 +1,7 @@
 
 # Sciypte that fill the database with all cards
 
-from modules.cards_bdd.CardReader import Card, CardBdd
+from modules.cards_bdd.CardReader import CardBdd
 
 bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
 bdd.delete()
@@ -13,7 +13,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0013397903",
                mode="none",
-               action="Command",
+               action="command",
                data="playpause")
 
 bdd.write_card(user="axel",
@@ -21,7 +21,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0013403195",
                mode="none",
-               action="Command",
+               action="command",
                data="next")
 
 bdd.write_card(user="axel",
@@ -29,7 +29,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0005690629",
                mode="none",
-               action="Command",
+               action="command",
                data="volume/+5")
 
 bdd.write_card(user="axel",
@@ -37,7 +37,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0005690629",
                mode="none",
-               action="Command",
+               action="command",
                data="volume/-5")
 
 # For Parents
