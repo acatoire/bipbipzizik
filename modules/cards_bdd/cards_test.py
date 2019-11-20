@@ -6,7 +6,7 @@
 #
 
 import unittest
-from modules.cards_bdd.CardReader import Card, CardBdd
+from modules.cards_bdd.CardFirebase import Card, CardBdd
 
 
 class CardLisTest(unittest.TestCase):

@@ -13,12 +13,9 @@ import requests
 # Bipbip Music import
 from modules.rfid_reader.Reader import Reader
 from modules.card_memory.CardMemory import CardMemory
-from modules.cards_bdd.CardReader import CardBdd
+from modules.cards_bdd.CardFirebase import CardBdd
 
 import config as cfg    # Get config from file
-
-# TODO check if bdd is automatically updated
-
 
 def main():
 

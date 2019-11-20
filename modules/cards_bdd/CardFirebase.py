@@ -8,6 +8,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
+BDD_REFRESH_DELAY = 60*60  # 1h
 
 class Card:
 
@@ -93,14 +94,6 @@ class CardBdd:
         :param bdd_name:
         """
 
-        def print_my_path():
-            from os import path, getcwd
-            print('DEBUG: cwd:     {}'.format(getcwd()))
-            print('DEBUG: __file__:{}'.format(__file__))
-            print('DEBUG: abspath: {}'.format(path.abspath(__file__)))
-
-        print_my_path()
-
         # Fetch the service account key JSON file contents
         cred = credentials.Certificate('serviceAccountKey.json')
 
@@ -110,7 +103,10 @@ class CardBdd:
         })
 
         self.cards_db = db.reference(bdd_name)
-        self.cards_db_python = self.cards_db.get()  # Todo refresh the bdd periodically
+        self.cards_db_python = self.cards_db.get()
+
+        # To refresh the bdd periodically
+        # TODO creat thread
 
     def get_card(self, card_id):
         """

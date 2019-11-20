@@ -1,7 +1,7 @@
 
-# Sciypte that fill the database with all cards
+# Script that fill the database with all cards
 
-from modules.cards_bdd.CardReader import CardBdd
+from modules.cards_bdd.CardFirebase import CardBdd
 
 bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
 bdd.delete()
