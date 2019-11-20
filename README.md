@@ -70,12 +70,16 @@ sudo systemctl daemon-reload
 ```
 - Start the musiccards.service
 ```bash
-sudo systemctl enable  musiccards.service
+sudo systemctl enable musiccards.service
 sudo systemctl start musiccards.service
 ```
 - Check if musiccards.service is running 
 ```bash
 sudo systemctl status musiccards.service
+```
+- Watch the full log of musiccards.service 
+```bash
+sudo journalctl -u musiccards.service
 ```
 - Restart service after file update 
 ```bash
