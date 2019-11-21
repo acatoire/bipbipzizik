@@ -18,12 +18,17 @@ sudo apt-get install python3-pip
 
 ```
 
-- python evdev. To install:
+- python evdev, firebase_admin. To install:
 ```bash
 sudo pip3 --default-timeout=1000 install evdev
+sudo pip3 --default-timeout=1000 install firebase_admin
+sudo pip3 --default-timeout=1000 install cryptography
 ```
 
-```--default-timeout=1000``` helps if the raspberry is too slow
+```--default-timeout=1000``` helps if the raspberry or the connection is too slow
+
+Firebase_Admin Error TypeError: __init__() got an unexpected keyword argument 'status'
+python3 -m pip install --upgrade urllib3
 
 ### hardware:
 - [Raspberry Pi Zero (Don't forget micro sd card and power supply)](http://www.microcenter.com/product/486575/Zero_W)
@@ -65,12 +70,16 @@ sudo systemctl daemon-reload
 ```
 - Start the musiccards.service
 ```bash
-sudo systemctl enable  musiccards.service
+sudo systemctl enable musiccards.service
 sudo systemctl start musiccards.service
 ```
 - Check if musiccards.service is running 
 ```bash
 sudo systemctl status musiccards.service
+```
+- Watch the full log of musiccards.service 
+```bash
+sudo journalctl -u musiccards.service
 ```
 - Restart service after file update 
 ```bash

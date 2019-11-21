@@ -1,6 +1,5 @@
 #
-# BIPBIP ZIZIK
-# cardReader class
+# Manage cards saved on firebase bdd
 #
 #
 
@@ -9,6 +8,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
+BDD_REFRESH_DELAY = 60*60  # 1h
 
 class Card:
 
@@ -68,25 +68,63 @@ class Card:
 
         return mode
 
+    def has_mode(self, mode):
+
+        if self.parameters.get("mode") == mode:
+            mode_exist = True
+        else:
+            mode_exist = False
+
+        return mode_exist
+
+    def is_command(self):
+
+        if self.parameters.get("action") == "command":
+            return True
+        else:
+            return False
+
 
 class CardBdd:
 
-    def __init__(self, bdd_addr, bdd_name):
+    def __init__(self, bdd_addr, bdd_name, path_to_key_file):
         """
         Card reader constructor.
         :param bdd_addr:
         :param bdd_name:
         """
 
-        # Fetch the service account key JSON file contents
-        cred = credentials.Certificate('serviceAccountKey.json')
+        try:
+            # Fetch the service account key JSON file contents
+            credential = credentials.Certificate(path_to_key_file)
+        except FileNotFoundError:
+            credential = None
+            print("FATAL ERROR: Impossible to access to bdd key file \"" + path_to_key_file + "\"")
+            exit()
 
         # Initialize the app with a service account, granting admin privileges
-        firebase_admin.initialize_app(cred, {
-            'databaseURL': bdd_addr
-        })
+        firebase_admin.initialize_app(credential, {'databaseURL': bdd_addr})
 
         self.cards_db = db.reference(bdd_name)
+        self.cards_db_python = {}
+
+        self.update()
+
+    def update(self):
+        """
+        Function that update the bdd from the cloud
+        :return: nothing
+        """
+
+        self.cards_db_python = self.cards_db.get()
+
+    def count(self):
+        """
+        Function that return the number of cards in th bdd
+        :return: the number of cards
+        """
+
+        return self.cards_db_python.__len__()
 
     def get_card(self, card_id):
         """
@@ -95,12 +133,9 @@ class CardBdd:
         :return: the searched Card or None
         """
 
-        cards_db_python = self.cards_db.get()
-
-        for key, card in cards_db_python.items():
+        for key, card in self.cards_db_python.items():
             if card_id in card.get("ids"):
                 return Card(card)
-
 
     def write_card(self, ids, user, name, action, data, comment, mode):
         """
@@ -109,7 +144,7 @@ class CardBdd:
         :param user:
         :param name:
         :param action:
-        :param command:
+        :param data:
         :param comment:
         :param mode:
         :return:
@@ -143,19 +178,17 @@ class CardBdd:
         Function that print the whole card bdd
         :return:
         """
-
-        print(self.cards_db.get())
+        
+        for key, card in self.cards_db_python.items():
+            print(key + ":" + str(card))
 
 
 # For test purpose
 def main():
 
-    card_reader = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
+    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards_test', 'serviceAccountKey.json')
 
-    card = card_reader.get_card('0013365376')
-
-    card.print()
-    print(card.get_command())
+    bdd.print()
 
 
 if __name__ == "__main__":

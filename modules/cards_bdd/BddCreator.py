@@ -1,9 +1,10 @@
 
-# Sciypte that fill the database with all cards
+# Script that fill the database with all cards
 
-from modules.cards_bdd.CardReader import Card, CardBdd
+from modules.cards_bdd.CardFirebase import CardBdd
 
-bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
+bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards', 'serviceAccountKey.json')
+bdd.delete()
 
 # CARDS
 # Command cards
@@ -159,7 +160,7 @@ bdd.write_card(user="axel",
                comment="",
                ids="0013397291",
                mode="ClearQueue",
-               action="spotify:album",
+               action="spotify:track",
                data="35VKLRwEjuR5IuFyGqjMaf")
 
 bdd.write_card(user="axel",
