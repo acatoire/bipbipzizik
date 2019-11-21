@@ -87,26 +87,44 @@ class Card:
 
 class CardBdd:
 
-    def __init__(self, bdd_addr, bdd_name):
+    def __init__(self, bdd_addr, bdd_name, path_to_key_file):
         """
         Card reader constructor.
         :param bdd_addr:
         :param bdd_name:
         """
 
-        # Fetch the service account key JSON file contents
-        cred = credentials.Certificate('serviceAccountKey.json')
+        try:
+            # Fetch the service account key JSON file contents
+            cred = credentials.Certificate(path_to_key_file)
+        except FileNotFoundError:
+            print("FATAL ERROR: Impossible to access to bdd key file \"" + path_to_key_file + "\"")
+            exit()
 
         # Initialize the app with a service account, granting admin privileges
-        firebase_admin.initialize_app(cred, {
-            'databaseURL': bdd_addr
-        })
+        firebase_admin.initialize_app(cred, {'databaseURL': bdd_addr})
 
         self.cards_db = db.reference(bdd_name)
         self.cards_db_python = self.cards_db.get()
 
         # To refresh the bdd periodically
         # TODO creat thread
+
+    def update(self):
+        """
+        Function that update the bdd from the cloud
+        :return: nothing
+        """
+
+        self.cards_db_python = self.cards_db.get()
+
+    def count(self):
+        """
+        Function that return the number of cards in th bdd
+        :return: the number of cards
+        """
+
+        return self.cards_db_python.__len__()
 
     def get_card(self, card_id):
         """

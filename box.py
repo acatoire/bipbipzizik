@@ -7,7 +7,7 @@
 
 # Python import
 import subprocess
-import time
+from time import time, sleep
 import requests
 
 # Bipbip Music import
@@ -27,9 +27,13 @@ def main():
         # Default value
         memory_duration = 30
 
+    UPDATE_PERIOD = 60
+
     reader = Reader()
-    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
+    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards', 'modules/cards_bdd/serviceAccountKey.json')
     previous_card = CardMemory(memory_duration)
+
+    last_update_time = time()
 
     # Create address path
     address = cfg.ip + ':' + cfg.port
@@ -85,13 +89,17 @@ def main():
                         response = requests.get(command_line)
                         print(response.text)
 
-                    list(range(10000)) # some payload code
-                    time.sleep(0.2)    # sane sleep time
+            # Update the bdd periodically
+            if (time() - last_update_time) > UPDATE_PERIOD:
+                bdd.update()
+                last_update_time = time()
+                # TODO Write last update time on config bdd
 
         except OSError as e:
-            print("Execution failed:" + e)
-            # wait before restart
-            time.sleep(0.5)
+            print("Execution failed:" + e.strerror)
+
+        # wait before restart
+        sleep(0.5)
 
 
 if __name__ == "__main__":

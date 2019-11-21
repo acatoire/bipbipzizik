@@ -3,7 +3,7 @@
 
 from modules.cards_bdd.CardFirebase import CardBdd
 
-bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
+bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards', 'serviceAccountKey.json')
 bdd.delete()
 
 # CARDS
