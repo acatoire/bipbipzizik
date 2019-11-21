@@ -96,19 +96,19 @@ class CardBdd:
 
         try:
             # Fetch the service account key JSON file contents
-            cred = credentials.Certificate(path_to_key_file)
+            credential = credentials.Certificate(path_to_key_file)
         except FileNotFoundError:
+            credential = None
             print("FATAL ERROR: Impossible to access to bdd key file \"" + path_to_key_file + "\"")
             exit()
 
         # Initialize the app with a service account, granting admin privileges
-        firebase_admin.initialize_app(cred, {'databaseURL': bdd_addr})
+        firebase_admin.initialize_app(credential, {'databaseURL': bdd_addr})
 
         self.cards_db = db.reference(bdd_name)
-        self.cards_db_python = self.cards_db.get()
+        self.cards_db_python = {}
 
-        # To refresh the bdd periodically
-        # TODO creat thread
+        self.update()
 
     def update(self):
         """
@@ -137,7 +137,6 @@ class CardBdd:
             if card_id in card.get("ids"):
                 return Card(card)
 
-
     def write_card(self, ids, user, name, action, data, comment, mode):
         """
         Function thar write a new card in the bdd
@@ -145,7 +144,7 @@ class CardBdd:
         :param user:
         :param name:
         :param action:
-        :param command:
+        :param data:
         :param comment:
         :param mode:
         :return:
@@ -179,19 +178,17 @@ class CardBdd:
         Function that print the whole card bdd
         :return:
         """
-
-        print(self.cards_db.get())
+        
+        for key, card in self.cards_db_python.items():
+            print(key + ":" + str(card))
 
 
 # For test purpose
 def main():
 
-    card_reader = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards')
+    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards_test', 'serviceAccountKey.json')
 
-    card = card_reader.get_card('0013365376')
-
-    card.print()
-    print(card.get_command())
+    bdd.print()
 
 
 if __name__ == "__main__":
