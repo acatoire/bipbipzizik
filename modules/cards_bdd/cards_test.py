@@ -1,12 +1,13 @@
 #
-#
-# BIPBIP ZIZIK
-# Unit test for CardList class
+# BIPBIPZIZIK
+# Unit test for Card and FirebaseBdd classes
 #
 #
 
 import unittest
-from modules.cards_bdd.CardFirebase import Card, CardBdd
+
+from modules.cards_bdd.Card import Card
+from modules.cards_bdd.DbManager import DbManager
 
 
 class CardLisTest(unittest.TestCase):
@@ -14,7 +15,7 @@ class CardLisTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
 
-        cls.bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards_test', 'serviceAccountKey.json')
+        cls.bdd = DbManager('https://bipbipzizik.firebaseio.com/', 'cards_test', 'serviceAccountKey.json')
         cls.bdd.delete()
         cls.bdd.write_card(user="user1",
                            name="name1",

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 #
-# MUSIC CARD
-# Application
+# BIPBIPZIZIK
+# Main Application
 #
 
 # Python import
@@ -10,10 +10,11 @@ import subprocess
 from time import time, sleep
 import requests
 
-# Bipbip Music import
+# Bipbipzizic import
 from modules.rfid_reader.Reader import Reader
 from modules.card_memory.CardMemory import CardMemory
-from modules.cards_bdd.CardFirebase import CardBdd
+from modules.cards_bdd.Card import Card
+from modules.cards_bdd.DbManager import DbManager
 
 import config as cfg    # Get config from file
 
@@ -30,7 +31,7 @@ def main():
     UPDATE_PERIOD = 60
 
     reader = Reader()
-    bdd = CardBdd('https://bipbipzizik.firebaseio.com/', 'cards', 'modules/cards_bdd/serviceAccountKey.json')
+    bdd = DbManager('https://bipbipzizik.firebaseio.com/', 'cards', 'modules/cards_bdd/serviceAccountKey.json')
     previous_card = CardMemory(memory_duration)
 
     last_update_time = time()
