@@ -14,39 +14,24 @@ import requests
 from modules.rfid_reader.Reader import Reader
 from modules.card_memory.CardMemory import CardMemory
 from modules.cards_bdd.Card import Card
+from modules.cards_bdd.AppConfig import AppConfig
 from modules.cards_bdd.DbManager import DbManager
+from modules.tools import get_serial
 
-import config as cfg    # Get config from file
 
 def main():
-
-    # Get config
-    try:
-        # Get it from config
-        memory_duration = cfg.previousCardTimeout
-    except AttributeError:
-        # Default value
-        memory_duration = 30
 
     UPDATE_PERIOD = 60
 
     reader = Reader()
-    bdd = DbManager('https://bipbipzizik.firebaseio.com/', 'cards', 'modules/cards_bdd/serviceAccountKey.json')
-    previous_card = CardMemory(memory_duration)
+    database = DbManager('https://bipbipzizik.firebaseio.com/', 'prod', 'modules/cards_bdd/serviceAccountKey.json')
 
+    app_serial = get_serial()
+    cfg = database.get_config(app_serial)
+    cfg.print() #TODO investigate why config db is empty sometimes if no print is done
+
+    previous_card = CardMemory(cfg.cfg_card_timeout)
     last_update_time = time()
-
-    # Create address path
-    address = cfg.ip + ':' + cfg.port
-
-    # Create command line
-    if cfg.roomName == '':
-        # Command for global playing
-        addr_with_room = address + '/'
-    else:
-        # Command for local playing
-        addr_with_room = address + '/' + cfg.roomName + '/'
-
 
     while True:
         print('Ready: place a card on top of the reader')
@@ -57,11 +42,11 @@ def main():
         try:
             print('Read card : ', read_id)
 
-            # Find the card in bdd
-            card = bdd.get_card(read_id)
+            # Find the card in database
+            card = database.get_card(read_id)
 
             if card is None:
-                print('Failed to read card from bdd')
+                print('Failed to read card from database')
 
             else:
                 # Card execution
@@ -71,7 +56,7 @@ def main():
                 print('Command : ', command)
                 print('Modes : ', mode)
 
-                if (previous_card.get() == read_id) and ("cancel" == cfg.multiReadMode) and (not card.is_command()):
+                if (previous_card.get() == read_id) and ("cancel" == cfg.cfg_multi_read_mode) and (not card.is_command()):
                     # Cancel the read
                     print('Multi read : card canceled')
                 else:
@@ -79,22 +64,22 @@ def main():
                     previous_card.set(read_id)
 
                     if card.has_mode("ClearQueue"):
-                        command_line = "http://" + addr_with_room + "clearqueue"
+                        command_line = cfg.get_sonos_cmd("clearqueue")
                         print(command_line)
                         response = requests.get(command_line)
                         print(response.text)
 
                     if command is not None:
-                        command_line = "http://" + addr_with_room + command
+                        command_line = cfg.get_sonos_cmd(command)
                         print(command_line)
                         response = requests.get(command_line)
                         print(response.text)
 
-            # Update the bdd periodically
+            # Update the database periodically
             if (time() - last_update_time) > UPDATE_PERIOD:
-                bdd.update()
+                database.update()
                 last_update_time = time()
-                # TODO Write last update time on config bdd
+                # TODO Write last update time on config database
 
         except OSError as e:
             print("Execution failed:" + e.strerror)

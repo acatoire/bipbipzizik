@@ -9,23 +9,24 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-from Card import Card
-from AppConfig import AppConfig
+from .Card import Card
+from .AppConfig import AppConfig
+
+from time import sleep
 
 
 class DbManager:
 
-    def __init__(self, bdd_addr, card_bdd_name, config_bdd_name, path_to_key_file):
+    def __init__(self, bdd_addr, bdd_name, path_to_key_file):
         """
         Card reader constructor.
         :param bdd_addr:
-        :param card_bdd_name:
-        :param config_bdd_name:
+        :param bdd_name:
         :param path_to_key_file:
         """
 
-        self.card_bdd_name = card_bdd_name
-        self.config_bdd_name = config_bdd_name
+        self.config_bdd_name = "config_" + bdd_name
+        self.card_bdd_name = "cards_" + bdd_name
 
         try:
             # Fetch the service account key JSON file contents
@@ -38,8 +39,10 @@ class DbManager:
         # Initialize the app with a service account, granting admin privileges
         firebase_admin.initialize_app(credential, {'databaseURL': bdd_addr})
 
-        self.config_db = db.reference(config_bdd_name)
-        self.cards_db = db.reference(card_bdd_name)
+        self.config_db = db.reference(self.config_bdd_name)
+        self.cards_db = db.reference(self.card_bdd_name)
+
+        # Todo stop the app with error if db is empty
 
         self.cards_db_python = {}
         self.config_db_python = {}
@@ -55,13 +58,21 @@ class DbManager:
         self.config_db_python = self.config_db.get()
         self.cards_db_python = self.cards_db.get()
 
-    def count(self):
+    def count_cards(self):
         """
         Function that return the number of cards in th bdd
         :return: the number of cards
         """
 
         return self.cards_db_python.__len__()
+
+    def count_configs(self):
+        """
+        Function that return the number of configs in th bdd
+        :return: the number of configs
+        """
+
+        return self.config_db_python.__len__()
 
     def get_card(self, card_id):
         """
@@ -122,7 +133,7 @@ class DbManager:
                                     sonos_server_port=config.get("sonos_server_port"),
                                     room_name=config.get("room_name"),
                                     multi_read_mode=config.get("multi_read_mode"),
-                                    card_timeout=config.get("card_timeout")
+                                    card_timeout=int(config.get("card_timeout"))
                                 )
 
             # Config not found, return None
@@ -160,9 +171,13 @@ class DbManager:
         :return:
         """
         if bdd_name == self.card_bdd_name:
+            print("Delete database: " + bdd_name)
             print(self.cards_db.delete())
         elif bdd_name == self.config_bdd_name:
+            print("Delete database: " + bdd_name)
             print(self.config_db.delete())
+        else:
+            print("Delete Canceled: Database not recognized")
 
     def print(self):
         """

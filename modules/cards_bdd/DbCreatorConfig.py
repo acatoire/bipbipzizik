@@ -3,8 +3,8 @@
 
 from modules.cards_bdd.DbManager import DbManager
 
-data_base = DbManager('https://bipbipzizik.firebaseio.com/', 'cards', 'config', 'serviceAccountKey.json')
-data_base.delete('config')
+data_base = DbManager('https://bipbipzizik.firebaseio.com/', 'prod', 'WriteKey.json')
+data_base.delete('config_prod')
 
 # CARDS
 # Command cards

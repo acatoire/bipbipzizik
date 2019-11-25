@@ -37,6 +37,21 @@ class AppConfig:
         # Previous card memory duration in second
         self.cfg_card_timeout = card_timeout
 
+    def get_sonos_cmd(self, command):
+
+        # Create address path
+        sonos_addr = "http://" + self.cfg_sonos_server_ip + ':' + self.cfg_sonos_server_port
+
+        # Create command line
+        if self.cfg_room_name == '':
+            # Command for global playing
+            addr_with_room = sonos_addr + '/'
+        else:
+            # Command for local playing
+            addr_with_room = sonos_addr + '/' + self.cfg_room_name + '/'
+
+        return addr_with_room + command
+
     def print(self):
         """
         Function that print the application config

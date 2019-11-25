@@ -10,13 +10,13 @@ from modules.cards_bdd.Card import Card
 from modules.cards_bdd.DbManager import DbManager
 
 
-class CardLisTest(unittest.TestCase):
+class CardsWrite(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
 
-        cls.bdd = DbManager('https://bipbipzizik.firebaseio.com/', 'cards_test', 'serviceAccountKey.json')
-        cls.bdd.delete()
+        cls.bdd = DbManager('https://bipbipzizik.firebaseio.com/', 'test', 'WriteKey.json')
+        cls.bdd.delete("cards_test")
         cls.bdd.write_card(user="user1",
                            name="name1",
                            comment="comment1",
