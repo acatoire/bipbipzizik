@@ -13,9 +13,7 @@ import requests
 # Bipbipzizic import
 from modules.rfid_reader.Reader import Reader
 from modules.card_memory.CardMemory import CardMemory
-from modules.bipbipzizik_database.Card import Card
-from modules.bipbipzizik_database.AppConfig import AppConfig
-from modules.bipbipzizik_database.DbManager import DbManager
+from modules.bipbipzizik_database.DbReader import DbReader
 from modules.tools import get_serial
 
 
@@ -24,11 +22,11 @@ def main():
     UPDATE_PERIOD = 60
 
     reader = Reader()
-    database = DbManager('https://bipbipzizik.firebaseio.com/', 'prod', 'modules/bipbipzizik_database/serviceAccountKey.json')
+    database = DbReader('https://bipbipzizik.firebaseio.com/', 'prod')
 
     app_serial = get_serial()
     cfg = database.get_config(app_serial)
-    cfg.print() #TODO investigate why config db is empty sometimes if no print is done
+    cfg.print()
 
     previous_card = CardMemory(cfg.cfg_card_timeout)
     last_update_time = time()
