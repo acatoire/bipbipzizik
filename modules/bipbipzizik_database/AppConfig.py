@@ -59,12 +59,14 @@ class AppConfig:
         """
 
         print("Application config:")
-        print(self.cfg_application_id)
-        print(self.cfg_sonos_server_ip)
-        print(self.cfg_sonos_server_port)
-        print(self.cfg_room_name)
-        print(self.cfg_multi_read_mode)
-        print(self.cfg_card_timeout)
+        print("    - " + self.cfg_app_name)
+        print("    - " + self.cfg_app_owner)
+        print("    - " + self.cfg_application_id)
+        print("    - " + self.cfg_sonos_server_ip)
+        print("    - " + self.cfg_sonos_server_port)
+        print("    - " + self.cfg_room_name)
+        print("    - " + self.cfg_multi_read_mode)
+        print("    - " + str(self.cfg_card_timeout))
 
 
 # For test purpose

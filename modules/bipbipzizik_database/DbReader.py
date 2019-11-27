@@ -6,8 +6,9 @@
 
 from firebase import firebase
 
-from .Card import Card
-from .AppConfig import AppConfig
+
+from modules.bipbipzizik_database.Card import Card
+from modules.bipbipzizik_database.AppConfig import AppConfig
 
 
 class DbReader:
@@ -37,7 +38,8 @@ class DbReader:
         """
 
         self.config_db_python = self.database.get('/' + self.config_bdd_name, None)
-        self.cards_db_python = self.database.get('/' + self.config_bdd_name, None)
+        self.cards_db_python = self.database.get('/' + self.card_bdd_name, None)
+
 
     def count_cards(self):
         """

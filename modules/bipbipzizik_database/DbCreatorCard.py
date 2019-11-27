@@ -1,7 +1,7 @@
 
 # Script that fill the database with all cards
 
-from modules.cards_bdd.DbManager import DbManager
+from modules.bipbipzizik_database.DbManager import DbManager
 
 data_base = DbManager('https://bipbipzizik.firebaseio.com/', 'prod', 'WriteKey.json')
 data_base.delete('cards_prod')

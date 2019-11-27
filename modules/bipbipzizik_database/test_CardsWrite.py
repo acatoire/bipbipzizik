@@ -6,8 +6,7 @@
 
 import unittest
 
-from modules.cards_bdd.Card import Card
-from modules.cards_bdd.DbManager import DbManager
+from modules.bipbipzizik_database.DbManager import DbManager
 
 
 class CardsWrite(unittest.TestCase):

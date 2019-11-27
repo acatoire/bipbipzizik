@@ -13,9 +13,9 @@ import requests
 # Bipbipzizic import
 from modules.rfid_reader.Reader import Reader
 from modules.card_memory.CardMemory import CardMemory
-from modules.cards_bdd.Card import Card
-from modules.cards_bdd.AppConfig import AppConfig
-from modules.cards_bdd.DbManager import DbManager
+from modules.bipbipzizik_database.Card import Card
+from modules.bipbipzizik_database.AppConfig import AppConfig
+from modules.bipbipzizik_database.DbManager import DbManager
 from modules.tools import get_serial
 
 
@@ -24,7 +24,7 @@ def main():
     UPDATE_PERIOD = 60
 
     reader = Reader()
-    database = DbManager('https://bipbipzizik.firebaseio.com/', 'prod', 'modules/cards_bdd/serviceAccountKey.json')
+    database = DbManager('https://bipbipzizik.firebaseio.com/', 'prod', 'modules/bipbipzizik_database/serviceAccountKey.json')
 
     app_serial = get_serial()
     cfg = database.get_config(app_serial)
