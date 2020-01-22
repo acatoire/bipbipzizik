@@ -1,25 +1,29 @@
 #!/usr/bin/env python
 
-#
-# BIPBIPZIZIK
-# Main Application
-#
+"""
+BIPBIPZIZIK
+main application
+"""
 
 # Python import
-import subprocess
 from time import time, sleep
 import requests
 
 # Bipbipzizic import
-from modules.rfid_reader.Reader import Reader
-from modules.card_memory.CardMemory import CardMemory
-from modules.bipbipzizik_database.DbReader import DbReader
+from modules.rfid_reader.linux_reader import Reader
+from modules.memory.timed_memory import TimedMemory
+from modules.card_db.db_reader import DbReader
 from modules.tools import get_serial
+
+# Constants
+UPDATE_PERIOD = 60
 
 
 def main():
-
-    UPDATE_PERIOD = 60
+    """
+    Application main function
+    :return: None
+    """
 
     reader = Reader()
     database = DbReader('https://bipbipzizik.firebaseio.com/', 'prod')
@@ -27,9 +31,6 @@ def main():
     app_serial = get_serial()
     cfg = database.get_config(app_serial)
     cfg.print()
-
-    previous_card = CardMemory(cfg.cfg_card_timeout)
-    last_update_time = time()
 
     while True:
         print('Ready: place a card on top of the reader')
@@ -54,24 +55,17 @@ def main():
                 print('Command : ', command)
                 print('Modes : ', mode)
 
-                if (previous_card.get() == read_id) and ("cancel" == cfg.cfg_multi_read_mode) and (not card.is_command()):
-                    # Cancel the read
-                    print('Multi read : card canceled')
-                else:
-                    # Update the previous card memory
-                    previous_card.set(read_id)
+                if card.has_mode("ClearQueue"):
+                    command_line = cfg.get_sonos_cmd("clearqueue")
+                    print(command_line)
+                    response = requests.get(command_line)
+                    print(response.text)
 
-                    if card.has_mode("ClearQueue"):
-                        command_line = cfg.get_sonos_cmd("clearqueue")
-                        print(command_line)
-                        response = requests.get(command_line)
-                        print(response.text)
-
-                    if command is not None:
-                        command_line = cfg.get_sonos_cmd(command)
-                        print(command_line)
-                        response = requests.get(command_line)
-                        print(response.text)
+                if command is not None:
+                    command_line = cfg.get_sonos_cmd(command)
+                    print(command_line)
+                    response = requests.get(command_line)
+                    print(response.text)
 
             # Update the database periodically
             if (time() - last_update_time) > UPDATE_PERIOD:
@@ -79,8 +73,8 @@ def main():
                 last_update_time = time()
                 # TODO Write last update time on config database
 
-        except OSError as e:
-            print("Execution failed:" + e.strerror)
+        except OSError as exception:
+            print("Execution failed:" + exception.strerror)
 
         # wait before restart
         sleep(0.5)

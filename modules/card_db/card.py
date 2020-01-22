@@ -1,11 +1,15 @@
-#
-# BIPBIPZIZIK
-# Manage cards
-#
-#
+
+
+"""
+BIPBIPZIZIK
+Manage cards
+"""
 
 
 class Card:
+    """
+    Card class
+    """
 
     def __init__(self, card_dict):
         self.parameters = card_dict
@@ -51,11 +55,15 @@ class Card:
         return command
 
     def get_mode(self):
+        """
+        Get the card mode or None if not found
+        :return: the mode
+        """
         if self.parameters is not None:
             # Card found create the command line
             mode = self.parameters.get("mode")
 
-            if mode == "none" or mode == "":
+            if mode in ("none", ""):
                 mode = None
 
         else:
@@ -64,34 +72,41 @@ class Card:
         return mode
 
     def has_mode(self, mode):
+        """
+        Check if the card mode is the expected one
+        :param mode: expected mode
+        :return: True if exist, else otherwise
+        """
 
-        if self.parameters.get("mode") == mode:
-            mode_exist = True
-        else:
-            mode_exist = False
+        mode_exist = self.parameters.get("mode") == mode
 
         return mode_exist
 
     def is_command(self):
+        """
+        Check if the card is a command card
+        :return: True if the card is a command, else otherwise
+        """
 
-        if self.parameters.get("action") == "command":
-            return True
-        else:
-            return False
+        return self.parameters.get("action") == "command"
 
 
-# For test purpose
 def main():
+    """
+    For test purpose
+    Quick card test
+    :return: None
+    """
 
-    card_dict = {
-                    'ids': 'ids',
-                    'user': 'user',
-                    'name': 'name',
-                    'action': 'action',
-                    'data': 'data',
-                    'mode': 'mode',
-                    'comment': 'comment',
-                }
+    card_dict = dict(
+        ids='ids',
+        user='user',
+        name='name',
+        action='action',
+        data='data',
+        mode='mode',
+        comment='comment'
+    )
 
     card_test = Card(card_dict)
     card_test.print()

@@ -1,18 +1,17 @@
-#
-# BIPBIPZIZIK
-# Manage Firebase bdd
-#
-#
+
+
+"""
+BIPBIPZIZIK
+Manage Firebase bdd with credential
+"""
 
 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-from .Card import Card
-from .AppConfig import AppConfig
-
-from time import sleep
+from .card import Card
+from .app_config import AppConfig
 
 
 class DbManager:

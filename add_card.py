@@ -1,6 +1,6 @@
 #from readtest import *
 from modules.cards_csv.CardList import CardList
-from modules.rfid_reader.Reader import Reader
+from modules.rfid_reader.linux_reader import Reader
 reader = Reader()
 cardList = CardList()
 

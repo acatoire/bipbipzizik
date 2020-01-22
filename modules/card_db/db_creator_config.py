@@ -1,7 +1,10 @@
 
-# Script that fill the database with all configs
 
-from modules.bipbipzizik_database.DbManager import DbManager
+"""
+Script that fill the database with all config
+"""
+
+from modules.card_db.db_manager import DbManager
 
 data_base = DbManager('https://bipbipzizik.firebaseio.com/', 'prod', 'WriteKey.json')
 data_base.delete('config_prod')
@@ -25,7 +28,7 @@ data_base.write_config(
     app_id="000000008e3c2b91",
     sonos_server_ip="192.168.1.80",
     sonos_server_port="5005",
-    room_name="Salle de jeux",
+    room_name="Salon",
     multi_read_mode="cancel",
     card_timeout="30")
 

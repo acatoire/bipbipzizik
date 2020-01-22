@@ -1,25 +1,40 @@
-#
-# BIPBIPZIZIK
-# Unit test for Card and FirebaseBdd classes
-# It test the read of cards on production database with a public key
-#
+
+
+"""
+BIPBIPZIZIK
+Unit test for Card and FirebaseBdd classes
+It test the read of cards on production database without credential
+"""
 
 import unittest
 
-from modules.bipbipzizik_database.DbReader import DbReader
+from modules.card_db.db_reader import DbReader
 
 
 class DatabaseReadTest(unittest.TestCase):
+    """
+    Set of unit test of firebase read for cards and config
+    """
 
     @classmethod
     def setUpClass(cls):
+        """
+        Setup for all unit test
+        :return: None
+        """
 
+        # Create the database handler
         cls.database = DbReader('https://bipbipzizik.firebaseio.com/', 'prod')
 
     # def setUp(self):
         # nothing yet
 
     def test_read_card(self):
+        """
+        Test card read on production database
+        :return
+        """
+
         card_expected = {"user": "user",
                          "name": "name",
                          "comment": "comment",
@@ -33,6 +48,11 @@ class DatabaseReadTest(unittest.TestCase):
         self.assertEqual(card.parameters, card_expected)
 
     def test_read_config(self):
+        """
+        Test config read on production database
+        :return
+        """
+
         card_expected = {"app_name": "For test purpose",
                          "app_owner": "axel",
                          "app_id": "template",
@@ -57,5 +77,3 @@ class DatabaseReadTest(unittest.TestCase):
 if __name__ == '__main__':
 
     unittest.main()
-
-

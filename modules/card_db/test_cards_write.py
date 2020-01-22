@@ -1,19 +1,28 @@
-#
-# BIPBIPZIZIK
-# Unit test for Card and FirebaseBdd classes
-#
-#
+
+
+"""
+BIPBIPZIZIK
+Unit test for Card and FirebaseBdd classes
+It test the write of cards on production database with credential
+"""
 
 import unittest
 
-from modules.bipbipzizik_database.DbManager import DbManager
+from modules.card_db.db_manager import DbManager
 
 
 class CardsWrite(unittest.TestCase):
+    """
+    Set of unit test of firebase cards database
+    """
 
     @classmethod
     def setUpClass(cls):
-
+        """
+        Setup for all unit test
+        :return: None
+        """
+        # Create a temporary database
         cls.bdd = DbManager('https://bipbipzizik.firebaseio.com/', 'test', 'WriteKey.json')
         cls.bdd.delete("cards_test")
         cls.bdd.write_card(user="user1",
@@ -60,6 +69,11 @@ class CardsWrite(unittest.TestCase):
         # nothing yet
 
     def test_read_card(self):
+        """
+        Test card read on production database
+        :return
+        """
+
         card_expected = {"user": "user5",
                          "name": "name5",
                          "comment": "comment5",
@@ -73,6 +87,10 @@ class CardsWrite(unittest.TestCase):
         self.assertEqual(card.parameters, card_expected)
 
     def test_read_card_command(self):
+        """
+        Test all command card read on production database
+        :return
+        """
 
         command_expected = "data1"
         card = self.bdd.get_card("id1")
@@ -118,4 +136,3 @@ class CardsWrite(unittest.TestCase):
 if __name__ == '__main__':
 
     unittest.main()
-

@@ -1,17 +1,20 @@
-#
-# BIPBIPZIZIK
-# Access in ReadOnly to Firebase database
-#
-#
+
+
+"""
+BIPBIPZIZIK
+Module to access in read only to firebase database
+"""
 
 from firebase import firebase
 
-
-from modules.bipbipzizik_database.Card import Card
-from modules.bipbipzizik_database.AppConfig import AppConfig
+from modules.card_db.card import Card
+from modules.card_db.app_config import AppConfig
 
 
 class DbReader:
+    """
+    database reader class
+    """
 
     def __init__(self, bdd_addr, bdd_name):
         """
@@ -64,7 +67,7 @@ class DbReader:
         :return: the searched Card or None
         """
 
-        for key, card in self.cards_db_python.items():
+        for _, card in self.cards_db_python.items():
             if card_id in card.get("ids"):
                 return Card(card)
 
@@ -78,22 +81,22 @@ class DbReader:
         :return: the searched AppConfig or None
         """
 
-        for key, config in self.config_db_python.items():
+        for _, config in self.config_db_python.items():
             if application_id in config.get("app_id"):
                 # Create the config object from json and return it
                 return AppConfig(
-                                    app_name=config.get("app_name"),
-                                    app_owner=config.get("app_owner"),
-                                    app_id=config.get("app_id"),
-                                    sonos_server_ip=config.get("sonos_server_ip"),
-                                    sonos_server_port=config.get("sonos_server_port"),
-                                    room_name=config.get("room_name"),
-                                    multi_read_mode=config.get("multi_read_mode"),
-                                    card_timeout=int(config.get("card_timeout"))
-                                )
+                    app_name=config.get("app_name"),
+                    app_owner=config.get("app_owner"),
+                    app_id=config.get("app_id"),
+                    sonos_server_ip=config.get("sonos_server_ip"),
+                    sonos_server_port=config.get("sonos_server_port"),
+                    room_name=config.get("room_name"),
+                    multi_read_mode=config.get("multi_read_mode"),
+                    card_timeout=int(config.get("card_timeout"))
+                    )
 
-            # Config not found, return None
-            return None
+        # Config not found, return None
+        return None
 
     def print(self):
         """
@@ -101,22 +104,6 @@ class DbReader:
         # todo make a print card ans print config
         :return:
         """
-        
+
         for key, card in self.cards_db_python.items():
             print(key + ":" + str(card))
-
-
-# For test purpose
-def main():
-
-    database = DbReader('https://bipbipzizik.firebaseio.com/', 'prod')
-
-    # database.print()
-    card_test = database.get_card("template")
-    card_test.print()
-    config_test = database.get_config("template")
-    config_test.print()
-
-
-if __name__ == "__main__":
-    main()
