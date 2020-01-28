@@ -50,6 +50,20 @@ class AppConfig:
         # Previous card memory duration in second
         self.cfg_card_timeout = card_timeout
 
+    def __str__(self):
+
+        return (
+                "Application config:\n" +
+                "    - " + self.cfg_app_name + "\n" +
+                "    - " + self.cfg_app_owner + "\n" +
+                "    - " + self.cfg_application_id + "\n" +
+                "    - " + self.cfg_sonos_server_ip + "\n" +
+                "    - " + self.cfg_sonos_server_port + "\n" +
+                "    - " + self.cfg_room_name + "\n" +
+                "    - " + self.cfg_multi_read_mode + "\n" +
+                "    - " + str(self.cfg_card_timeout)
+                )
+
     def get_sonos_cmd(self, card_command):
         """
         Get the sonos command from the card command

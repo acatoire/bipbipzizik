@@ -28,7 +28,7 @@ data_base.write_config(
     app_id="000000008e3c2b91",
     sonos_server_ip="192.168.1.80",
     sonos_server_port="5005",
-    room_name="Salon",
+    room_name="Salon 3",
     multi_read_mode="cancel",
     card_timeout="30")
 

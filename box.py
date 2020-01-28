@@ -18,6 +18,8 @@ from modules.tools import get_serial
 # Constants
 UPDATE_PERIOD = 60
 
+#  TODO use CardLauncher
+
 
 def main():
     """
@@ -31,6 +33,9 @@ def main():
     app_serial = get_serial()
     cfg = database.get_config(app_serial)
     cfg.print()
+
+    card_mem = TimedMemory(cfg.cfg_card_timeout)
+    last_update_time = time()
 
     while True:
         print('Ready: place a card on top of the reader')
@@ -55,17 +60,24 @@ def main():
                 print('Command : ', command)
                 print('Modes : ', mode)
 
-                if card.has_mode("ClearQueue"):
-                    command_line = cfg.get_sonos_cmd("clearqueue")
-                    print(command_line)
-                    response = requests.get(command_line)
-                    print(response.text)
+                if (card_mem.get() == read_id) and (cfg.cfg_multi_read_mode == "cancel") and (not card.is_command()):
+                    # Cancel the read
+                    print('Multi read : card canceled')
+                else:
+                    # Update the previous card memory
+                    card_mem.set(read_id)
 
-                if command is not None:
-                    command_line = cfg.get_sonos_cmd(command)
-                    print(command_line)
-                    response = requests.get(command_line)
-                    print(response.text)
+                    if card.has_mode("ClearQueue"):
+                        command_line = cfg.get_sonos_cmd("clearqueue")
+                        print(command_line)
+                        response = requests.get(command_line)
+                        print(response.text)
+
+                    if command is not None:
+                        command_line = cfg.get_sonos_cmd(command)
+                        print(command_line)
+                        response = requests.get(command_line)
+                        print(response.text)
 
             # Update the database periodically
             if (time() - last_update_time) > UPDATE_PERIOD:
