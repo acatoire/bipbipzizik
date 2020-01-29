@@ -2,9 +2,9 @@
 
 """
 BIPBIPZIZIK
-Manage Firebase bdd with credential
+Manage Firebase db with credential
 """
-
+import sys
 
 import firebase_admin
 from firebase_admin import credentials
@@ -15,6 +15,9 @@ from .app_config import AppConfig
 
 
 class DbManager:
+    """
+    Manage Firebase db with credential
+    """
 
     def __init__(self, bdd_addr, bdd_name, path_to_key_file):
         """
@@ -33,7 +36,7 @@ class DbManager:
         except FileNotFoundError:
             credential = None
             print("FATAL ERROR: Impossible to access to bdd key file \"" + path_to_key_file + "\"")
-            exit()
+            sys.exit()
 
         # Initialize the app with a service account, granting admin privileges
         firebase_admin.initialize_app(credential, {'databaseURL': bdd_addr})
@@ -41,7 +44,7 @@ class DbManager:
         self.config_db = db.reference(self.config_bdd_name)
         self.cards_db = db.reference(self.card_bdd_name)
 
-        # Todo stop the app with error if db is empty
+        # TODO stop the app with error if db is empty
 
         self.cards_db_python = {}
         self.config_db_python = {}
@@ -80,7 +83,7 @@ class DbManager:
         :return: the searched Card or None
         """
 
-        for key, card in self.cards_db_python.items():
+        for _, card in self.cards_db_python.items():
             if card_id in card.get("ids"):
                 return Card(card)
 
@@ -101,7 +104,7 @@ class DbManager:
         """
 
         # TODO check if card already exist
-        # If not creat
+        # If not create it
         # If yes update
 
         self.cards_db.push({
@@ -121,24 +124,25 @@ class DbManager:
         :return: the searched AppConfig or None
         """
 
-        for key, config in self.config_db_python.items():
+        for _, config in self.config_db_python.items():
             if application_id in config.get("app_id"):
                 # Creat the config object from json and return it
                 return AppConfig(
-                                    app_name=config.get("app_name"),
-                                    app_owner=config.get("app_owner"),
-                                    app_id=config.get("app_id"),
-                                    sonos_server_ip=config.get("sonos_server_ip"),
-                                    sonos_server_port=config.get("sonos_server_port"),
-                                    room_name=config.get("room_name"),
-                                    multi_read_mode=config.get("multi_read_mode"),
-                                    card_timeout=int(config.get("card_timeout"))
+                    app_name=config.get("app_name"),
+                    app_owner=config.get("app_owner"),
+                    app_id=config.get("app_id"),
+                    sonos_server_ip=config.get("sonos_server_ip"),
+                    sonos_server_port=config.get("sonos_server_port"),
+                    room_name=config.get("room_name"),
+                    multi_read_mode=config.get("multi_read_mode"),
+                    card_timeout=int(config.get("card_timeout"))
                                 )
 
             # Config not found, return None
             return None
 
-    def write_config(self, app_name, app_owner, app_id, sonos_server_ip, sonos_server_port, room_name, multi_read_mode, card_timeout):
+    def write_config(self, app_name, app_owner, app_id, sonos_server_ip,
+                     sonos_server_port, room_name, multi_read_mode, card_timeout):
         """
         Function thar write a new card in the bdd
         :param app_name:
@@ -184,14 +188,15 @@ class DbManager:
         # todo make a print card ans print config
         :return:
         """
-        
+
         for key, card in self.cards_db_python.items():
             print(key + ":" + str(card))
 
 
-# For test purpose
 def main():
-
+    """
+    For test purpose
+    """
     database = DbManager('https://bipbipzizik.firebaseio.com/', 'cards', 'config', 'serviceAccountKey.json')
 
     # database.print()

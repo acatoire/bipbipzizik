@@ -42,7 +42,3 @@ data_base.write_config(
     room_name="Hugo",
     multi_read_mode="cancel",
     card_timeout="30")
-
-
-
-

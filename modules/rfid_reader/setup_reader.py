@@ -1,3 +1,10 @@
+
+
+"""
+Create a device file
+"""
+
+
 import os.path
 from evdev import InputDevice, list_devices
 
@@ -11,8 +18,6 @@ for dev in devices:
 
 dev_id = int(input('Device Number: '))
 
-with open(path + '/deviceName.txt','w') as f:
+with open(path + '/deviceName.txt', 'w') as f:
     f.write(devices[dev_id].name)
     f.close()
-
-
