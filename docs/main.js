@@ -11,23 +11,23 @@ var db = firebase.database();
 // CREATE CARD
 
 var cardForm = document.getElementById('cardForm');
-var hiddenId   = document.getElementById('hiddenId');
-var name = document.getElementById('name');
-var ids = document.getElementById('ids');
-var action = document.getElementById('action');
-var data = document.getElementById('data');
-var mode = document.getElementById('mode');
-var comment = document.getElementById('comment');
+var hiddenId = document.getElementById('hiddenId');
+var cardName = document.getElementById('cardName');
+var ids =      document.getElementById('ids');
+var action =   document.getElementById('action');
+var data =     document.getElementById('data');
+var mode =     document.getElementById('mode');
+var comment =  document.getElementById('comment');
 
 cardForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  if (!name.value || !ids.value) return null
+  if (!cardName.value || !ids.value) return null
 
   var id = hiddenId.value || Date.now()
 
   db.ref('cards_prod/' + id).set({
-    name: name.value,
+    name: cardName.value,
     ids: ids.value,
     action: action.value,
     data: data.value,
@@ -36,7 +36,7 @@ cardForm.addEventListener('submit', (e) => {
   });
 
   hiddenId.value = '';
-  name.value = '';
+  cardName.value = '';
   ids.value  = '';
   action.value  = '';
   data.value  = '';
@@ -70,8 +70,9 @@ cards.addEventListener('click', (e) => {
   var cardNode = e.target.parentNode
 
   // UPDATE CARD
-  if (e.target.classList.contains('edit')) {
-    name.value = cardNode.querySelector('.name').innerText;
+  if (e.target.classList.contains('edit')) 
+  {
+    cardName.value = cardNode.querySelector('.name').innerText;
     ids.value  = cardNode.querySelector('.ids').innerText;
     action.value = cardNode.querySelector('.action').innerText;
     data.value  = cardNode.querySelector('.data').innerText;
@@ -81,13 +82,15 @@ cards.addEventListener('click', (e) => {
   }
 
   // DELETE CARD
-  if (e.target.classList.contains('delete')) {
+  if (e.target.classList.contains('delete')) 
+  {
     var id = cardNode.id;
     db.ref('cards_prod/' + id).remove();
   }
 });
 
-function cardTemplate({name, ids, action, data, mode, comment}) {
+function cardTemplate({name, ids, action, data, mode, comment}) 
+{
   return `
     <div class='nameLabel'>Name:</div>
     <div class='name'>${name}</div>
