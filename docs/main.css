@@ -4,7 +4,7 @@ body {
   background-color: #FDFDFD;
 }
 
-div, input, a, button, textarea, ul, li {
+div, input, a, button, ul, li {
   box-sizing: border-box;
 }
 
@@ -14,7 +14,7 @@ div, input, a, button, textarea, ul, li {
   margin: 0 auto;
 }
 
-#reviews {
+#cards {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -26,7 +26,7 @@ div, input, a, button, textarea, ul, li {
   margin-bottom: 20px;
 }
 
-#reviews li {
+#cards li {
   padding: 10px;
   border: 1px solid #EEE;
   border-bottom: none;
@@ -38,7 +38,7 @@ input[type="text"],
 textarea {
   border: 1px solid #EEE;
   display: block;
-  width: 100%;
+  width: 200px;
   padding: 8px;
   font-size: 16px;
   background-color: #fff;
@@ -64,4 +64,13 @@ textarea {
 .header img {
   border-radius: 50%;
   box-shadow: 0 1px 1px rgba(0,0,0,.1),0 1px 1px rgba(0,0,0,.1);
+}
+
+#editBlock{
+  display:inline-block;
+}
+
+#btnsBlock{
+  text-align:center;
+  margin: 20px;
 }

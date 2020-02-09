@@ -16,20 +16,34 @@
         <h2>Cards</h2>
         <h4>CREATE/UPDATE</h4>
         <form id='cardForm'>
-          <input type="hidden" id='hiddenId' />
-          <label for="cardName">Name</label>
-          <input type="text" id='cardName' /><br/>
-          <label for="ids">Ids</label>
-          <input type="text" id="ids" /><br/>
-          <label for="action">Action</label>
-          <input type="text" id='action' /><br/>
-          <label for="data">Data</label>
-          <input type="text" id="data" /><br/>
-          <label for="mode">Mode</label>
-          <input type="text" id='mode' /><br/>
-          <label for="comment">Comment</label>
-          <input type="text" id="comment" /><br/>
-          <button type='submit'>Add/Update card</button>
+          <input type="hidden" id='hiddenIdText' />
+          <div id=editBlock>
+            <label for="cardNameText">Name</label>
+            <input type="text" id='cardNameText' />
+          </div>
+          <div id=editBlock>
+            <label for="idsText">Ids</label>
+            <input type="text" id="idsText" size="50px"/>
+          </div>
+          <div id=editBlock>
+            <label for="actionText">Action</label>
+            <input type="text" id='actionText' />
+          </div>
+          <div id=editBlock>
+            <label for="dataText">Data</label>
+            <input type="text" id="dataText" />
+          </div>
+          <div id=editBlock>
+            <label for="modeText">Mode</label>
+            <input type="text" id='modeText' />
+          </div>
+          <div id=editBlock>
+            <label for="commentText">Comment</label>
+            <input type="text" id="commentText" />
+          </div>
+          <div id=btnsBlock>
+            <button type='submit'>Add/Update card</button>
+          </div>
         </form>
         <br/>
         <h4>READ/DELETE</h4>
@@ -37,6 +51,5 @@
       </div>
       <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
       <script src="main.js"></script>
-      <link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     </body>
 </html>

@@ -1,3 +1,6 @@
+
+// from https://github.com/VoloshinS/firebase-crud-example
+
 var config = {
   apiKey: "AIzaSyBDpWYywapzpuYJerHNe1aVNPsQGULBMN0",
   authDomain: "bipbipzizik.firebaseapp.com",
@@ -8,44 +11,52 @@ var config = {
 firebase.initializeApp(config);
 var db = firebase.database();
 
+
+
 // CREATE CARD
+var cardForm =     document.getElementById('cardForm');
+var cardHiddenId = document.getElementById('hiddenIdText');
+var cardName =     document.getElementById('cardNameText');
+var cardIds =      document.getElementById('idsText');
+var cardAction =   document.getElementById('actionText');
+var cardData =     document.getElementById('dataText');
+var cardMode =     document.getElementById('modeText');
+var cardComment =  document.getElementById('commentText');
 
-var cardForm = document.getElementById('cardForm');
-var hiddenId = document.getElementById('hiddenId');
-var cardName = document.getElementById('cardName');
-var ids =      document.getElementById('ids');
-var action =   document.getElementById('action');
-var data =     document.getElementById('data');
-var mode =     document.getElementById('mode');
-var comment =  document.getElementById('comment');
-
-cardForm.addEventListener('submit', (e) => {
+cardForm.addEventListener('submit', (e) => 
+{
   e.preventDefault();
 
-  if (!cardName.value || !ids.value) return null
+  //Prevent empty card
+  if (!cardName.value || !cardIds.value || !cardAction.value || !cardData.value)
+  {
+    return null
+  } 
 
-  var id = hiddenId.value || Date.now()
+  var id = cardHiddenId.value || Date.now()
 
-  db.ref('cards_prod/' + id).set({
-    name: cardName.value,
-    ids: ids.value,
-    action: action.value,
-    data: data.value,
-    mode: mode.value,
-    comment: comment.value
-  });
+  db.ref('cards_prod/' + id).set(
+    {
+      name: cardName.value,
+      ids: cardIds.value,
+      action: cardAction.value,
+      data: cardData.value,
+      mode: cardMode.value,
+      comment: cardComment.value
+    }
+  );
 
-  hiddenId.value = '';
-  cardName.value = '';
-  ids.value  = '';
-  action.value  = '';
-  data.value  = '';
-  mode.value  = '';
-  comment.value  = '';
+  cardHiddenId.value = '';
+  cardName.value =     '';
+  cardIds.value  =     '';
+  cardAction.value  =  '';
+  cardData.value  =    '';
+  cardMode.value  =    '';
+  cardComment.value  = '';
 });
 
-// READ CARDS
 
+// READ CARDS
 var cards = document.getElementById('cards');
 var cardsRef = db.ref('/cards_prod');
 
@@ -66,22 +77,26 @@ cardsRef.on('child_removed', (data) => {
   cardNode.parentNode.removeChild(cardNode);
 });
 
-cards.addEventListener('click', (e) => {
+
+
+// Action on CARD
+cards.addEventListener('click', (e) => 
+{
   var cardNode = e.target.parentNode
 
-  // UPDATE CARD
+  // Update card editor view
   if (e.target.classList.contains('edit')) 
   {
     cardName.value = cardNode.querySelector('.name').innerText;
-    ids.value  = cardNode.querySelector('.ids').innerText;
-    action.value = cardNode.querySelector('.action').innerText;
-    data.value  = cardNode.querySelector('.data').innerText;
-    mode.value = cardNode.querySelector('.mode').innerText;
-    comment.value  = cardNode.querySelector('.comment').innerText;
-    hiddenId.value = cardNode.id;
+    cardIds.value  = cardNode.querySelector('.ids').innerText;
+    cardAction.value = cardNode.querySelector('.action').innerText;
+    cardData.value  = cardNode.querySelector('.data').innerText;
+    cardMode.value = cardNode.querySelector('.mode').innerText;
+    cardComment.value  = cardNode.querySelector('.comment').innerText;
+    cardHiddenId.value = cardNode.id;
   }
 
-  // DELETE CARD
+  // Delet card in database
   if (e.target.classList.contains('delete')) 
   {
     var id = cardNode.id;
