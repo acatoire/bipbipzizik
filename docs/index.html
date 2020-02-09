@@ -17,37 +17,39 @@
         <h4>CREATE/UPDATE</h4>
         <form id='cardForm'>
           <input type="hidden" id='hiddenIdText' />
-          <div id=editBlock>
+          <div class=editBlock>
             <label for="cardNameText">Name</label>
             <input type="text" id='cardNameText' />
           </div>
-          <div id=editBlock>
+          <div class=editBlock>
             <label for="idsText">Ids</label>
             <input type="text" id="idsText" size="50px"/>
           </div>
-          <div id=editBlock>
+          <div class=editBlock>
             <label for="actionText">Action</label>
             <input type="text" id='actionText' />
           </div>
-          <div id=editBlock>
+          <div class=editBlock>
             <label for="dataText">Data</label>
             <input type="text" id="dataText" />
           </div>
-          <div id=editBlock>
+          <div class=editBlock>
             <label for="modeText">Mode</label>
             <input type="text" id='modeText' />
           </div>
-          <div id=editBlock>
+          <div class=editBlock>
             <label for="commentText">Comment</label>
             <input type="text" id="commentText" />
           </div>
-          <div id=btnsBlock>
+          <div class=btnsBlock>
             <button type='submit'>Add/Update card</button>
           </div>
         </form>
         <br/>
         <h4>READ/DELETE</h4>
-        <ul id='cards'></ul>
+        <div id='cards'>
+
+        </div>
       </div>
       <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
       <script src="main.js"></script>

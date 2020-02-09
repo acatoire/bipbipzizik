@@ -60,11 +60,21 @@ cardForm.addEventListener('submit', (e) =>
 var cards = document.getElementById('cards');
 var cardsRef = db.ref('/cards_prod');
 
+/*
 cardsRef.on('child_added', (data) => {
-  var li = document.createElement('li')
+  var li = document.createElement('div')
   li.id = data.key;
   li.innerHTML = cardTemplate(data.val())
   cards.appendChild(li);
+});
+*/
+
+cardsRef.on('child_added', (data) => {
+  var newDiv = document.createElement('div')
+  newDiv.id = data.key;
+  newDiv.className = "cardTile";
+  newDiv.innerHTML = cardTemplate(data.val())
+  cards.appendChild(newDiv);
 });
 
 cardsRef.on('child_changed', (data) => {
@@ -107,7 +117,6 @@ cards.addEventListener('click', (e) =>
 function cardTemplate({name, ids, action, data, mode, comment}) 
 {
   return `
-    <div class='nameLabel'>Name:</div>
     <div class='name'>${name}</div>
     <div class='idsLabel'>Ids:</div>
     <div class='ids'>${ids}</div>
