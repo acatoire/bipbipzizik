@@ -40,6 +40,11 @@ class CardLauncher:
         :return: None
         """
         self.config = self.database.get_config(config_id)
+
+        if self.config is None:
+            raise Exception("The config for " + config_id + " is not present in the bipbipzizik database." +
+                            "Did you create it?")
+
         self.memory = TimedMemory(self.config.cfg_card_timeout)
 
         print(self.config)

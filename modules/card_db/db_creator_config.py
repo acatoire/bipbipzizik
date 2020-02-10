@@ -36,7 +36,7 @@ data_base.write_config(
 data_base.write_config(
     app_name="Hugo's sonos",
     app_owner="axel",
-    app_id="TODO",
+    app_id="00000000deec2469",
     sonos_server_ip="192.168.1.80",
     sonos_server_port="5005",
     room_name="Hugo",

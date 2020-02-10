@@ -18,20 +18,30 @@ sudo apt-get install python3-pip
 
 ```
 
-- python evdev, firebase_admin. To install:
+- All python packages needed can be installed from requirements file. To install:
 ```bash
-sudo pip3 --default-timeout=1000 install evdev
-sudo pip3 --default-timeout=1000 install firebase_admin
-sudo pip3 --default-timeout=1000 install cryptography
+sudo pip3 install -r requirements.txt
 ```
 
-```--default-timeout=1000``` helps if the raspberry or the connection is too slow
+```--default-timeout=1000``` for pip helps if the raspberry or the connection is too slow
 
+If you encounter this error:
+```
 Firebase_Admin Error TypeError: __init__() got an unexpected keyword argument 'status'
+```
+try:
+```
 python3 -m pip install --upgrade urllib3
+```
+
+- git if you want to clone the repo
+```bash
+sudo apt install git-all
+```
 
 ### hardware:
-- [Raspberry Pi Zero (Don't forget micro sd card and power supply)](http://www.microcenter.com/product/486575/Zero_W)
+- [Raspberry Pi Zero](http://www.microcenter.com/product/486575/Zero_W)
+- Don't forget micro sd card and power supply
 - [USB OTG Hub](https://www.amazon.com/gp/product/B01HYJLZH6/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1)
 - [RFID 125Khz Reader](https://www.amazon.com/gp/product/B018C8C162/ref=oh_aui_detailpage_o03_s01?ie=UTF8&psc=1)
 - [125Khz Cards](https://www.amazon.com/gp/product/B01MQY5Y7U/ref=ox_sc_act_title_1?smid=A1GYMVIZIMSYWM&psc=1)
@@ -44,14 +54,16 @@ It is recommend you use a Raspberry Pi 3 if you intend to run both at the same t
 
 Test has to be done with [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api) and rfid scanner, they should run together on all raspberry.
 
-#####Raspberry Config
+####Raspberry Config
+You can use the wpa_supplicant.conf template in tools
 [Config the wifi on boot partition](https://www.raspberrypi-spy.co.uk/2017/04/manually-setting-up-pi-wifi-using-wpa_supplicant-conf/)
 
 ## Steps to Configure and/or Run once without AutoStart
 0. Copy/Downloar/Clone the project in home/pi
-1. Run `python3 setup_reader.py` to select the reader from the inputs
-2. Run `python3 add_card.py` to scan cards and enter your Google Play Music Playlist Name
-3. Make .sh scrypts executables : `chmod +x sonosplay.sh`
+   * git clone https://github.com/acatoire/music-cards music-cards
+1. Run `python3 modules/rfid_reader/setup_reader.py` to select the reader from the inputs
+2. TODO procedure see serial and create config for the new pi
+3. TODO procedure to add cards
 4. Run `python3 box.py` to start the application and verify that it is reading your cards and csv list properly
 
 ## Install Service to AutoStart
