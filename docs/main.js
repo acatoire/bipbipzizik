@@ -17,6 +17,7 @@ var db = firebase.database();
 var cardForm =     document.getElementById('cardForm');
 var cardHiddenId = document.getElementById('hiddenIdText');
 var cardName =     document.getElementById('cardNameText');
+var cardUser =     document.getElementById('userText');
 var cardIds =      document.getElementById('idsText');
 var cardAction =   document.getElementById('actionText');
 var cardData =     document.getElementById('dataText');
@@ -60,15 +61,6 @@ cardForm.addEventListener('submit', (e) =>
 var cards = document.getElementById('cards');
 var cardsRef = db.ref('/cards_prod');
 
-/*
-cardsRef.on('child_added', (data) => {
-  var li = document.createElement('div')
-  li.id = data.key;
-  li.innerHTML = cardTemplate(data.val())
-  cards.appendChild(li);
-});
-*/
-
 cardsRef.on('child_added', (data) => {
   var newDiv = document.createElement('div')
   newDiv.id = data.key;
@@ -97,12 +89,13 @@ cards.addEventListener('click', (e) =>
   // Update card editor view
   if (e.target.classList.contains('edit')) 
   {
-    cardName.value = cardNode.querySelector('.name').innerText;
-    cardIds.value  = cardNode.querySelector('.ids').innerText;
-    cardAction.value = cardNode.querySelector('.action').innerText;
-    cardData.value  = cardNode.querySelector('.data').innerText;
-    cardMode.value = cardNode.querySelector('.mode').innerText;
-    cardComment.value  = cardNode.querySelector('.comment').innerText;
+    cardName.value = cardNode.querySelector('.nameTile').innerText;
+    cardIds.value  = cardNode.querySelector('.idsTile').innerText;
+    cardUser.value  = cardNode.querySelector('.userTile').innerText;
+    cardAction.value = cardNode.querySelector('.actionTile').innerText;
+    cardData.value  = cardNode.querySelector('.dataTile').innerText;
+    cardMode.value = cardNode.querySelector('.modeTile').innerText;
+    cardComment.value  = cardNode.querySelector('.commentTile').innerText;
     cardHiddenId.value = cardNode.id;
   }
 
@@ -114,20 +107,22 @@ cards.addEventListener('click', (e) =>
   }
 });
 
-function cardTemplate({name, ids, action, data, mode, comment}) 
+function cardTemplate({name, ids, user, action, data, mode, comment}) 
 {
   return `
-    <div class='name'>${name}</div>
+    <div class='nameTile'>${name}</div>
     <div class='idsLabel'>Ids:</div>
-    <div class='ids'>${ids}</div>
+    <div class='idsTile'>${ids}</div>
+    <div class='userLabel'>User:</div>
+    <div class='userTile'>${user}</div>
     <div class='actionLabel'>Action:</div>
-    <div class='action'>${action}</div>
+    <div class='actionTile'>${action}</div>
     <div class='dataLabel'>Data:</div>
-    <div class='data'>${data}</div>
+    <div class='dataTile'>${data}</div>
     <div class='modeLabel'>Mode:</div>
-    <div class='mode'>${mode}</div>
+    <div class='modeTile'>${mode}</div>
     <div class='commentLabel'>Comment:</div>
-    <div class='comment'>${comment}</div>
+    <div class='commentTile'>${comment}</div>
     <button class='delete'>Delete</button>
     <button class='edit'>Edit</button>
   `
