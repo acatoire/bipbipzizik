@@ -16,7 +16,7 @@ var db = firebase.database();
 // CREATE CARD
 var cardForm =     document.getElementById('cardForm');
 var cardHiddenId = document.getElementById('hiddenIdText');
-var cardName =     document.getElementById('cardNameText');
+var cardName =     document.getElementById('nameText');
 var cardUser =     document.getElementById('userText');
 var cardIds =      document.getElementById('idsText');
 var cardAction =   document.getElementById('actionText');
@@ -58,7 +58,7 @@ cardForm.addEventListener('submit', (e) =>
 
 
 // READ CARDS
-var cards = document.getElementById('cards');
+var cardsDiv = document.getElementById('cards');
 var cardsRef = db.ref('/cards_prod');
 
 cardsRef.on('child_added', (data) => {
@@ -66,23 +66,23 @@ cardsRef.on('child_added', (data) => {
   newDiv.id = data.key;
   newDiv.className = "cardTile";
   newDiv.innerHTML = cardTemplate(data.val())
-  cards.appendChild(newDiv);
+  cardsDiv.appendChild(newDiv);
 });
 
 cardsRef.on('child_changed', (data) => {
-  var cardNode = document.getElementById(data.key);
-  cardNode.innerHTML = cardTemplate(data.val());
+  var node = document.getElementById(data.key);
+  node.innerHTML = cardTemplate(data.val());
 });
 
 cardsRef.on('child_removed', (data) => {
-  var cardNode = document.getElementById(data.key);
-  cardNode.parentNode.removeChild(cardNode);
+  var node = document.getElementById(data.key);
+  node.parentNode.removeChild(node);
 });
 
 
 
 // Action on CARD
-cards.addEventListener('click', (e) => 
+cardsDiv.addEventListener('click', (e) => 
 {
   var cardNode = e.target.parentNode
 
