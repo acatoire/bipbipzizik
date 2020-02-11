@@ -1,61 +1,25 @@
 <!doctype html>
 <html>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Firebase realtime database CRUD example</title>
-      <link rel="stylesheet" href="main.css">
-    </head>
-    <body>
-      <div class='container'>
-        <div class='header'>
-          <img src="https://media-exp1.licdn.com/dms/image/C4D03AQH51YudTlJwPg/profile-displayphoto-shrink_100_100/0?e=1586390400&v=beta&t=5owiSGfCMUUq1Ff7XyTeBPoErWqaGnMf-4SVAyyHkj8" alt="">
-          <h1>Axel</h1>
-          <h4>Embedded Developper/Tester.</h4>
-        </div>
-        <h2>Cards</h2>
-        <h4>CREATE/UPDATE</h4>
-        <form id='cardForm'>
-          <input type="hidden" id='hiddenIdText' />
-          <div class=editBlock>
-            <label for="cardNameText">Name</label>
-            <input type="text" id='cardNameText' />
-          </div>
-          <div class=editBlock>
-            <label for="userText">User</label>
-            <input type="text" id="userText" />
-          </div>
-          <div class=editBlock>
-            <label for="idsText">Ids</label>
-            <input type="text" id="idsText" />
-          </div>
-          <div class=editBlock>
-            <label for="actionText">Action</label>
-            <input type="text" id='actionText' />
-          </div>
-          <div class=editBlock>
-            <label for="dataText">Data</label>
-            <input type="text" id="dataText" />
-          </div>
-          <div class=editBlock>
-            <label for="modeText">Mode</label>
-            <input type="text" id='modeText' />
-          </div>
-          <div class=editBlock>
-            <label for="commentText">Comment</label>
-            <input type="text" id="commentText" />
-          </div>
-          <div class=btnsBlock>
-            <button type='submit'>Add/Update card</button>
-          </div>
-        </form>
-        <br/>
-        <h4>READ/DELETE</h4>
-        <div id='cards'>
-
-        </div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Firebase realtime database CRUD example</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <div class='container'>
+      <div class='header'>
+        <h1>BipBipZiZik admin interface</h1>
+        <h4>Lets config everything</h4>
       </div>
-      <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-      <script src="main.js"></script>
-    </body>
+      <h2>Cards</h2>
+      <div class=cardLink>
+        <a href="cards.html">Card edit</a>
+      </div>
+      <div class=configLink>
+        <a href="configs.html">Config edit</a>
+      </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  </body>
 </html>

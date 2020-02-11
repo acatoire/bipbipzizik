@@ -35,7 +35,29 @@ div, input, a, button, ul, li {
   margin-bottom: 20px;
 }
 
+#configs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #EEE;
+  border-radius: 2px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.1),0 1px 4px rgba(0,0,0,.1);
+  background-color: #fff;
+  min-height: 20px;
+  margin-bottom: 20px;
+}
+
 .cardTile {
+  display: inline-block;
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #EEE;
+  border-bottom: none;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.configTile {
   display: inline-block;
   width: 250px;
   padding: 10px;
