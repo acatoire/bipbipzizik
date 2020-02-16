@@ -9,37 +9,8 @@ List of actions:
 
 
 ## Requires
-### software:
-- python pip. To install:
-```bash
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install python3-pip
 
-```
-
-- All python packages needed can be installed from requirements file. To install:
-```bash
-sudo pip3 install -r requirements.txt
-```
-
-```--default-timeout=1000``` for pip helps if the raspberry or the connection is too slow
-
-If you encounter this error:
-```
-Firebase_Admin Error TypeError: __init__() got an unexpected keyword argument 'status'
-```
-try:
-```
-python3 -m pip install --upgrade urllib3
-```
-
-- git if you want to clone the repo
-```bash
-sudo apt install git-all
-```
-
-### hardware:
+### Hardware:
 - [Raspberry Pi Zero](http://www.microcenter.com/product/486575/Zero_W)
 - Don't forget micro sd card and power supply
 - [USB OTG Hub](https://www.amazon.com/gp/product/B01HYJLZH6/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1)
@@ -48,43 +19,67 @@ sudo apt install git-all
 
 Remark : see on original project [https://github.com/hoveeman/music-cards](hoveeman/music-cards) for printable rfid cards
 
-####Raspberry Limitaion
-Please note that Raspberry Pi Zero is insufficient to run both the Home Assistant and and the rfid scanner. 
-It is recommend you use a Raspberry Pi 3 if you intend to run both at the same time.
+### Raspberry basis:
+- Download and flash the las lite version of Raspbian
+- Enable SSH by creating an empty "ssh" named file at the root of the boot partition (visible on windows)
+- Configure your wifi using the wpa_supplicant.conf template in the tools folder [Config the wifi on boot partition](https://www.raspberrypi-spy.co.uk/2017/04/manually-setting-up-pi-wifi-using-wpa_supplicant-conf/)
 
-Test has to be done with [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api) and rfid scanner, they should run together on all raspberry.
+### Linux basic
+Update your distrib to be up to date
+```bash
+sudo apt-get update
+sudo apt-get upgrade -y
+```
 
-####Raspberry Config
-You can use the wpa_supplicant.conf template in tools
-[Config the wifi on boot partition](https://www.raspberrypi-spy.co.uk/2017/04/manually-setting-up-pi-wifi-using-wpa_supplicant-conf/)
+### software setup:
+- You need git to clone the project repository
+```bash
+sudo apt install git-all
+git clone https://github.com/acatoire/music-cards music-cards
+```
+- You need python pip
+- Then all python packages needed can be installed from requirements file
+```bash
+sudo apt-get install python3-pip
+sudo pip3 install -r requirements.txt
+```
 
-## Steps to Configure and/or Run once without AutoStart
-0. Copy/Downloar/Clone the project in home/pi
-   * git clone https://github.com/acatoire/music-cards music-cards
-1. Run `python3 modules/rfid_reader/setup_reader.py` to select the reader from the inputs
-2. TODO procedure see serial and create config for the new pi
-3. TODO procedure to add cards
-4. Run `python3 box.py` to start the application and verify that it is reading your cards and csv list properly
+```--default-timeout=1000``` for pip helps if the raspberry or the connection is too slow
 
-## Install Service to AutoStart
+### Start the application
+#### Configure your database
+1. TODO Procedure create configuration foa a new pi application
+- Get your raspberry unique ID (16 numbers ex:0000XXXXXXXXXXXX) with the command ```cat /proc/cpuinfo```
+2. TODO procedure to add new cards
 
+#### Configure the rfid reader
+Run `python3 modules/rfid_reader/setup_reader.py` to select the reader from the detected inputs inputs
+
+#### Steps to Run without AutoStart
+Simply run the application with python 3
+```bash 
+python3 box.py
+```
+This will loop reading rfid cards.
+But the application will not automatically restart.
+See the following procedure to setup the auto-start.
+
+
+#### Install Service to AutoStart
 - Change directory to music-cards/
-```bash
-cd music-cards/
-```
 - Copy the musiccards.service file to systemd
-```bash
-sudo cp /home/pi/music-cards/musiccards.service /etc/systemd/system/musiccards.service
-```
 - Reload the Daemon
-```bash
-sudo systemctl daemon-reload
-```
+- Enable the musiccards.service
 - Start the musiccards.service
 ```bash
+cd music-cards/
+sudo cp /home/pi/music-cards/musiccards.service /etc/systemd/system/musiccards.service
+sudo systemctl daemon-reload
 sudo systemctl enable musiccards.service
 sudo systemctl start musiccards.service
 ```
+
+#### Manage Running Service
 - Check if musiccards.service is running 
 ```bash
 sudo systemctl status musiccards.service
@@ -97,6 +92,47 @@ sudo journalctl -u musiccards.service
 ```bash
 sudo systemctl restart musiccards.service
 ```
+
+##Possibles Errors and solution
+### Missing your app token in database
+```bash
+Exception: The config for 0000XXXXXXXXXXXX is not present in the bipbipzizik database. 
+           Did you create it?
+```
+You didn't register your raspberry unique ID (16 numbers ex:0000XXXXXXXXXXXX) in the database.
+Execute the procedure as described above.
+
+### Missing your card in database
+```bash
+Read card:  XXXXXXXXX
+Card not found in database
+```
+You didn't register the card passed on the reader.
+Execute the procedure as described above.
+
+
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to bus: Host is down
+
+### urllib3
+```
+Firebase_Admin Error TypeError: __init__() got an unexpected keyword argument 'status'
+```
+try:
+```
+python3 -m pip install --upgrade urllib3
+```
+
+
+###Raspberry Limitaion
+####node-sonos-http-api
+Test has to be done with [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api) and rfid scanner, they should run together on all raspberry.
+
+####Home Assistant
+Please note that Raspberry Pi Zero is insufficient to run both the Home Assistant and and the rfid scanner. 
+It is recommend you use a Raspberry Pi 3 if you intend to run both at the same time.
+
+
 
 ## HomeAssistant Setup for Google Music
 TO BE CHECKED
