@@ -48,7 +48,7 @@ sudo pip3 install -r requirements.txt
 
 ### Start the application
 #### Configure your database
-1. TODO Procedure create configuration foa a new pi application
+1. TODO Procedure create configuration for a new pi application
 - Get your raspberry unique ID (16 numbers ex:0000XXXXXXXXXXXX) with the command ```cat /proc/cpuinfo```
 2. TODO procedure to add new cards
 
@@ -79,7 +79,7 @@ sudo systemctl enable musiccards.service
 sudo systemctl start musiccards.service
 ```
 
-#### Manage Running Service
+##### Manage Running Service
 - Check if musiccards.service is running 
 ```bash
 sudo systemctl status musiccards.service
@@ -92,6 +92,31 @@ sudo journalctl -u musiccards.service
 ```bash
 sudo systemctl restart musiccards.service
 ```
+
+#### Install node-sonos-http-api
+The sonos Api [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api) can be setup on a dedicated server. 
+
+##### Locally setup
+[install node](https://www.instructables.com/id/Install-Nodejs-and-Npm-on-Raspberry-Pi/)
+- Install nodejs
+- Clone the repo
+- Enter in the folder
+- install the package and start it
+```bash
+sudo apt-get install nodejs
+sudo apt-get install npm
+git clone https://github.com/jishi/node-sonos-http-api node-sonos-http-api
+cd node-sonos-http-api
+npm install --production
+npm start
+```
+
+TODO auto start
+
+##### Docker
+
+
+
 
 ##Possibles Errors and solution
 ### Missing your app token in database
