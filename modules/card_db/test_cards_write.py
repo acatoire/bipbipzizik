@@ -9,6 +9,7 @@ It test the write of cards on production database with credential
 import unittest
 
 from modules.card_db.db_manager import DbManager
+import os
 
 
 class CardsWrite(unittest.TestCase):
@@ -22,8 +23,14 @@ class CardsWrite(unittest.TestCase):
         Setup for all unit test
         :return: None
         """
+
+        # Create real file path
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        key_file_path = os.path.join(dir_path, 'WriteKey.json')
+        print(key_file_path)
+
         # Create a temporary database
-        cls.bdd = DbManager('https://bipbipzizik.firebaseio.com/', 'test', 'WriteKey.json')
+        cls.bdd = DbManager('https://bipbipzizik.firebaseio.com/', 'test', key_file_path)
         cls.bdd.delete("cards_test")
         cls.bdd.write_card(user="user1",
                            name="name1",
