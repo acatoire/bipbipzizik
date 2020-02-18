@@ -2,8 +2,8 @@
 
 """
 BIPBIPZIZIK
-Unit test for card command execution
-It run some known cards
+Fake Unit test for card command execution
+It run some known cards directly as unit test to test in on any computers.
 """
 
 import unittest
