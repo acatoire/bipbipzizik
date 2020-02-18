@@ -6,10 +6,10 @@ Unit test for Card and FirebaseBdd classes
 It test the write of cards on production database with credential
 """
 
+import os
 import unittest
 
 from modules.card_db.db_manager import DbManager
-import os
 
 
 class CardsWrite(unittest.TestCase):

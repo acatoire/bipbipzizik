@@ -197,7 +197,7 @@ def main():
     """
     For test purpose
     """
-    database = DbManager('https://bipbipzizik.firebaseio.com/', 'cards', 'config', 'serviceAccountKey.json')
+    database = DbManager('https://bipbipzizik.firebaseio.com/', 'prod', 'WriteKey.json')
 
     # database.print()
     card_test = database.get_card("template")

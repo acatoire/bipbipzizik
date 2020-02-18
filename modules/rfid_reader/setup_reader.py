@@ -8,16 +8,20 @@ Create a device file
 import os.path
 from evdev import InputDevice, list_devices
 
-devices = [InputDevice(fn) for fn in list_devices()]
-path = os.path.dirname(os.path.realpath(__file__))
+DEVICES_LIST = [InputDevice(fn) for fn in list_devices()]
+FILE_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), '/deviceName.txt')
+
+
 i = 0
+
 print("Choose the reader from list")
-for dev in devices:
+
+for dev in DEVICES_LIST:
     print(i, dev.name)
     i += 1
 
-dev_id = int(input('Device Number: '))
+DEVICE_ID = int(input('Device Number: '))
 
-with open(path + '/deviceName.txt', 'w') as f:
-    f.write(devices[dev_id].name)
+with open(FILE_PATH, 'w') as f:
+    f.write(DEVICES_LIST[DEVICE_ID].name)
     f.close()
