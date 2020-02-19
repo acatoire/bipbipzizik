@@ -34,8 +34,8 @@ sudo apt-get upgrade -y
 ### software setup:
 - You need git to clone the project repository
 ```bash
-sudo apt install git-all
-git clone https://github.com/acatoire/music-cards music-cards
+sudo apt install git
+git clone https://github.com/acatoire/music-cards /home/pi/music-cards
 ```
 TODO procedure without git (wget?)
 
@@ -44,6 +44,12 @@ TODO procedure without git (wget?)
 ```bash
 sudo apt-get install python3-pip
 sudo pip3 install -r requirements.txt
+```
+
+- Setup the reader
+```bash
+cd /home/pi/music-cards/modules/rfid_reader/
+sudo sudo python3 setup_reader.py
 ```
 
 ```--default-timeout=1000``` for pip helps if the raspberry or the connection is too slow
@@ -74,7 +80,7 @@ See the following procedure to setup the auto-start.
 - Enable the musiccards.service
 - Start the musiccards.service
 ```bash
-cd music-cards/
+cd /home/pi/music-cards/
 sudo cp /home/pi/music-cards/musiccards.service /etc/systemd/system/musiccards.service
 sudo systemctl daemon-reload
 sudo systemctl enable musiccards.service
@@ -107,14 +113,27 @@ The sonos Api [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api
 ```bash
 sudo apt-get install nodejs
 sudo apt-get install npm
-git clone https://github.com/jishi/node-sonos-http-api node-sonos-http-api
+git clone https://github.com/jishi/node-sonos-http-api /home/pi/node-sonos-http-api
 cd node-sonos-http-api
 npm install --production
 npm start
 ```
 
-TODO auto start
+TODO auto start [found here](https://github.com/jishi/node-sonos-http-api/issues/20#issuecomment-274986533)
+```bash
+sudo npm install -g pm2
+pm2 startup
+```
+pm2 will request you this
+```bash
+sudo env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
+```
 
+```bash
+cd /home/pi/node-sonos-http-api
+pm2 start npm -- start
+pm2 save
+```
 ##### Docker
 
 
