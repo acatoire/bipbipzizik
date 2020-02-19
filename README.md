@@ -37,6 +37,8 @@ sudo apt-get upgrade -y
 sudo apt install git-all
 git clone https://github.com/acatoire/music-cards music-cards
 ```
+TODO procedure without git (wget?)
+
 - You need python pip
 - Then all python packages needed can be installed from requirements file
 ```bash
