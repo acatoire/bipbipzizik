@@ -34,7 +34,7 @@ sudo apt-get upgrade -y
 ### software setup:
 - You need git to clone the project repository
 ```bash
-sudo apt install git
+sudo apt install git -y
 git clone https://github.com/acatoire/music-cards /home/pi/music-cards
 ```
 TODO procedure without git (wget?)
@@ -42,14 +42,14 @@ TODO procedure without git (wget?)
 - You need python pip
 - Then all python packages needed can be installed from requirements file
 ```bash
-sudo apt-get install python3-pip
+sudo apt-get install python3-pip -y
 sudo pip3 install -r requirements.txt
 ```
 
 - Setup the reader
 ```bash
 cd /home/pi/music-cards/modules/rfid_reader/
-sudo sudo python3 setup_reader.py
+sudo python3 setup_reader.py
 ```
 
 ```--default-timeout=1000``` for pip helps if the raspberry or the connection is too slow
