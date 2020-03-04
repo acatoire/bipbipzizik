@@ -105,6 +105,10 @@ class CardLauncher:
     def __cmd_execution(self, command):
 
         command_line = self.config.get_sonos_cmd(command)
-        response = requests.get(command_line)
-        print(command_line)
-        print(response.text)
+        print("Execute command: {}".format(command_line))
+
+        try:
+            response = requests.get(command_line)
+            print("Command response: {}".format(response.text))
+        except requests.exceptions.ConnectionError:
+            print("Connexion Failed! Is the server up and running?")
