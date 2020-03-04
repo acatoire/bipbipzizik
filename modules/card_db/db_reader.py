@@ -67,7 +67,7 @@ class DbReader:
         """
 
         for _, card in self.cards_db_python.items():
-            if card_id in card.get("ids"):
+            if card_id in card.get("ids").split(","):
                 return Card(card)
 
         # Card not found, return None

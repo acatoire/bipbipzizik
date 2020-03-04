@@ -10,8 +10,16 @@ from time import time, sleep
 
 # Bipbipzizic import
 from card_launcher import CardLauncher
-from modules.rfid_reader.linux_reader import Reader
-from modules.tools import get_serial
+from sys import platform
+
+if platform == "linux" or platform == "linux2" or  platform == "darwin":
+    # linux or OS X
+    from modules.tools import get_linux_serial as get_serial
+    from modules.rfid_reader.linux_reader import Reader
+elif platform == "win32":
+    # Windows
+    from modules.tools import get_win_serial as get_serial
+    from modules.rfid_reader.windows_reader import Reader
 
 # Constants
 UPDATE_PERIOD = 60

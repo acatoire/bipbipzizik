@@ -22,6 +22,10 @@ for dev in DEVICES_LIST:
 
 DEVICE_ID = int(input('Device Number: '))
 
-with open(FILE_PATH, 'w') as f:
-    f.write(DEVICES_LIST[DEVICE_ID].name)
-    f.close()
+with open(FILE_PATH, 'w') as file_handler:
+    file_handler.write(DEVICES_LIST[DEVICE_ID].name)
+    # FIXME, doesn't save the file
+    file_handler.close()
+
+print("Device name saved in: " + FILE_PATH)
+
