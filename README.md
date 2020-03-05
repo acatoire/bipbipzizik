@@ -37,6 +37,11 @@ sudo apt-get upgrade -y
 sudo apt install git -y
 git clone https://github.com/acatoire/music-cards /home/pi/music-cards
 ```
+- Then you will be able to update with
+```bash
+cd /home/pi/music-cards
+git pull
+```
 TODO procedure without git (wget?)
 
 - You need python pip
