@@ -19,7 +19,7 @@ class DbReader:
     def __init__(self, bdd_addr, bdd_name):
         """
         Card reader constructor.
-        :param bdd_name:
+        @return bdd_name:
         """
 
         self.config_bdd_name = "config_" + bdd_name
@@ -37,7 +37,7 @@ class DbReader:
     def update(self):
         """
         Function that update the bdd from the cloud
-        :return: nothing
+        @return: nothing
         """
 
         self.config_db_python = self.database.get('/' + self.config_bdd_name, None)
@@ -46,7 +46,7 @@ class DbReader:
     def count_cards(self):
         """
         Function that return the number of cards in th bdd
-        :return: the number of cards
+        @return: the number of cards
         """
 
         return self.cards_db_python.__len__()
@@ -54,7 +54,7 @@ class DbReader:
     def count_configs(self):
         """
         Function that return the number of configs in th bdd
-        :return: the number of configs
+        @return: the number of configs
         """
 
         return self.config_db_python.__len__()
@@ -62,8 +62,8 @@ class DbReader:
     def get_card(self, card_id):
         """
         Function that get a dict of a searched card
-        :param card_id: searched card id
-        :return: the searched Card or None
+        @return card_id: searched card id
+        @return: the searched Card or None
         """
 
         for _, card in self.cards_db_python.items():
@@ -76,8 +76,8 @@ class DbReader:
     def get_config(self, application_id):
         """
         Function that get searched configuration
-        :param application_id: searched application id
-        :return: the searched AppConfig or None
+        @return application_id: searched application id
+        @return: the searched AppConfig or None
         """
 
         for _, config in self.config_db_python.items():
@@ -101,7 +101,7 @@ class DbReader:
         """
         Function that print the whole card bdd
         # todo make a print card ans print config
-        :return:
+        @return:
         """
 
         for key, card in self.cards_db_python.items():

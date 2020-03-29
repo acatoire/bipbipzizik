@@ -28,4 +28,3 @@ with open(FILE_PATH, 'w') as file_handler:
     file_handler.close()
 
 print("Device name saved in: " + FILE_PATH)
-

@@ -15,14 +15,14 @@ class AppConfig:
                  room_name, multi_read_mode, card_timeout):
         """
         Constructor
-        :param app_name:
-        :param app_owner:
-        :param app_id:
-        :param sonos_server_ip:
-        :param sonos_server_port:
-        :param room_name:
-        :param multi_read_mode:
-        :param card_timeout:
+        @return app_name:
+        @return app_owner:
+        @return app_id:
+        @return sonos_server_ip:
+        @return sonos_server_port:
+        @return room_name:
+        @return multi_read_mode:
+        @return card_timeout:
         """
 
         # Application owner info
@@ -67,8 +67,8 @@ class AppConfig:
     def get_sonos_cmd(self, card_command):
         """
         Get the sonos command from the card command
-        :param card_command:
-        :return:
+        @return card_command:
+        @return:
         """
 
         # Create address path
@@ -87,7 +87,7 @@ class AppConfig:
     def print(self):
         """
         Function that print the application config
-        :return:
+        @return:
         """
 
         print("Application config:")

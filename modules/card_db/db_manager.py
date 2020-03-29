@@ -22,9 +22,9 @@ class DbManager:
     def __init__(self, bdd_addr, bdd_name, path_to_key_file):
         """
         Card reader constructor.
-        :param bdd_addr:
-        :param bdd_name:
-        :param path_to_key_file:
+        @return bdd_addr:
+        @return bdd_name:
+        @return path_to_key_file:
         """
 
         self.config_bdd_name = "config_" + bdd_name
@@ -54,7 +54,7 @@ class DbManager:
     def update(self):
         """
         Function that update the bdd from the cloud
-        :return: nothing
+        @return: nothing
         """
 
         self.config_db_python = self.config_db.get()
@@ -63,7 +63,7 @@ class DbManager:
     def count_cards(self):
         """
         Function that return the number of cards in th bdd
-        :return: the number of cards
+        @return: the number of cards
         """
 
         return self.cards_db_python.__len__()
@@ -71,7 +71,7 @@ class DbManager:
     def count_configs(self):
         """
         Function that return the number of configs in th bdd
-        :return: the number of configs
+        @return: the number of configs
         """
 
         return self.config_db_python.__len__()
@@ -79,8 +79,8 @@ class DbManager:
     def get_card(self, card_id):
         """
         Function that get a dict of a searched card
-        :param card_id: searched card id
-        :return: the searched Card or None
+        @return card_id: searched card id
+        @return: the searched Card or None
         """
 
         for _, card in self.cards_db_python.items():
@@ -93,14 +93,14 @@ class DbManager:
     def write_card(self, ids, user, name, action, data, comment, mode):
         """
         Function thar write a new card in the bdd
-        :param ids:
-        :param user:
-        :param name:
-        :param action:
-        :param data:
-        :param comment:
-        :param mode:
-        :return:
+        @return ids:
+        @return user:
+        @return name:
+        @return action:
+        @return data:
+        @return comment:
+        @return mode:
+        @return:
         """
 
         # TODO check if card already exist
@@ -120,8 +120,8 @@ class DbManager:
     def get_config(self, application_id):
         """
         Function that get searched configuration
-        :param application_id: searched application id
-        :return: the searched AppConfig or None
+        @return application_id: searched application id
+        @return: the searched AppConfig or None
         """
 
         for _, config in self.config_db_python.items():
@@ -145,15 +145,15 @@ class DbManager:
                      sonos_server_port, room_name, multi_read_mode, card_timeout):
         """
         Function thar write a new card in the bdd
-        :param app_name:
-        :param app_id:
-        :param app_owner:
-        :param sonos_server_ip:
-        :param sonos_server_port:
-        :param room_name:
-        :param multi_read_mode:
-        :param card_timeout:
-        :return:
+        @return app_name:
+        @return app_id:
+        @return app_owner:
+        @return sonos_server_ip:
+        @return sonos_server_port:
+        @return room_name:
+        @return multi_read_mode:
+        @return card_timeout:
+        @return:
         """
 
         self.config_db.push({
@@ -171,7 +171,7 @@ class DbManager:
         """
         Function that clear the whole bdd given in argument
         DANGEROUS: for safety only matching bdd name can be deleted
-        :return:
+        @return:
         """
         if bdd_name == self.card_bdd_name:
             print("Delete database: " + bdd_name)
@@ -186,7 +186,7 @@ class DbManager:
         """
         Function that print the whole card bdd
         # todo make a print card ans print config
-        :return:
+        @return:
         """
 
         for key, card in self.cards_db_python.items():

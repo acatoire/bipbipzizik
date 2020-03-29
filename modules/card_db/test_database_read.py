@@ -20,7 +20,7 @@ class DatabaseReadTest(unittest.TestCase):
     def setUpClass(cls):
         """
         Setup for all unit test
-        :return: None
+        @return: None
         """
 
         # Create the database handler
@@ -32,7 +32,7 @@ class DatabaseReadTest(unittest.TestCase):
     def test_read_card(self):
         """
         Test card read on production database
-        :return
+        @return
         """
 
         card_expected = {"user": "user",
@@ -50,7 +50,7 @@ class DatabaseReadTest(unittest.TestCase):
     def test_read_config(self):
         """
         Test config read on production database
-        :return
+        @return
         """
 
         card_expected = {"app_name": "For test purpose",

@@ -8,7 +8,7 @@ Module containing useful tools
 def print_my_path():
     """
     For debug purpose, print path
-    :return: None
+    @return: None
     """
     from os import path, getcwd
     print('DEBUG: cwd:     {}'.format(getcwd()))
@@ -19,7 +19,7 @@ def print_my_path():
 def get_linux_serial() -> str:
     """
     Extract serial from raspberry pi cpuinfo file
-    :return: serial as string
+    @return: serial as string
     """
     serial = "0000000000000000"
     try:
@@ -37,7 +37,7 @@ def get_win_serial() -> str:
     """
     Extract serial from windows pc
     TODO not doing anything for now, for test purpose allowing to run on personal computer.
-    :return: serial as string
+    @return: serial as string
     """
     # serial = "000000TEST000000"
     serial = "000000008e3c2b91"

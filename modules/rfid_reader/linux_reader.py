@@ -48,7 +48,7 @@ class Reader:
         Function to read the cards.
         It concatenate all characters until finding 'KEY_ENTER'
         The final word is returned
-        :return: card key as string
+        @return: card key as string
         """
         keys_input = ''
         key = ''

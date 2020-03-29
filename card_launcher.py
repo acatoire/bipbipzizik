@@ -29,15 +29,15 @@ class CardLauncher:
     def database_update(self):
         """
         Update the database
-        :return: None
+        @return: None
         """
         self.database.update()
 
     def config_update(self, config_id):
         """
         Update used config
-        :param config_id: id of the config to be used
-        :return: None
+        @return config_id: id of the config to be used
+        @return: None
         """
         self.config = self.database.get_config(config_id)
 
@@ -52,8 +52,8 @@ class CardLauncher:
     def execute_card(self, card_id):
         """
         Execute a card command
-        :param card_id: card to be run
-        :return: error code
+        @return card_id: card to be run
+        @return: error code
         - 0 if all OK
         - 1 if card is not found
         - 2 if card is canceled by the memory

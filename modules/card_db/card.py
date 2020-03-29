@@ -17,7 +17,7 @@ class Card:
     def print(self):
         """
         Function that print a card parameters found from its id
-        :return:
+        @return:
         """
 
         if self.parameters is not None:
@@ -30,7 +30,7 @@ class Card:
     def get_command(self):
         """
         Function that create the command from card parameters found from its id
-        :return:
+        @return:
         """
 
         # This dict can be easily completed with more command
@@ -57,7 +57,7 @@ class Card:
     def get_mode(self):
         """
         Get the card mode or None if not found
-        :return: the mode
+        @return: the mode
         """
         if self.parameters is not None:
             # Card found create the command line
@@ -74,8 +74,8 @@ class Card:
     def has_mode(self, mode):
         """
         Check if the card mode is the expected one
-        :param mode: expected mode
-        :return: True if exist, else otherwise
+        @return mode: expected mode
+        @return: True if exist, else otherwise
         """
 
         mode_exist = self.parameters.get("mode") == mode
@@ -85,7 +85,7 @@ class Card:
     def is_command(self):
         """
         Check if the card is a command card
-        :return: True if the card is a command, else otherwise
+        @return: True if the card is a command, else otherwise
         """
 
         return self.parameters.get("action") == "command"
@@ -95,7 +95,7 @@ def main():
     """
     For test purpose
     Quick card test
-    :return: None
+    @return: None
     """
 
     card_dict = dict(

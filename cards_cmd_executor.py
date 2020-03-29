@@ -20,7 +20,7 @@ class CardsWrite(unittest.TestCase):
     def setUpClass(cls):
         """
         Setup for all unit test
-        :return: None
+        @return: None
         """
 
         cls.launcher = CardLauncher('https://bipbipzizik.firebaseio.com/', 'prod')
@@ -32,21 +32,21 @@ class CardsWrite(unittest.TestCase):
     def test_playpause(self):
         """
         Test card read on production database
-        :return
+        @return
         """
         self.launcher.execute_card('0013397903')
 
     def test_mathieu_shedid(self):
         """
         Test card read on production database
-        :return
+        @return
         """
         self.launcher.execute_card('0013365376')
 
     def test_gorillaz(self):
         """
         Test card read on production database
-        :return
+        @return
         """
         self.launcher.execute_card('0005585628')
 

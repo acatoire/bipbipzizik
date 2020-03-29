@@ -12,7 +12,7 @@ from time import time, sleep
 from card_launcher import CardLauncher
 from sys import platform
 
-if platform == "linux" or platform == "linux2" or  platform == "darwin":
+if platform in ("linux", "linux2", "darwin"):
     # linux or OS X
     from modules.tools import get_linux_serial as get_serial
     from modules.rfid_reader.linux_reader import Reader
@@ -28,7 +28,7 @@ UPDATE_PERIOD = 60
 def main():
     """
     Application main function
-    :return: None
+    @return: None
     """
 
     reader = Reader()

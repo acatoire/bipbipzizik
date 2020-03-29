@@ -21,7 +21,7 @@ class CardsWrite(unittest.TestCase):
     def setUpClass(cls):
         """
         Setup for all unit test
-        :return: None
+        @return: None
         """
 
         # Create real file path
@@ -78,7 +78,7 @@ class CardsWrite(unittest.TestCase):
     def test_read_card(self):
         """
         Test card read on production database
-        :return
+        @return
         """
 
         card_expected = {"user": "user5",
@@ -96,7 +96,7 @@ class CardsWrite(unittest.TestCase):
     def test_read_card_command(self):
         """
         Test all command card read on production database
-        :return
+        @return
         """
 
         command_expected = "data1"
