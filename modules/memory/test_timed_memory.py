@@ -6,7 +6,7 @@ Unit test for timed memory classe
 
 import unittest
 
-from time import sleep
+from time import sleep, time
 
 from modules.memory.timed_memory import TimedMemory
 
@@ -19,77 +19,117 @@ class TimedMemoryTest(unittest.TestCase):
     def setUp(self):
         """
         Setup for each unit test
-        :return:
         """
 
         self.empty = "empty"
         self.fill = "filled"
-        self.timeout_value = 2.0
+        self.timeout_value = 0.1
         self.memory = TimedMemory(self.timeout_value, self.empty)
 
     def test_memory(self):
         """
-        Basic check of the auto reset
-        :return:
+        Basic check of the memory system
         """
 
-        self.assertEqual(self.memory.get(), self.empty)
+        # Check initial value
+        self.assertEqual(self.memory.value, self.empty)
 
-        self.memory.set(self.fill)
-        sleep(self.timeout_value - 0.5)
-        self.assertEqual(self.memory.get(), self.fill)
+        # Save a value in the memory
+        self.memory.value = self.fill
+        start = time()
 
-        sleep(0.5)
-        self.assertEqual(self.memory.get(), self.empty)
+        while time() < (start + self.timeout_value - 0.01):
+            sleep(0.001)
 
-    def test_memory_reset(self):
+        # Check saved value before timeout
+        self.assertEqual(self.memory.value, self.fill)
+
+        while time() < (start + self.timeout_value + 0.01):
+            sleep(0.001)
+
+        # Check saved value after timeout
+        self.assertEqual(self.memory.value, self.empty)
+
+    def test_memory_reuse(self):
         """
-        Check the re-use of a running timer
-        :return:
+        Check the re-use of a running memory before timeout
         """
 
         fill2 = "fill2"
 
-        # Fill first value
-        self.memory.set(self.fill)
+        # Check initial value
+        self.assertEqual(self.memory.value, self.empty)
 
-        # Wait 1s to fill second value
-        sleep(1.0)
-        self.memory.set(fill2)
-        self.assertEqual(self.memory.get(), fill2)
+        # Save first value in the memory
+        self.memory.value = self.fill
+        start = time()
 
-        # Wait 1.5s to have elapsed the initial timer
-        # Value should be the second one
-        sleep(1.5)
-        self.assertEqual(self.memory.get(), fill2)
+        while time() < (start + self.timeout_value - 0.01):
+            sleep(0.001)
 
-        # Wait 1s to have elapsed the second timer
-        sleep(1.0)
-        self.assertEqual(self.memory.get(), self.empty)
+        # Check saved value before timeout
+        self.assertEqual(self.memory.value, self.fill)
+
+        # Save second value in the memory
+        self.memory.value = fill2
+        start2 = time()
+
+        while time() < (start + self.timeout_value + 0.01):
+            sleep(0.001)
+
+        # Check saved value after first timeout
+        self.assertEqual(self.memory.value, fill2)
+
+        while time() < (start2 + self.timeout_value + 0.01):
+            sleep(0.001)
+
+        # Check saved value after second timeout
+        self.assertEqual(self.memory.value, self.empty)
 
     def test_memory_double_use(self):
         """
         Check the re-use of a ended timer
-        :return:
         """
 
-        # Fill first value
-        self.memory.set(self.fill)
-        # Wait 1s the end of the memory
-        sleep(1.0)
-        self.assertEqual(self.memory.get(), self.fill)
-        # Wait 3s the end of the memory
-        sleep(2.0)
-        self.assertEqual(self.memory.get(), self.empty)
+        fill2 = "fill2"
 
-        # Try another use
-        self.memory.set(self.fill)
-        # Wait 1s the end of the memory
-        sleep(1.0)
-        self.assertEqual(self.memory.get(), self.fill)
-        # Wait 3s the end of the memory
-        sleep(2.0)
-        self.assertEqual(self.memory.get(), self.empty)
+        # Check initial value
+        self.assertEqual(self.memory.value, self.empty)
+
+        # Save a value in the memory
+        self.memory.value = self.fill
+        start = time()
+
+        while time() < (start + self.timeout_value - 0.01):
+            sleep(0.001)
+
+        # Check saved value before timeout
+        self.assertEqual(self.memory.value, self.fill)
+
+        while time() < (start + self.timeout_value + 0.01):
+            sleep(0.001)
+
+        # Check saved value after timeout
+        self.assertEqual(self.memory.value, self.empty)
+
+        # Check initial value
+        self.assertEqual(self.memory.value, self.empty)
+
+        # Save a value in the memory
+        self.memory.value = fill2
+        start = time()
+
+        while time() < (start + self.timeout_value - 0.01):
+            sleep(0.001)
+
+        # Check saved value before timeout
+        self.assertEqual(self.memory.value, fill2)
+
+        while time() < (start + self.timeout_value + 0.01):
+            sleep(0.001)
+
+        # Check saved value after timeout
+        self.assertEqual(self.memory.value, self.empty)
 
 
 if __name__ == '__main__':

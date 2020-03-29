@@ -80,13 +80,13 @@ class CardLauncher:
 
         if self.config.cfg_multi_read_mode == "cancel" and not card.is_command():
             # Card cancel is allowed
-            if self.memory.get() == card_id:
+            if self.memory.value == card_id:
                 # Cancel the read
                 print('Card not executed: the card is still active in th memory')
                 return 2
 
         # Update the memory with the new card
-        self.memory.set(card_id)
+        self.memory.value = card_id
 
         # Handle the clear queue needs
         if card.has_mode("ClearQueue"):
