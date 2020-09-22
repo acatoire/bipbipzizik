@@ -2,11 +2,31 @@ var config = {
   apiKey: "AIzaSyBDpWYywapzpuYJerHNe1aVNPsQGULBMN0",
   authDomain: "bipbipzizik.firebaseapp.com",
   databaseURL: "https://bipbipzizik.firebaseio.com",
+  projectId: "bipbipzizik",
   storageBucket: "bipbipzizik.appspot.com",
+  messagingSenderId: "800598547799",
+  appId: "1:800598547799:web:3ee8db578f5c76da60f212",
+  measurementId: "G-LPM9CG1HWR"
 };
 
 firebase.initializeApp(config);
 var db = firebase.database();
+
+firebase.auth().onAuthStateChanged((user) =>{
+  if (user) {
+    console.log("user found");
+    console.log(user);
+
+    const logInDiv = document.getElementById("firebase-login");
+    const logInButton = document.getElementById("firebase-login-button");
+
+    logInDiv.innerText = user.email
+    logInButton.style.display = "none";
+
+  } else {
+    console.log("Not logged in");
+  }
+});
 
 // CREATE REWIEW
 

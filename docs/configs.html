@@ -15,6 +15,9 @@
             This page allows to edit all configs.<br>
             Find your raspberry ID and choose your config.
           </h4>
+          <div id="firebase-login">
+            <button id="firebase-login-button" onclick="logIn()">Log in using Google</button>
+          </div>
         </div>
         <h2>Configs</h2>
         <h4>CREATE/UPDATE</h4>
@@ -62,7 +65,10 @@
 
         </div>
       </div>
-      <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
       <script src="configs.js"></script>
     </body>
 </html>
