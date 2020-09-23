@@ -34,10 +34,7 @@ class BBZZAdmin extends LitElement {
         super();
         this.user = null;
         this.cards = [];
-    }
 
-    connectedCallback() {
-        super.connectedCallback()
         const dbCardsReference = db.ref('/cards_prod');
 
         dbCardsReference.on('child_added', (data) => {
@@ -46,8 +43,8 @@ class BBZZAdmin extends LitElement {
             const cardId = data.key;
             const cardData = data.val();
 
-            this.cards.push({cardId, cardData});
-            this.requestUpdate();
+            // Axel : lit element cannot understand when you change elements in an array. you have to change the whole array every time.
+            this.cards = [...this.cards, {cardId, cardData}]
         });
     }
 

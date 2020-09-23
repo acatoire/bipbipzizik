@@ -26,7 +26,9 @@ class BBZZCards extends LitElement {
         <h2>Cards</h2>
         <h4>CREATE/UPDATE</h4>
         <h4>READ/DELETE</h4>
-          ${this.cards.map(c => html`<div>${c.cardId}</div>`)}
+        <div class="cards">
+            ${this.cards.map(c => html`<div>${c.cardId}</div>`) }
+        </div>
       </div>
     `;
     }
