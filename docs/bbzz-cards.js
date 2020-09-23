@@ -3,11 +3,13 @@ import { LitElement, html, css } from 'https://unpkg.com/lit-element@2.4.0/lit-e
 class BBZZCards extends LitElement {
     static get properties() {
         return {
+            cards: {type:Array}
         }
     }
 
     constructor() {
         super();
+        this.cards = [];
     }
 
     render() {
@@ -20,13 +22,11 @@ class BBZZCards extends LitElement {
             This page allows to edit all cards.<br>
             Edit existing card or create a new one.
           </h4>
-          <div id="firebase-login">
-            <button id="firebase-login-button" onclick="logIn()">Log in using Google</button>
-          </div>
         </div>
         <h2>Cards</h2>
         <h4>CREATE/UPDATE</h4>
         <h4>READ/DELETE</h4>
+          ${this.cards.map(c => html`<div>${c.cardId}</div>`)}
       </div>
     `;
     }

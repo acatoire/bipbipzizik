@@ -25,13 +25,29 @@ class BBZZAdmin extends LitElement {
     static get properties() {
         return {
             selectedTab : {type: Number},
-            user : {type : Object}
+            user : {type : Object},
+            cards : {type: Array},
         }
     }
 
     constructor() {
         super();
         this.user = null;
+
+        const dbCardsReference = db.ref('/cards_prod');
+
+        this.cards = [];
+
+        dbCardsReference.on('child_added', (data) => {
+            console.log("card added", data);
+
+            const cardId = data.key;
+            const cardData = data.val();
+
+            this.cards.push({cardId, cardData});
+        });
+
+
     }
 
     tabClicked(e){
@@ -82,7 +98,7 @@ class BBZZAdmin extends LitElement {
                 </mwc-tab-bar>
                 
                 ${this.selectedTab === 0
-                    ? html`<bbzz-cards></bbzz-cards>`
+                    ? html`<bbzz-cards .cards="${this.cards}"></bbzz-cards>`
                     : html`<bbzz-configs></bbzz-configs>`
                 }
               </div>
