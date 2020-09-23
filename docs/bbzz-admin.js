@@ -5,20 +5,58 @@ import 'https://unpkg.com/@material/mwc-tab-bar@0.18.0/mwc-tab-bar.js?module';
 import './bbzz-cards.js';
 import './bbzz-configs.js';
 
+const config = {
+    apiKey: "AIzaSyBDpWYywapzpuYJerHNe1aVNPsQGULBMN0",
+    authDomain: "bipbipzizik.firebaseapp.com",
+    databaseURL: "https://bipbipzizik.firebaseio.com",
+    projectId: "bipbipzizik",
+    storageBucket: "bipbipzizik.appspot.com",
+    messagingSenderId: "800598547799",
+    appId: "1:800598547799:web:3ee8db578f5c76da60f212",
+    measurementId: "G-LPM9CG1HWR"
+};
+
+firebase.initializeApp(config);
+const db = firebase.database();
+const provider = new firebase.auth.GoogleAuthProvider();
 
 class BBZZAdmin extends LitElement {
+
     static get properties() {
         return {
-            selectedTab : {type: Number}
+            selectedTab : {type: Number},
+            user : {type : Object}
         }
     }
 
     constructor() {
         super();
+        this.user = null;
     }
 
     tabClicked(e){
         this.selectedTab = e.detail.index;
+    }
+
+    logIn(){
+        console.log("Logging in");
+        firebase.auth().signInWithPopup(provider).then((result) =>{
+            console.log("logged in");
+            this.user = result.user;
+        }).catch((error) =>{
+            console.log("Error when logging in", error);
+        });
+
+    }
+
+    logout(){
+        console.log("Logging out");
+        firebase.auth().signOut().then(() =>{
+            console.log("logged out");
+            this.user = null;
+        }, (error) =>{
+            console.log("Error while logging out", error);
+        });
     }
 
     render() {
@@ -27,6 +65,15 @@ class BBZZAdmin extends LitElement {
               <div class='header'>
                 <h1>BipBipZiZik admin interface</h1>
                 <h4>Lets config everything</h4>
+                <div class="login-button">
+                    ${this.user
+                        ? html`
+                            <p>Logged in as ${this.user.email}</p>
+                            <mwc-button raised label="Logout" icon="login" @click="${this.logout}"></mwc-button>
+                        `
+                        : html`<mwc-button raised label="LogIn with Google" icon="login" @click="${this.logIn}"></mwc-button>`
+                    }
+                </div>
               </div>
               <div class="app">
                 <mwc-tab-bar @MDCTabBar:activated=${this.tabClicked}> 
