@@ -100,6 +100,12 @@ class BBZZAdmin extends LitElement {
         );
     }
 
+    deleteCardFromFirebase(e){
+        const cardToDelete = e.detail.card;
+        console.log("Removing", cardToDelete);
+        db.ref('cards_prod/' + cardToDelete.cardId).remove();
+    }
+
     render() {
         return html`
             <div class='container'>
@@ -123,7 +129,7 @@ class BBZZAdmin extends LitElement {
                 </mwc-tab-bar>
                 
                 ${this.selectedTab === 0
-                    ? html`<bbzz-cards .cards="${this.cards}" @bbzz-card-save="${this.saveCardToFirebase}"></bbzz-cards>`
+                    ? html`<bbzz-cards .cards="${this.cards}" @bbzz-card-save="${this.saveCardToFirebase}" @bbzz-card-remove-admin="${this.deleteCardFromFirebase}"></bbzz-cards>`
                     : html`<bbzz-configs></bbzz-configs>`
                 }
               </div>

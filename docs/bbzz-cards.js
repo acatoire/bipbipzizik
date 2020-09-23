@@ -34,6 +34,16 @@ class BBZZCards extends LitElement {
         this.requestUpdate();
     }
 
+    catchRemoveEvent(e){
+        // We just forward to the admin element, who has the database connection
+        let event = new CustomEvent('bbzz-card-remove-admin', {
+            detail: {
+                card: e.detail.card
+            }
+        });
+        this.dispatchEvent(event);
+    }
+
     saveCard(){
         //We send the edited card or created card to the admin view, which is the only one with the firebase access
         console.log(this.editedCard);
@@ -43,6 +53,18 @@ class BBZZCards extends LitElement {
             }
         });
         this.dispatchEvent(event);
+        this.editedCard = {
+            cardId : Date.now(),
+            cardData : {
+                name: "",
+                mode: "",
+                ids: "",
+                data: "",
+                comment: "",
+                action: "",
+                user: ""
+            }
+        };
     }
 
     render() {
@@ -70,7 +92,7 @@ class BBZZCards extends LitElement {
             </div>
         <h4>READ/DELETE</h4>
         <div class="cards">
-            ${this.cards.map(card => html`<bbzz-card @bbzz-card-edit="${this.catchEditEvent}" .card="${card}"></bbzz-card>`) }
+            ${this.cards.map(card => html`<bbzz-card @bbzz-card-edit="${this.catchEditEvent}" @bbzz-card-remove="${this.catchRemoveEvent}" .card="${card}"></bbzz-card>`) }
         </div>
       </div>
     `;
