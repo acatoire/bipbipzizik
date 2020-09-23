@@ -33,10 +33,12 @@ class BBZZAdmin extends LitElement {
     constructor() {
         super();
         this.user = null;
-
-        const dbCardsReference = db.ref('/cards_prod');
-
         this.cards = [];
+    }
+
+    connectedCallback() {
+        super.connectedCallback()
+        const dbCardsReference = db.ref('/cards_prod');
 
         dbCardsReference.on('child_added', (data) => {
             console.log("card added", data);
@@ -47,8 +49,6 @@ class BBZZAdmin extends LitElement {
             this.cards.push({cardId, cardData});
             this.requestUpdate();
         });
-
-
     }
 
     tabClicked(e){
