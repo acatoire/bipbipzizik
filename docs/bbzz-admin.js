@@ -38,13 +38,27 @@ class BBZZAdmin extends LitElement {
         const dbCardsReference = db.ref('/cards_prod');
 
         dbCardsReference.on('child_added', (data) => {
-            console.log("card added", data);
+            const cardId = data.key;
+            const cardData = data.val();
+            this.cards = [...this.cards, {cardId, cardData}]
+        });
 
+        dbCardsReference.on('child_changed', (data) => {
             const cardId = data.key;
             const cardData = data.val();
 
-            // Axel : lit element cannot understand when you change elements in an array. you have to change the whole array every time.
-            this.cards = [...this.cards, {cardId, cardData}]
+            // Find which item changed, and update the array
+            const item = this.cards.find(card => {
+                return card.cardId === cardId
+            });
+            // Get all the other items
+            const otherCards = this.cards.filter(card => card.cardId === cardId);
+
+            this.cards = [...otherCards, {cardId, cardData}];
+        });
+
+        dbCardsReference.on('child_removed', (data) => {
+            this.cards = this.cards.filter(card => card.cardId === data.key);
         });
     }
 
@@ -73,6 +87,11 @@ class BBZZAdmin extends LitElement {
         });
     }
 
+    saveCardToFirebase(e){
+        const cardToSave = e.detail.card;
+        console.log("Saving", cardToSave);
+    }
+
     render() {
         return html`
             <div class='container'>
@@ -96,7 +115,7 @@ class BBZZAdmin extends LitElement {
                 </mwc-tab-bar>
                 
                 ${this.selectedTab === 0
-                    ? html`<bbzz-cards .cards="${this.cards}"></bbzz-cards>`
+                    ? html`<bbzz-cards .cards="${this.cards}" @bbzz-card-save="${this.saveCardToFirebase}"></bbzz-cards>`
                     : html`<bbzz-configs></bbzz-configs>`
                 }
               </div>
