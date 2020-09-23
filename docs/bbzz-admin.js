@@ -62,7 +62,7 @@ class BBZZAdmin extends LitElement {
 
         dbCardsReference.on('child_removed', (data) => {
             console.log("child_removed", data.key);
-            this.cards = this.cards.filter(card => card.cardId === data.key);
+            this.cards = this.cards.filter(card => card.cardId != data.key);
         });
     }
 
