@@ -38,12 +38,15 @@ class BBZZAdmin extends LitElement {
         const dbCardsReference = db.ref('/cards_prod');
 
         dbCardsReference.on('child_added', (data) => {
+            console.log("child added");
             const cardId = data.key;
             const cardData = data.val();
             this.cards = [...this.cards, {cardId, cardData}]
         });
 
         dbCardsReference.on('child_changed', (data) => {
+            console.log("child changed", data.key);
+
             const cardId = data.key;
             const cardData = data.val();
 
@@ -58,6 +61,7 @@ class BBZZAdmin extends LitElement {
         });
 
         dbCardsReference.on('child_removed', (data) => {
+            console.log("child_removed", data.key);
             this.cards = this.cards.filter(card => card.cardId === data.key);
         });
     }
@@ -89,7 +93,11 @@ class BBZZAdmin extends LitElement {
 
     saveCardToFirebase(e){
         const cardToSave = e.detail.card;
-        console.log("Saving", cardToSave);
+        console.log("saving to firebase ", cardToSave);
+
+        db.ref('cards_prod/' + cardToSave.cardId).set(
+            cardToSave.cardData
+        );
     }
 
     render() {
