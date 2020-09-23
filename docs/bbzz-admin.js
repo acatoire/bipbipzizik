@@ -45,6 +45,7 @@ class BBZZAdmin extends LitElement {
             const cardData = data.val();
 
             this.cards.push({cardId, cardData});
+            this.requestUpdate();
         });
 
 
