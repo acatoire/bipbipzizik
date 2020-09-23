@@ -17,7 +17,8 @@ ___
 
 5) Push to repo.
 
-6) Open https://[github_username].github.io.
+6) Open https://[github_username].github.io. or https://[github_username].github.io[repo_name]
+example: https://acatoire.github.io/music-cards/
 
 7) You have your own website.
 

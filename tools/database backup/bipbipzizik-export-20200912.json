@@ -1,0 +1,463 @@
+{
+  "cards_prod" : {
+    "-M1bQq7zETmJ18W4gaYr" : {
+      "action" : "action",
+      "comment" : "comment",
+      "data" : "data",
+      "ids" : "template",
+      "mode" : "mode",
+      "name" : "name",
+      "user" : "user"
+    },
+    "-M1bQqBIjic5P0xytQq6" : {
+      "action" : "command",
+      "comment" : "",
+      "data" : "playpause",
+      "ids" : "0013397903,1",
+      "mode" : "none",
+      "name" : "Play/Pause",
+      "user" : "axel"
+    },
+    "-M1bQqE_phYwS6666M-6" : {
+      "action" : "command",
+      "comment" : "",
+      "data" : "next",
+      "ids" : "0013403195",
+      "mode" : "none",
+      "name" : "Next",
+      "user" : "axel"
+    },
+    "-M1bQqIadZUMunbyyrDA" : {
+      "action" : "command",
+      "comment" : "",
+      "data" : "volume/+5",
+      "ids" : "0005690629",
+      "mode" : "none",
+      "name" : "Volum +",
+      "user" : "axel"
+    },
+    "-M1bQqNoF9dOpeTf-W3C" : {
+      "action" : "command",
+      "comment" : "",
+      "data" : "volume/-5",
+      "ids" : "0005690629",
+      "mode" : "none",
+      "name" : "Volum -",
+      "user" : "axel"
+    },
+    "-M1bQqSfMdyn6v-4LqzR" : {
+      "action" : "spotify:album",
+      "comment" : "M - Lettre Infinie",
+      "data" : "4yYVqX2KierVI3nDV0M2UL",
+      "ids" : "0013365376",
+      "mode" : "none",
+      "name" : "Mathieu Shedid",
+      "user" : "axel"
+    },
+    "-M1bQqXOBMfjLW29YH_1" : {
+      "action" : "spotify:album",
+      "comment" : "Adebert 2",
+      "data" : "45Hm9e77uZVaRnEIYzzpzM",
+      "ids" : "0003586576",
+      "mode" : "none",
+      "name" : "Adebert 2",
+      "user" : "axel"
+    },
+    "-M1bQqaodIzNZUpLQcEp" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "3qU4wXm0Qngbtnr5PiLbFX",
+      "ids" : "0013381409",
+      "mode" : "none",
+      "name" : "Caravan Palace",
+      "user" : "axel"
+    },
+    "-M1bQqeHN0jzYoz91N3O" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "5lFcL4pj96ZRsoIiHpFl79",
+      "ids" : "0013356493",
+      "mode" : "none",
+      "name" : "Shaka Ponk",
+      "user" : "axel"
+    },
+    "-M1bQqh4muOF7uj3il6z" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "0bUTHlWbkSQysoM3VsWldT",
+      "ids" : "0005585628",
+      "mode" : "none",
+      "name" : "Gorillaz",
+      "user" : "axel"
+    },
+    "-M1bQqk9sWe6JfalAbeX" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "3bRM4GQgoFjBRRzhp87Ugb",
+      "ids" : "0013343924",
+      "mode" : "none",
+      "name" : "Kavinsky",
+      "user" : "axel"
+    },
+    "-M1bQqo8OIGdUeh3xMO-" : {
+      "action" : "tunein",
+      "comment" : "",
+      "data" : "24875",
+      "ids" : "0005690638",
+      "mode" : "none",
+      "name" : "Radio France Inter",
+      "user" : "axel"
+    },
+    "-M1bQqrL-FVnnPYBCYSZ" : {
+      "action" : "tunein",
+      "comment" : "",
+      "data" : "17696",
+      "ids" : "0013385899",
+      "mode" : "none",
+      "name" : "Radio Nova",
+      "user" : "axel"
+    },
+    "-M1bQqwAuhKW25eX0FaY" : {
+      "action" : "tunein",
+      "comment" : "",
+      "data" : "50486",
+      "ids" : "0005589167",
+      "mode" : "none",
+      "name" : "Radio RTL2",
+      "user" : "axel"
+    },
+    "-M1bQr-edyrMg7ASCuBw" : {
+      "action" : "tunein",
+      "comment" : "",
+      "data" : "2960",
+      "ids" : "0013336496",
+      "mode" : "none",
+      "name" : "Radio Nostalgie",
+      "user" : "axel"
+    },
+    "-M1bQr3IA5PcjzjzBHHC" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "1xhy7WWxO28XoPKuFlnxSZ",
+      "ids" : "0013200813",
+      "mode" : "ClearQueue",
+      "name" : "Aldebert Enfantillage 1",
+      "user" : "axel"
+    },
+    "-M1bQr8ZaCCe81XHG4_x" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "45Hm9e77uZVaRnEIYzzpzM",
+      "ids" : "0013352322",
+      "mode" : "ClearQueue",
+      "name" : "Aldebert Enfantillage 2",
+      "user" : "axel"
+    },
+    "-M1bQrBV_BYNS-5BMkws" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "77kv2o5PJeW3mim1yWPiMA",
+      "ids" : "0013362342",
+      "mode" : "ClearQueue",
+      "name" : "Aldebert Enfantillage 3",
+      "user" : "axel"
+    },
+    "-M1bQrELVTf6b8i_Y8kJ" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "3qU4wXm0Qngbtnr5PiLbFX",
+      "ids" : "0013177875",
+      "mode" : "ClearQueue",
+      "name" : "Caravan Palace",
+      "user" : "axel"
+    },
+    "-M1bQrIQn8ZAqVQOdS2m" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "35VKLRwEjuR5IuFyGqjMaf",
+      "ids" : "0013397291",
+      "mode" : "ClearQueue",
+      "name" : "Les petits poissons",
+      "user" : "axel"
+    },
+    "-M1bQrLMcpqImnAW9jr2" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "7zwcj8LYBpHfcPTgR5LkFg",
+      "ids" : "0013199764",
+      "mode" : "ClearQueue",
+      "name" : "Bateau sur l'eau",
+      "user" : "axel"
+    },
+    "-M1bQrO2jmiABIdMKj8c" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "3yCoWlqfp2wnOS4PeNsADE",
+      "ids" : "0013400272",
+      "mode" : "ClearQueue",
+      "name" : "Pirouette Cacahuete",
+      "user" : "axel"
+    },
+    "-M1bQrQtSy35Pi_2WQz7" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "16nCFJAHubC7sj9LsTt3KF",
+      "ids" : "0013337950",
+      "mode" : "ClearQueue",
+      "name" : "Un grand Cerf",
+      "user" : "axel"
+    },
+    "-M1bQrU6Grgr-R9zLav4" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "7IDzwsobKLjgaqg6keknrE",
+      "ids" : "0013385163",
+      "mode" : "ClearQueue",
+      "name" : "Planter les choux",
+      "user" : "axel"
+    },
+    "-M1bQrXRbhRzdcfcs9_-" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "2eu7C32YZKEyILfPHPwVa3",
+      "ids" : "0013353316",
+      "mode" : "ClearQueue",
+      "name" : "Coucou Hibou",
+      "user" : "axel"
+    },
+    "-M1bQr_QKAqU9PLRGE_P" : {
+      "action" : "spotify:playlist",
+      "comment" : "",
+      "data" : "37i9dQZF1DWXTHBOfJ8aI7",
+      "ids" : "0013193487",
+      "mode" : "none",
+      "name" : "Légendes du Rock",
+      "user" : "axel"
+    },
+    "-M1bQrcTPCcW77goZhbM" : {
+      "action" : "spotify:playlist",
+      "comment" : "",
+      "data" : "5p0Mw9D1i1EjkJyIafFsvH",
+      "ids" : "0013186464",
+      "mode" : "ClearQueue",
+      "name" : "Hugo Dance Hugo Go Go"
+    },
+    "-M1bQrfODnqjyYdVD3T0" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "5ygDXis42ncn6kYG14lEVG",
+      "ids" : "0005686687",
+      "mode" : "ClearQueue",
+      "name" : "Medusa"
+    },
+    "-M1bQriGF34hL0XDpqX4" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "136ob2EotyWFvbTnmTiNnw",
+      "ids" : "0013377637",
+      "mode" : "ClearQueue",
+      "name" : "Pin Pon"
+    },
+    "-M1bQrlWCNd9HaMz9f7O" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "xxxxx",
+      "ids" : "0013350280",
+      "mode" : "none",
+      "name" : "Plouf",
+      "user" : "axel"
+    },
+    "-M1bQrpkOed-spPhR0YC" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "1oFbpb8ynzEKH17ZIZGmYK",
+      "ids" : "0013375526",
+      "mode" : "none",
+      "name" : "Shaka Ponk"
+    },
+    "-M1bQrt0VLE9oeRMUlHh" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "7mwevPAnZ4aEhZzFXO6Blb",
+      "ids" : "0015141595",
+      "mode" : "none",
+      "name" : "Elefunk"
+    },
+    "-M1bQrwGxOxZB2C6hysb" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "xxxxx",
+      "ids" : "0013381471",
+      "mode" : "none",
+      "name" : "Mystico",
+      "user" : "axel"
+    },
+    "-M1bQs-PSI71lzjorXop" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "xxxxx",
+      "ids" : "0015141710",
+      "mode" : "none",
+      "name" : "Nez-licoptere",
+      "user" : "axel"
+    },
+    "-M1bQs2Md-fz832ga_EC" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "0hUMKXGkWnvv7VP25otgMM",
+      "ids" : "0013375443",
+      "mode" : "ClearQueue",
+      "name" : "Lion"
+    },
+    "-M1bQs8TUSA47g2PFHEl" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "5jaVyz2GDdesyu01cBbOSc",
+      "ids" : "0013379816",
+      "mode" : "ClearQueue",
+      "name" : "Mr Oizo"
+    },
+    "-M1bQsBWUSAyHNsatVxN" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "4wbTTaqEfNsSb5MlhrSEDG",
+      "ids" : "0013377441",
+      "mode" : "ClearQueue",
+      "name" : "Mice Mobile"
+    },
+    "-M1bQsE7D06qhPjvL3A8" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "xxxxx",
+      "ids" : "0015141564",
+      "mode" : "none",
+      "name" : "Spirale",
+      "user" : "axel"
+    },
+    "-M1bQsXq6A1UHQLuOqAs" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "xxxxx",
+      "ids" : "0013379825",
+      "mode" : "none",
+      "name" : "Clowny",
+      "user" : "axel"
+    },
+    "-M1bQs_xt-_grJMsmwr4" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "57rnQRDe5JSSpDuk80UakP",
+      "ids" : "0013209651",
+      "mode" : "ClearQueue",
+      "name" : "Enaf"
+    },
+    "-M1bQsiF_JJPUNFhdaZD" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "77wWhEjur7FDECSlICjdJB",
+      "ids" : "0013338744",
+      "mode" : "ClearQueue",
+      "name" : "Croc odile"
+    },
+    "-M1bQsm1I-henc1FWYJz" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "7zwcj8LYBpHfcPTgR5LkFg",
+      "ids" : "0013249903",
+      "mode" : "ClearQueue",
+      "name" : "Mr Bato"
+    },
+    "-M1bQspNanREV6aImBS6" : {
+      "action" : "spotify:track",
+      "comment" : "",
+      "data" : "3kWzCuajfopiCpw2AMKPnM",
+      "ids" : "0013247975",
+      "mode" : "ClearQueue",
+      "name" : "Lapin"
+    },
+    "1599073670723" : {
+      "action" : "command",
+      "comment" : "",
+      "data" : "volume/10",
+      "ids" : "0005857645",
+      "mode" : "none",
+      "name" : "Volume 1"
+    },
+    "1599073952251" : {
+      "action" : "command",
+      "comment" : "",
+      "data" : "volume/16",
+      "ids" : "0005687327",
+      "mode" : "none",
+      "name" : "Volume 2"
+    },
+    "1599074162721" : {
+      "action" : "command",
+      "comment" : "",
+      "data" : "volume/30",
+      "ids" : "0011644881",
+      "mode" : "none",
+      "name" : "Volume 3"
+    },
+    "1599293439017" : {
+      "action" : "spotify:album",
+      "comment" : "",
+      "data" : "2mylGx7w2Q3yhUyN8iEWOF",
+      "ids" : "0013347620",
+      "mode" : "none",
+      "name" : "Camion chasse neige"
+    }
+  },
+  "config_prod" : {
+    "-M175FBKnjl7SklEWFkB" : {
+      "app_id" : "template",
+      "app_name" : "For test purpose",
+      "app_owner" : "axel",
+      "card_timeout" : "42",
+      "multi_read_mode" : "none",
+      "room_name" : "Ginette",
+      "sonos_server_ip" : "HHH.UUU.GGG.OOO",
+      "sonos_server_port" : "2017"
+    },
+    "-M175FFZ27wRrXQ4U-Qw" : {
+      "app_id" : "000000008e3c2b91",
+      "app_name" : "Main house sonos (black72)",
+      "app_owner" : "axel",
+      "card_timeout" : "30",
+      "multi_read_mode" : "cancel",
+      "room_name" : "Salon",
+      "sonos_server_ip" : "192.168.1.80",
+      "sonos_server_port" : "5005"
+    },
+    "-M175FId0H6fk0OufHxa" : {
+      "app_id" : "00000000deec2469",
+      "app_name" : "Hugo's (orange71)",
+      "app_owner" : "axel",
+      "card_timeout" : "30",
+      "multi_read_mode" : "cancel",
+      "room_name" : "Hugo",
+      "sonos_server_ip" : "192.168.1.80",
+      "sonos_server_port" : "5005"
+    },
+    "-M175FNMQW6KXmRUyRvL" : {
+      "app_id" : "00000000bad90242",
+      "app_name" : "Debug (naked74)",
+      "app_owner" : "axel",
+      "card_timeout" : "30",
+      "multi_read_mode" : "cancel",
+      "room_name" : "Hugo",
+      "sonos_server_ip" : "192.168.1.80",
+      "sonos_server_port" : "5005"
+    },
+    "-M175FQXL4g5uCrdJQVS" : {
+      "app_id" : "0000000036c8d22e",
+      "app_name" : "Bertrand (nano)",
+      "app_owner" : "bertrand",
+      "card_timeout" : "30",
+      "multi_read_mode" : "cancel",
+      "room_name" : "Salon",
+      "sonos_server_ip" : "localhost",
+      "sonos_server_port" : "5005"
+    }
+  }
+}

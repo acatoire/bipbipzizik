@@ -58,7 +58,7 @@ DATABASE.write_config(
     app_name="Bertrand (nano)",
     app_owner="bertrand",
     app_id="0000000036c8d22e",
-    sonos_server_ip="192.168.1.80",
+    sonos_server_ip="localhost",
     sonos_server_port="5005",
     room_name="Salon 3",
     multi_read_mode="cancel",
