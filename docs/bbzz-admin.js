@@ -145,15 +145,15 @@ class BBZZAdmin extends LitElement {
         const configToSave = e.detail.config;
         console.log("saving to firebase ", configToSave);
 
-        // db.ref('cards_prod/' + cardToSave.cardId).set(
-        //     cardToSave.cardData
-        // );
+        db.ref('config_prod/' + configToSave.configId).set(
+            configToSave.configData
+        );
     }
 
     deleteConfigFromFirebase(e){
         const configToDelete = e.detail.config;
         console.log("Removing", configToDelete);
-        // db.ref('cards_prod/' + cardToDelete.cardId).remove();
+        db.ref('config_prod/' + configToDelete.configId).remove();
     }
 
     render() {
