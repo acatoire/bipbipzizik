@@ -27,6 +27,7 @@ class BBZZAdmin extends LitElement {
             selectedTab : {type: Number},
             user : {type : Object},
             cards : {type: Array},
+            configs : {type: Array},
         }
     }
 
@@ -34,8 +35,14 @@ class BBZZAdmin extends LitElement {
         super();
         this.user = null;
         this.cards = [];
+        this.configs = [];
 
         const dbCardsReference = db.ref('/cards_prod');
+        const dbConfigReference = db.ref('/config_prod');
+
+        /*
+        Routines to keep cards in sync
+         */
 
         dbCardsReference.on('child_added', (data) => {
             console.log("child added");
@@ -63,6 +70,24 @@ class BBZZAdmin extends LitElement {
         dbCardsReference.on('child_removed', (data) => {
             console.log("child_removed", data.key);
             this.cards = this.cards.filter(card => card.cardId != data.key);
+        });
+
+        /*
+        Routines to keep configs in sync
+         */
+        dbConfigReference.on('child_added', (data) => {
+            console.log("config child added");
+            const configId = data.key;
+            const configData = data.val();
+            this.configs = [...this.configs, {configId, configData}]
+        });
+
+        dbConfigReference.on('child_changed', (data) => {
+            console.log("config child changed", data.key);
+        });
+
+        dbConfigReference.on('child_removed', (data) => {
+            console.log("config child removed", data.key);
         });
     }
 
@@ -130,7 +155,7 @@ class BBZZAdmin extends LitElement {
                 
                 ${this.selectedTab === 0
                     ? html`<bbzz-cards .cards="${this.cards}" @bbzz-card-save="${this.saveCardToFirebase}" @bbzz-card-remove-admin="${this.deleteCardFromFirebase}"></bbzz-cards>`
-                    : html`<bbzz-configs></bbzz-configs>`
+                    : html`<bbzz-configs .configs="${this.configs}"></bbzz-configs>`
                 }
               </div>
             </div>
