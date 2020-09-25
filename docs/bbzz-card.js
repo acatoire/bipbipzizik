@@ -19,7 +19,6 @@ class BBZZCard extends LitElement {
     }
 
     delete(){
-        console.log(`remove ${this.card.cardId}`);
         // Sends the card to remove to the cards element
         let event = new CustomEvent('bbzz-card-remove', {
             detail: {

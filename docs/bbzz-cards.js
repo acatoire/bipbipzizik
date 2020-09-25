@@ -46,7 +46,6 @@ class BBZZCards extends LitElement {
 
     saveCard(){
         //We send the edited card or created card to the admin view, which is the only one with the firebase access
-        console.log(this.editedCard);
         let event = new CustomEvent('bbzz-card-save', {
             detail: {
                 card: this.editedCard
@@ -81,7 +80,7 @@ class BBZZCards extends LitElement {
         <h2>Cards</h2>
         <h4>CREATE/UPDATE</h4>
             <div class="edit-card">
-                <mwc-textfield outlined label="Name" value="${this.editedCard.cardData.name}" @change=${(e) => this.editedCard.cardData.name = e.target.value}"></mwc-textfield>
+                <mwc-textfield outlined label="Name" .value="${this.editedCard.cardData.name}" @change=${(e) => this.editedCard.cardData.name = e.target.value}"></mwc-textfield>
                 <mwc-textfield outlined label="User" .value="${this.editedCard.cardData.user}" @change=${(e) => this.editedCard.cardData.user = e.target.value}"></mwc-textfield>
                 <mwc-textfield outlined label="Ids" .value="${this.editedCard.cardData.ids}" @change=${(e) => this.editedCard.cardData.ids = e.target.value}"></mwc-textfield>
                 <mwc-textfield outlined label="Action" .value="${this.editedCard.cardData.action}" @change=${(e) => this.editedCard.cardData.action = e.target.value}"></mwc-textfield>

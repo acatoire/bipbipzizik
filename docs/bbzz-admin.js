@@ -84,10 +84,20 @@ class BBZZAdmin extends LitElement {
 
         dbConfigReference.on('child_changed', (data) => {
             console.log("config child changed", data.key);
+            const configId = data.key;
+            const configData = data.val();
+
+            const item = this.configs.find(config => {
+                return config.configId === configId
+            });
+            const otherConfigs = this.configs.filter(config => config.configId === configId);
+
+            this.configs = [...otherConfigs, {configId, configData}];
         });
 
         dbConfigReference.on('child_removed', (data) => {
             console.log("config child removed", data.key);
+            this.configs = this.configs.filter(config => config.configId != data.key);
         });
     }
 
@@ -131,6 +141,21 @@ class BBZZAdmin extends LitElement {
         db.ref('cards_prod/' + cardToDelete.cardId).remove();
     }
 
+    saveConfigToFirebase(e){
+        const configToSave = e.detail.config;
+        console.log("saving to firebase ", configToSave);
+
+        // db.ref('cards_prod/' + cardToSave.cardId).set(
+        //     cardToSave.cardData
+        // );
+    }
+
+    deleteConfigFromFirebase(e){
+        const configToDelete = e.detail.config;
+        console.log("Removing", configToDelete);
+        // db.ref('cards_prod/' + cardToDelete.cardId).remove();
+    }
+
     render() {
         return html`
             <div class='container'>
@@ -155,7 +180,7 @@ class BBZZAdmin extends LitElement {
                 
                 ${this.selectedTab === 0
                     ? html`<bbzz-cards .cards="${this.cards}" @bbzz-card-save="${this.saveCardToFirebase}" @bbzz-card-remove-admin="${this.deleteCardFromFirebase}"></bbzz-cards>`
-                    : html`<bbzz-configs .configs="${this.configs}"></bbzz-configs>`
+                    : html`<bbzz-configs .configs="${this.configs}" @bbzz-config-save="${this.saveConfigToFirebase}" @bbzz-config-remove-admin="${this.deleteConfigFromFirebase}"></bbzz-configs>`
                 }
               </div>
             </div>

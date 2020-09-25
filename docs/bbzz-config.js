@@ -17,7 +17,6 @@ class BBZZConfig extends LitElement {
     }
 
     delete(){
-        console.log(`remove ${this.config.configId}`);
         let event = new CustomEvent('bbzz-config-remove', {
             detail: {
                 config: this.config
