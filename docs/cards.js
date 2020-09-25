@@ -98,6 +98,7 @@ var cardsDiv = document.getElementById('cards');
 var cardsRef = db.ref('/cards_prod');
 
 cardsRef.on('child_added', (data) => {
+  console.log("card added", data);
   var newDiv = document.createElement('div')
   newDiv.id = data.key;
   newDiv.className = "cardTile";
