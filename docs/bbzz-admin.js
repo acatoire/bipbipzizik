@@ -37,6 +37,11 @@ class BBZZAdmin extends LitElement {
         this.cards = [];
         this.configs = [];
 
+        // Grabbing logged in user from the local sessions
+        firebase.auth().onAuthStateChanged(user => {
+            this.user = user;
+        });
+
         const dbCardsReference = db.ref('/cards_prod');
         const dbConfigReference = db.ref('/config_prod');
 
@@ -79,7 +84,7 @@ class BBZZAdmin extends LitElement {
             console.log("config child added");
             const configId = data.key;
             const configData = data.val();
-            this.configs = [...this.configs, {configId, configData}]
+            this.configs = [...this.configs, {configId, configData}];
         });
 
         dbConfigReference.on('child_changed', (data) => {
