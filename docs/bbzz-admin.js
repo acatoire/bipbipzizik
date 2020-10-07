@@ -7,7 +7,6 @@ import './bbzz-configs.js';
 import {FirebaseMixin} from "./bbzz-firebase-mixin.js";
 
 class BBZZAdmin extends FirebaseMixin(LitElement) {
-
     static get properties() {
         return {
             selectedTab : {type: Number},
