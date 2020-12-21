@@ -8,7 +8,7 @@ pycryptodome
 # For firebase read/write
 firebase_admin==3.1.0
 requests
-cryptography==2.8
-urllib3==1.25.7
+cryptography>=2.8
+urllib3>=1.25.7
 # For usb read, not avaiable on windows
-evdev==1.2.0
+evdev>=1.2.0

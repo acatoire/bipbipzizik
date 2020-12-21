@@ -27,6 +27,8 @@ class Reader:
         self.keys = "X^1234567890XXXXqwertzuiopXXXXasdfghjklXXXXXyxcvbnmXXXXXXXXXXXXXXXXXXXXXXX"
 
         if not os.path.isfile(path + '/deviceName.txt'):
+            # FIXME, Seems not to work
+            # TODO if only one device use it directly
             sys.exit('Please run setup_reader.py first')
         else:
             with open(path + '/deviceName.txt', 'r') as file_handler:

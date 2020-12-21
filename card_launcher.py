@@ -107,8 +107,10 @@ class CardLauncher:
         command_line = self.config.get_sonos_cmd(command)
         print("Execute command: {}".format(command_line))
 
+        from requests.exceptions import ConnectionError
+        from urllib3.exceptions import MaxRetryError, NewConnectionError
         try:
             response = requests.get(command_line)
             print("Command response: {}".format(response.text))
-        except requests.exceptions.ConnectionError:
-            print("Connexion Failed! Is the server up and running?")
+        except (ConnectionRefusedError, ConnectionError, MaxRetryError, NewConnectionError):
+            print("Connexion Failed! Is the sonos api server up and running?")
