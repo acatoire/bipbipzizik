@@ -469,17 +469,17 @@
       "sonos_server_port" : "5005"
     },
     "-M175FId0H6fk0OufHxa" : {
-      "app_id" : "00000000deec2469",
-      "app_name" : "Hugo's (orange71)",
-      "app_owner" : "axel",
+      "app_id" : "00000000bad90242",
+      "app_name" : "Bertrand (orange75)",
+      "app_owner" : "bertrand",
       "card_timeout" : "30",
       "multi_read_mode" : "cancel",
-      "room_name" : "Hugo",
-      "sonos_server_ip" : "192.168.1.80",
+      "room_name" : "Bureau",
+      "sonos_server_ip" : "localhost",
       "sonos_server_port" : "5005"
     },
     "-M175FNMQW6KXmRUyRvL" : {
-      "app_id" : "00000000bad90242",
+      "app_id" : "00000000deec2469",
       "app_name" : "Debug (naked74)",
       "app_owner" : "axel",
       "card_timeout" : "30",
@@ -490,8 +490,8 @@
     },
     "-M175FQXL4g5uCrdJQVS" : {
       "app_id" : "0000000036c8d22e",
-      "app_name" : "Bertrand (nano)",
-      "app_owner" : "bertrand",
+      "app_name" : "nano",
+      "app_owner" : "axel",
       "card_timeout" : "30",
       "multi_read_mode" : "cancel",
       "room_name" : "Salon",
