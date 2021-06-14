@@ -5,6 +5,7 @@ from unittest import TestCase
 from bipbip_soco import BipBipSoCo
 
 logging.basicConfig(level=logging.INFO)
+# logging.config.fileConfig('logging_unittest.yaml')  TODO understand logging config
 
 
 class TestBipBip(TestCase):
@@ -44,6 +45,7 @@ class TestBipBip(TestCase):
             name='Les petits poissons',
             action='spotify:track',
             data='35VKLRwEjuR5IuFyGqjMaf',
+            mode='ClearQueue',
         )
 
         bip_bip = BipBipSoCo(param_dict)

@@ -2,11 +2,13 @@
 
 This project is a fork of Music Card from [hoveeman/music-cards](https://github.com/hoveeman/music-cards) forked from [fsahli/music-cards](https://github.com/fsahli/music-cards).
 
-It has been updated to be able to trig actions on others servers on rfid swipe. 
-List of actions:
-- sonos Api [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api)
-- home assistant (todo, change from hoveeman/music-cards)
-
+It has been reworked to:
+- use python 3 with a complete object-oriented rework
+- read card info from bdd
+- edit cards info on a website with basic auth [bipbipzizik](https://acatoire.github.io/bipbipzizik/)
+- play music on sonos 
+  - from spotify
+  - to be continued
 
 ## Requires
 
@@ -17,11 +19,11 @@ List of actions:
 - [RFID 125Khz Reader](https://www.amazon.com/gp/product/B018C8C162/ref=oh_aui_detailpage_o03_s01?ie=UTF8&psc=1)
 - [125Khz Cards](https://www.amazon.com/gp/product/B01MQY5Y7U/ref=ox_sc_act_title_1?smid=A1GYMVIZIMSYWM&psc=1)
 
-Remark : see on original project [https://github.com/hoveeman/music-cards](hoveeman/music-cards) for printable rfid cards
+Remark : see on original project [hoveeman/music-cards](https://github.com/hoveeman/music-cards) for printable rfid cards
 
 ### Raspberry basis:
 - Download and flash the las lite version of Raspbian
-- Enable SSH by creating an empty "ssh" named file at the root of the boot partition (visible on windows)
+- Enable SSH by creating an empty "ssh" named file at the root of the boot partition (visible on Windows)
 - Configure your wifi using the wpa_supplicant.conf template in the tools folder [Config the wifi on boot partition](https://www.raspberrypi-spy.co.uk/2017/04/manually-setting-up-pi-wifi-using-wpa_supplicant-conf/)
 
 ### Linux basic
@@ -183,13 +185,6 @@ Test has to be done with [node-sonos-http-api](https://github.com/jishi/node-son
 Please note that Raspberry Pi Zero is insufficient to run both the Home Assistant and and the rfid scanner. 
 It is recommend you use a Raspberry Pi 3 if you intend to run both at the same time.
 
-
-
-## HomeAssistant Setup for Google Music
-TO BE CHECKED
-1. Add the configs from homeassistant_files in the config of your [Homeassistant](https://www.home-assistant.io/).
-2. You will need to create custom_components/switch directory in your config directory and place [`gmusic.py`](https://github.com/mf-social/Home-Assistant/blob/master/custom_components/switch/gmusic.py) in there.
-3. Follow [this forum post](https://community.home-assistant.io/t/google-music-in-ha/10976) to install gmusicapi, find your device id, and set up the component.
 
 ## For Dev
 ### Unit test

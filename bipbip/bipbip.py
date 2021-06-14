@@ -105,3 +105,5 @@ class BipBip:
         """
         self._execution_log.append(time.time())
         logger.info("Execute the bipbip: %s", self.name)
+
+        # TODO manage the multi-read
