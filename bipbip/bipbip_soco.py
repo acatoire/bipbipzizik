@@ -51,7 +51,7 @@ class BipBipSoCo(BipBip):
     The SoCo bipbip class
     """
 
-    def __init__(self, parameters: dict):
+    def __init__(self, parameters: dict, multi_read_timeout: int or float = 3):
         """
         :param parameters: Parameter dict, each BipBip can implement its own parameters
                   Generic parameters are:
@@ -62,14 +62,16 @@ class BipBipSoCo(BipBip):
                         action: type of action to be executed
                         data: extra data related to the action
                         user: allowed user for the card
+        :param multi_read_timeout: (optional) Value to consider a multi read, default 3s
         """
-        super().__init__(parameters)
+        super().__init__(parameters, multi_read_timeout)
 
         self.soco_mode = SoCoMode(self.mode)
 
         # TODO create a sonos singleton
         player_name = "Hugo"
         self.player = soco.discovery.by_name(player_name)
+        self.sharelink = ShareLinkPlugin(self.player)
 
         if self.player:
             logger.info("Player %s is available @ %s", player_name, self.player.ip_address)
@@ -77,18 +79,26 @@ class BipBipSoCo(BipBip):
             logger.critical("No player found with name: %s!", player_name)
             return
 
-    def execute(self):
+    def start(self):
         """
         Execute of the bipbip
         :return:
         """
 
-        super().execute()
+        ####################################################
+        # ## Cancel conditions
+        ####################################################
+        if self.locked and not self.action == "sonos-cmd":
+            logger.warning("Action canceled because of the %ds multi read protection.", self.multi_read_timeout)
+            return
 
         if not self.player:
             logger.critical("No player valid player configured during init, execution aborted!")
             return
 
+        ####################################################
+        # ####### Action
+        ####################################################
         if self.soco_mode.clear_queue:
             self.player.clear_queue()
             logger.debug("Clear sonos queue before execution")
@@ -109,8 +119,7 @@ class BipBipSoCo(BipBip):
             spotify_link = f"{self.action}:{self.data}"
             logger.debug("System will execute on sonos the spotify %s: %s", spotify_mode, self.data)
 
-            sharelink = ShareLinkPlugin(self.player)
-            sharelink.add_share_link_to_queue(spotify_link)
+            self.sharelink.add_share_link_to_queue(spotify_link)
 
             self.player.play()
             # Start the queue play from beginning
