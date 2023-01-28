@@ -103,7 +103,6 @@ class BipBipSoCo(BipBip):
         Execute of the bipbip
         :return:
         """
-        super().execute()
 
         ####################################################
         # ## Cancel conditions
@@ -153,7 +152,7 @@ class BipBipSoCo(BipBip):
 
         elif self.action == "radio":
             # radio action execution
-            # TODO to be implemented
+            logger.critical('TODO to be implemented') # TODO to be implemented
 
         else:
             logger.critical('Action "%s" is not supported by BipBipSoCo!', self.action)
