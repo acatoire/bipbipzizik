@@ -12,7 +12,7 @@ class BipBip:
     The generic bipbip class
     """
 
-    def __init__(self, parameters: dict):
+    def __init__(self, parameters: dict, multi_read_timeout: int or float = 3):
         """
         :param parameters: Parameter dict, each BipBip can implement its own parameters
                   Generic parameters are:
@@ -23,12 +23,16 @@ class BipBip:
                         action: type of action to be executed
                         data: extra data related to the action
                         user: allowed user for the card
+        :param multi_read_timeout: (optional) Value to consider a multi read, default 3s
         """
-        self.parameters = parameters
         self.player = None
+        self.parameters = parameters
+        self.multi_read_timeout = multi_read_timeout
         self._execution_log = []
 
-    def _parameter(self, param_name:str) -> str or None:
+        self.locked = False
+
+    def _parameter(self, param_name: str) -> str or None:
         try:
             return self.parameters[param_name]
         except KeyError:
@@ -112,4 +116,26 @@ class BipBip:
 
         logger.info("Execute the bipbip: %s", self.name)
 
-        # TODO manage the multi-read
+        if len(self.execution_log) > 1:
+            last_time_period = (self.execution_log[-1] - self.execution_log[-2])
+            if last_time_period < self.multi_read_timeout:
+                self.locked = True
+            else:
+                self.locked = False
+
+        self.start()
+
+    def start(self):
+        """
+        Action of the bipbip to be overwritten by the child class
+        :return:
+        """
+
+        ####################################################
+        # ## Cancel conditions sample
+        ####################################################
+        if self.locked:
+            logger.warning("Action canceled because of the %ds multi read protection.", self.multi_read_timeout)
+            return
+
+        logger.info("ACTION")
