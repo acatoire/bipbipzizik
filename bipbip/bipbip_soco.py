@@ -4,11 +4,9 @@ Interacting with Sonos using SoCo library
 """
 
 import logging
-import time
-import soco0226 as soco
+import soco
+from soco.plugins.sharelink import ShareLinkPlugin
 from bipbip import BipBip
-
-from soco0226.plugins.sharelink import ShareLinkPlugin  #need merge of https://github.com/SoCo/SoCo/pull/838
 
 logger = logging.getLogger("bipbip.soco")
 
@@ -27,23 +25,43 @@ class SoCoMode:
 
     @property
     def clear_queue(self):
-        return True if "ClearQueue" in self.modes else False
+        """
+        clear_queue
+        :return:
+        """
+        return "ClearQueue" in self.modes
 
     @property
     def multi_read_cancel(self):  # TODO
-        return True if "MultiReadCancel" in self.modes else False
+        """
+        multi_read_cancel
+        :return:
+        """
+        return "MultiReadCancel" in self.modes
 
     @property
     def multi_read_db_random(self):  # TODO
-        return True if "MultiReadDbRandom" in self.modes else False
+        """
+        multi_read_db_random
+        :return:
+        """
+        return "MultiReadDbRandom" in self.modes
 
     @property
     def multi_read_next(self):  # TODO
-        return True if "MultiReadNext" in self.modes else False
+        """
+        multi_read_next
+        :return:
+        """
+        return "MultiReadNext" in self.modes
 
     @property
     def multi_read_random(self):  # TODO
-        return True if "MultiReadRandom" in self.modes else False
+        """
+        multi_read_random
+        :return:
+        """
+        return "MultiReadRandom" in self.modes
 
 
 class BipBipSoCo(BipBip):
@@ -68,7 +86,7 @@ class BipBipSoCo(BipBip):
         self.soco_mode = SoCoMode(self.mode)
 
         # TODO create a sonos singleton
-        player_name = "Hugo"
+        player_name = "TV"
         self.player = soco.discovery.by_name(player_name)
 
         if self.player:
@@ -89,7 +107,12 @@ class BipBipSoCo(BipBip):
             logger.critical("No player valid player configured during init, execution aborted!")
             return
 
+        if self.player.is_playing_radio:
+            logger.debug("Stop radio before continue")
+            # Todo manage the radio kill if actually playing
+
         if self.soco_mode.clear_queue:
+            self.player.stop()
             self.player.clear_queue()
             logger.debug("Clear sonos queue before execution")
 
@@ -111,6 +134,14 @@ class BipBipSoCo(BipBip):
 
             sharelink = ShareLinkPlugin(self.player)
             sharelink.add_share_link_to_queue(spotify_link)
+
+            self.player.play()
+            # Start the queue play from beginning
+            # self.player.play_from_queue(0)
+
+        elif self.action == "radio":
+            # radio action execution
+            # TODO to be implemented
 
             self.player.play()
             # Start the queue play from beginning

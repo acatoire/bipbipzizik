@@ -25,6 +25,7 @@ class BipBip:
                         user: allowed user for the card
         """
         self.parameters = parameters
+        self.player = None
         self._execution_log = []
 
     def _parameter(self, param_name:str) -> str or None:
@@ -104,6 +105,11 @@ class BipBip:
         :return:
         """
         self._execution_log.append(time.time())
+        logger.info("Playing:")
+
+        # Iterating over all the track info
+        [logger.info("%s: %s", key, value) for key, value in self.player.get_current_track_info().items()]
+
         logger.info("Execute the bipbip: %s", self.name)
 
         # TODO manage the multi-read
