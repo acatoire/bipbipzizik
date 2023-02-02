@@ -103,26 +103,41 @@ class BipBip:
         """
         return self._execution_log
 
+    def check(self):
+        """
+        Check of the bipbip status
+        :return:
+        """
+        logger.info("Playing: %s", self.name)
+
     def execute(self):
         """
         Execute of the bipbip
         :return:
         """
-        self._execution_log.append(time.time())
-        logger.info("Playing:")
+        execution_time = time.time()
 
-        # Iterating over all the track info
-        [logger.info("%s: %s", key, value) for key, value in self.player.get_current_track_info().items()]
-
-        logger.info("Execute the bipbip: %s", self.name)
-
-        if len(self.execution_log) > 1:
-            last_time_period = (self.execution_log[-1] - self.execution_log[-2])
+        if len(self.execution_log) > 0:
+            last_time_period = (execution_time - self.execution_log[-1])
             if last_time_period < self.multi_read_timeout:
                 self.locked = True
             else:
                 self.locked = False
 
+        ####################################################
+        # ## Cancel conditions
+        ####################################################
+        if self.locked and "-cmd" not in self.action:
+            logger.warning("Action canceled because of the %ds multi read protection.",
+                           self.multi_read_timeout)
+            return
+
+        ####################################################
+        # ## Execution
+        ####################################################
+        self._execution_log.append(execution_time)
+        self.check()
+        logger.info("Execute the bipbip: %s", self.name)
         self.start()
 
     def start(self):
@@ -131,11 +146,5 @@ class BipBip:
         :return:
         """
 
-        ####################################################
-        # ## Cancel conditions sample
-        ####################################################
-        if self.locked:
-            logger.warning("Action canceled because of the %ds multi read protection.", self.multi_read_timeout)
-            return
-
-        logger.info("ACTION")
+        logger.info("ACTION (%s) To be overwritten by player implementation",
+                    self.action)

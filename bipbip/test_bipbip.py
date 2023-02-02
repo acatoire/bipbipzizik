@@ -1,6 +1,10 @@
-
+"""
+BipBip
+Base class tests
+"""
 
 import logging
+from time import sleep
 from unittest import TestCase
 from bipbip import BipBip
 
@@ -8,7 +12,13 @@ logging.basicConfig(level=logging.INFO)
 
 
 class TestBipBip(TestCase):
+    """
+    Test of main comportment
+    """
     def test_parameters(self):
+        """
+        Test parameters config
+        """
         param_dict = dict(
             name='name',
             ids='ids',
@@ -29,6 +39,9 @@ class TestBipBip(TestCase):
         self.assertEqual("user", bip_bip.user)
 
     def test_parameters_failed(self):
+        """
+        Test missing parameters
+        """
         param_dict = dict(
             name='name',
         )
@@ -38,12 +51,32 @@ class TestBipBip(TestCase):
         self.assertEqual(None, bip_bip.ids)
 
     def test_execute(self):
+        """
+        Test action execution
+        """
         param_dict = dict(
-            name='name',
+            name='test card',
+            action='test action',
+        )
+
+        bip_bip = BipBip(param_dict, multi_read_timeout=0.1)
+        bip_bip.execute()
+        self.assertEqual(1, len(bip_bip.execution_log))
+        sleep(0.5)
+        bip_bip.execute()
+        self.assertEqual(2, len(bip_bip.execution_log))
+
+    def test_execute_canceled(self):
+        """
+        Test cancelled execution
+        """
+        param_dict = dict(
+            name='test card',
+            action='test action',
         )
 
         bip_bip = BipBip(param_dict)
         bip_bip.execute()
         self.assertEqual(1, len(bip_bip.execution_log))
         bip_bip.execute()
-        self.assertEqual(2, len(bip_bip.execution_log))
+        self.assertEqual(1, len(bip_bip.execution_log))

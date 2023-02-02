@@ -4,7 +4,6 @@ Interacting with Sonos using SoCo library
 """
 
 import logging
-import time
 
 import soco
 from soco.plugins.sharelink import ShareLinkPlugin
@@ -34,7 +33,7 @@ class SoCoMode:
         return "ClearQueue" in self.modes
 
     @property
-    def multi_read_cancel(self):  # TODO
+    def multi_read_cancel(self):
         """
         multi_read_cancel
         :return:
@@ -42,7 +41,7 @@ class SoCoMode:
         return "MultiReadCancel" in self.modes
 
     @property
-    def multi_read_db_random(self):  # TODO
+    def multi_read_db_random(self):
         """
         multi_read_db_random
         :return:
@@ -50,7 +49,7 @@ class SoCoMode:
         return "MultiReadDbRandom" in self.modes
 
     @property
-    def multi_read_next(self):  # TODO
+    def multi_read_next(self):
         """
         multi_read_next
         :return:
@@ -58,7 +57,7 @@ class SoCoMode:
         return "MultiReadNext" in self.modes
 
     @property
-    def multi_read_random(self):  # TODO
+    def multi_read_random(self):
         """
         multi_read_random
         :return:
@@ -88,7 +87,7 @@ class BipBipSoCo(BipBip):
 
         self.soco_mode = SoCoMode(self.mode)
 
-        # TODO create a sonos singleton
+        # TODO: create a sonos singleton
         player_name = "TV"
         self.player = soco.discovery.by_name(player_name)
 
@@ -97,6 +96,15 @@ class BipBipSoCo(BipBip):
         else:
             logger.critical("No player found with name: %s!", player_name)
             return
+
+    def check(self):
+        """
+        Check of the bipbip status
+        :return:
+        """
+        logger.info("Playing: %s", self.name)
+        # Iterating over all the track info
+        [logger.info("%s: %s", key, value) for key, value in self.player.get_current_track_info().items()]
 
     def start(self):
         """
@@ -107,10 +115,6 @@ class BipBipSoCo(BipBip):
         ####################################################
         # ## Cancel conditions
         ####################################################
-        if self.locked and not self.action == "sonos-cmd":
-            logger.warning("Action canceled because of the %ds multi read protection.", self.multi_read_timeout)
-            return
-
         if not self.player:
             logger.critical("No player valid player configured during init, execution aborted!")
             return
@@ -120,7 +124,7 @@ class BipBipSoCo(BipBip):
         ####################################################
         if self.player.is_playing_radio:
             logger.debug("Stop radio before continue")
-            # Todo manage the radio kill if actually playing
+            # TODO: manage the radio kill if actually playing
 
         if self.soco_mode.clear_queue:
             self.player.stop()
@@ -143,8 +147,7 @@ class BipBipSoCo(BipBip):
             spotify_link = f"{self.action}:{self.data}"
             logger.debug("System will execute on sonos the spotify %s: %s", spotify_mode, self.data)
 
-            sharelink = ShareLinkPlugin(self.player)
-            sharelink.add_share_link_to_queue(spotify_link)
+            ShareLinkPlugin(self.player).add_share_link_to_queue(spotify_link)
 
             self.player.play()
             # Start the queue play from beginning
@@ -152,7 +155,8 @@ class BipBipSoCo(BipBip):
 
         elif self.action == "radio":
             # radio action execution
-            logger.critical('TODO to be implemented') # TODO to be implemented
+            logger.critical('TODO to be implemented')
+            # TODO: to be implemented
 
         else:
             logger.critical('Action "%s" is not supported by BipBipSoCo!', self.action)
