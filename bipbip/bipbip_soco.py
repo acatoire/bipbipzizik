@@ -70,7 +70,7 @@ class BipBipSoCo(BipBip):
     The SoCo bipbip class
     """
 
-    def __init__(self, parameters: dict, multi_read_timeout: int or float = 3):
+    def __init__(self, parameters: dict, player_name: str, multi_read_timeout: int or float = 3):
         """
         :param parameters: Parameter dict, each BipBip can implement its own parameters
                   Generic parameters are:
@@ -83,12 +83,11 @@ class BipBipSoCo(BipBip):
                         user: allowed user for the card
         :param multi_read_timeout: (optional) Value to consider a multi read, default 3s
         """
-        super().__init__(parameters, multi_read_timeout)
+        super().__init__(parameters, player_name, multi_read_timeout)
 
         self.soco_mode = SoCoMode(self.mode)
 
         # TODO: create a sonos singleton
-        player_name = "TV"
         self.player = soco.discovery.by_name(player_name)
 
         if self.player:

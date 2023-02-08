@@ -36,7 +36,7 @@ class TestBipBip(TestCase):
             data='play',
         )
 
-        bip_bip = BipBipSoCo(param_dict)
+        bip_bip = BipBipSoCo(param_dict, 'TV')
 
         if not REAL:
             bip_bip.player.play = MagicMock()

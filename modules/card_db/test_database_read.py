@@ -53,25 +53,25 @@ class DatabaseReadTest(unittest.TestCase):
         @return
         """
 
-        card_expected = {"app_name": "For test purpose",
-                         "app_owner": "axel",
-                         "app_id": "template",
-                         "sonos_server_ip": "HHH.UUU.GGG.OOO",
-                         "sonos_server_port": "2017",
-                         "room_name": "Ginette",
-                         "multi_read_mode": "none",
-                         "card_timeout": "42"}
+        config_expected = {"app_name": "For test purpose",
+                           "app_owner": "axel",
+                           "app_id": "template",
+                           "sonos_server_ip": "HHH.UUU.GGG.OOO",
+                           "sonos_server_port": "2017",
+                           "room_name": "Ginette",
+                           "multi_read_mode": "none",
+                           "card_timeout": "42"}
 
         config = self.database.get_config("template")
 
-        self.assertEqual(config.cfg_app_name, card_expected.get("app_name"))
-        self.assertEqual(config.cfg_app_owner, card_expected.get("app_owner"))
-        self.assertEqual(config.cfg_application_id, card_expected.get("app_id"))
-        self.assertEqual(config.cfg_sonos_server_ip, card_expected.get("sonos_server_ip"))
-        self.assertEqual(config.cfg_sonos_server_port, card_expected.get("sonos_server_port"))
-        self.assertEqual(config.cfg_room_name, card_expected.get("room_name"))
-        self.assertEqual(config.cfg_multi_read_mode, card_expected.get("multi_read_mode"))
-        self.assertEqual(config.cfg_card_timeout, int(card_expected.get("card_timeout")))
+        self.assertEqual(config.cfg_app_name, config_expected.get("app_name"))
+        self.assertEqual(config.cfg_app_owner, config_expected.get("app_owner"))
+        self.assertEqual(config.cfg_application_id, config_expected.get("app_id"))
+        self.assertEqual(config.cfg_sonos_server_ip, config_expected.get("sonos_server_ip"))
+        self.assertEqual(config.cfg_sonos_server_port, config_expected.get("sonos_server_port"))
+        self.assertEqual(config.cfg_room_name, config_expected.get("room_name"))
+        self.assertEqual(config.cfg_multi_read_mode, config_expected.get("multi_read_mode"))
+        self.assertEqual(config.cfg_card_timeout, int(config_expected.get("card_timeout")))
 
 
 if __name__ == '__main__':

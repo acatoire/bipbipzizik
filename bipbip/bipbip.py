@@ -12,7 +12,7 @@ class BipBip:
     The generic bipbip class
     """
 
-    def __init__(self, parameters: dict, multi_read_timeout: int or float = 3):
+    def __init__(self, parameters: dict, player_name: str, multi_read_timeout: int or float = 3):
         """
         :param parameters: Parameter dict, each BipBip can implement its own parameters
                   Generic parameters are:
@@ -27,6 +27,7 @@ class BipBip:
         """
         self.player = None
         self.parameters = parameters
+        self.player_name = player_name
         self.multi_read_timeout = multi_read_timeout
         self._execution_log = []
 
